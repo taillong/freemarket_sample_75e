@@ -94,3 +94,12 @@ freemarket_sample_75e DB設計
 ### Association
 - belongs_to :items
 - belongs_to :categories
+
+## cardsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id |references|null: false, foreign_key: true|
+|customer_id| integer| null: false |
+|card_id |integer |null: false |
+### Association
+- belongs_to :user
