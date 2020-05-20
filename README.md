@@ -8,7 +8,7 @@ freemarket_sample_75e DB設計
 |condition|string|null: false|
 |delivery_fee|string|null: false|
 |method|string|null: false|
-|data|string|null: false|
+|date|string|null: false|
 |price|integer|null: false|
 |prefecture_id|references|null: false, foreign_key: true|
 |brand_id|references|null: false, foreign_key: true|
@@ -31,9 +31,9 @@ freemarket_sample_75e DB設計
 ## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|nickname|string|null: false , unique: true , index: true|
-|email   |string|null: false, unique: true, index: true|
-|password|string|null: false, unique: true, index: true|
+|nickname|string|null: false , unique: true , add_index|
+|email   |string|null: false, unique: true, add_index|
+|password|string|null: false, unique: true, add_index|
 ### Association
 - has_many :items
 - has_one :card
@@ -44,6 +44,7 @@ freemarket_sample_75e DB設計
 ## addressesテーブル
 |Column|Type|Options|
 |------|----|-------|
+|user_id       |integer|null: false, foreign_key: true|
 |prefecture_id |references|null: false, foreign_key: true|
 |zipcode       |string |null: false |
 |city          |string |null: false |
@@ -56,7 +57,7 @@ freemarket_sample_75e DB設計
 ## person_infosテーブル
 |Column|Type|Options|
 |------|----|-------|
-|person_id  |integer|null: false, foreign_key: true|
+|user_id    |integer|null: false, foreign_key: true|
 |family_name|string |null: false |
 |first_name |string |null: false |
 |family_kana|string |null: false |
@@ -71,7 +72,7 @@ freemarket_sample_75e DB設計
 ## categoriesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|string| |
+|name|string|add_index|
 
 ### Association
 - has_many :category_items
@@ -80,7 +81,7 @@ freemarket_sample_75e DB設計
 ## prefecturesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|string|null: false|
+|name|string||
 
 ### Association
 - has_many :items
@@ -90,7 +91,7 @@ freemarket_sample_75e DB設計
 ## brandsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|string|index: true|
+|name|string|add_index|
 ### Association
 - has_many :items
 
@@ -100,8 +101,8 @@ freemarket_sample_75e DB設計
 |item_id|references|null: false, foreign_key: true|
 |category_id|references|null: false, foreign_key: true|
 ### Association
-- belongs_to :items
-- belongs_to :categories
+- belongs_to :item
+- belongs_to :category
 
 ## cardsテーブル
 |Column|Type|Options|
@@ -115,12 +116,11 @@ freemarket_sample_75e DB設計
 ## shippingテーブル
 |Column|Type|Options|
 |------|----|-------|
-|id         |integer|null: false |
 |family_name|string |null: false |
 |first_name |string |null: false |
 |family_kana|string |null: false |
 |first_kana |string |null: false |
-|zip code   |string |null: false |
+|zipcode   |string |null: false |
 |prefecture_id|references|null: false, foreign_key: true |
 |city|string|null: false |
 |street|string|null: false |
