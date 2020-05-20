@@ -103,3 +103,20 @@ freemarket_sample_75e DB設計
 |card_id |integer |null: false |
 ### Association
 - belongs_to :user
+
+## shippingテーブル
+|Column|Type|Options|
+|------|----|-------|
+|id         |integer|null: false |
+|family_name|string |null: false |
+|first_name |string |null: false |
+|family_kana|string |null: false |
+|first_kana |string |null: false |
+|zip code   |string |null: false |
+|prefecture_id|integer|null: false, foreign_key: true |
+|city|string|null: false |
+|street|varchat|null: false |
+|apartment|varchat| |
+|tell|varchat| |
+### Association
+- has_many :users
