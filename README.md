@@ -85,3 +85,12 @@ freemarket_sample_75e DB設計
 |name|string|index: true|
 ### Association
 - has_many :products
+
+## category_itemsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|item_id|references|null: false, foregin_key: true|
+|category_id|references|null: false, foregin_key: true|
+### Association
+- belongs_to :items
+- belongs_to :categories
