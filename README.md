@@ -19,6 +19,8 @@ freemarket_sample_75e DB設計
 - belongs_to :brand
 - belongs_to :prefecture
 - belongs_to :user
+- has_one :buy
+- has_one :sell
 
 ## imagesテーブル
 |Column|Type|Options|
@@ -39,6 +41,8 @@ freemarket_sample_75e DB設計
 - has_one :card
 - has_one :address
 - has_one :person_info
+- has_many :buy
+- has_many :sell
 
 
 ## addressesテーブル
@@ -129,3 +133,21 @@ freemarket_sample_75e DB設計
 ### Association
 - has_many :users
 - belongs_to :prefecture
+
+## buyテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|references|null: false, foreign_key: true|
+|item_id|references|null: false, foreign_key: true|
+### Association
+- belongs_to :user
+- belongs_to :item
+
+## sellテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|references|null: false, foreign_key: true|
+|item_id|references|null: false, foreign_key: true|
+### Association
+- belongs_to :user
+- belongs_to :item
