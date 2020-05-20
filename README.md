@@ -34,6 +34,7 @@ freemarket_sample_75e DB設計
 |nickname|string|null: false , unique: true , index: true|
 |email   |string|null: false, unique: true, index: true|
 |password|string|null: false, unique: true, index: true|
+### Association
 - has_many :items
 
 ## adressesテーブル
@@ -44,6 +45,7 @@ freemarket_sample_75e DB設計
 |city          |string |null: false |
 |street        |string |null: false |
 |apartment     |string | |
+### Association
 - belongs_to :user
 
 ## person_infosテーブル
@@ -58,4 +60,21 @@ freemarket_sample_75e DB設計
 |birth_month|integer|null: false |
 |birth_day  |integer|null: false |
 |tell       |integer| |
+### Association
 - belongs_to :user
+
+## categoriesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|type|string|null: false|
+
+### Association
+- has_many :category_items
+
+## prefectyres
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false|
+
+### Association
+- has_many :items
