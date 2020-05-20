@@ -10,12 +10,12 @@ freemarket_sample_75e DB設計
 |method|string|null: false|
 |data|string|null: false|
 |price|integer|null: false|
-|prefecture_id|string|null: false, foreign_key: true|
-|brand_id|integer|null: false, foreign_key: true|
+|prefecture_id|references|null: false, foreign_key: true|
+|brand_id|references|null: false, foreign_key: true|
 ### Association
 - has_many :images
 - has_many :category_products
-- has_many :categorys,  through: :category_products
+- has_many :categories,  through: :category_products
 - belongs_to :brand
 - belongs_to :prefecture
 - belongs_to :user
@@ -23,8 +23,8 @@ freemarket_sample_75e DB設計
 ## imagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|img|integer|null: false|
-|item_id|integer|null: false, foregin_key: true|
+|img|string|null: false|
+|item_id|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :item
 
@@ -36,8 +36,12 @@ freemarket_sample_75e DB設計
 |password|string|null: false, unique: true, index: true|
 ### Association
 - has_many :items
+- has_one :card
+- has_one :address
+- has_one :person_info
 
-## adressesテーブル
+
+## addressesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |prefecture_id |integer|null: false, foreign_key: true|
@@ -66,12 +70,12 @@ freemarket_sample_75e DB設計
 ## categoriesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|type|string|null: false|
+|name|string|null: false|
 
 ### Association
 - has_many :category_items
 
-## prefectyres
+## prefectures
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null: false|
@@ -89,8 +93,8 @@ freemarket_sample_75e DB設計
 ## category_itemsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|item_id|references|null: false, foregin_key: true|
-|category_id|references|null: false, foregin_key: true|
+|item_id|references|null: false, foreign_key: true|
+|category_id|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :items
 - belongs_to :categories
@@ -115,8 +119,8 @@ freemarket_sample_75e DB設計
 |zip code   |string |null: false |
 |prefecture_id|integer|null: false, foreign_key: true |
 |city|string|null: false |
-|street|varchat|null: false |
-|apartment|varchat| |
-|tell|varchat| |
+|street|varchar|null: false |
+|apartment|varchar| |
+|tell|varchar| |
 ### Association
 - has_many :users
