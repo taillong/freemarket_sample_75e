@@ -27,3 +27,35 @@ freemarket_sample_75e　DB設計
 |product_id|integer|null: false, foregin_key: true|
 ### Association
 - belongs_to :products
+
+## usersテーブル
+|Column|Type|Options|
+|------|----|-------|
+|nickname|string|null: false , unique: true , index: true|
+|email   |string||
+|password|string|null: false, unique: true, index: true|
+- has_many :products
+
+## adressesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|prefecture_id |integer|null: false, foreign_key: true|
+|zipcode       |string |null: false |
+|city          |string |null: false |
+|street        |string |null: false |
+|apartment     |string | |
+- belongs_to :user
+
+## person_infosテーブル
+|Column|Type|Options|
+|------|----|-------|
+|person_id  |integer|null: false, foreign_key: true|
+|family_name|string |null: false |
+|first_name |string |null: false |
+|family_kana|string |null: false |
+|first_kana |string |null: false |
+|birth_year |integer|null: false |
+|birth_month|integer|null: false |
+|birth_day  |integer|null: false |
+|tell       |integer| |
+- belongs_to :user
