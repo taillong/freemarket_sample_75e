@@ -41,8 +41,8 @@ freemarket_sample_75e DB設計
 - has_one :card
 - has_one :address
 - has_one :person_info
-- has_many :buy
-- has_many :sell
+- has_many :buys
+- has_many :sells
 
 
 ## addressesテーブル
