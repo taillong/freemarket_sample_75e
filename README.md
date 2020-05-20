@@ -78,3 +78,10 @@ freemarket_sample_75e DB設計
 
 ### Association
 - has_many :items
+
+## brandsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|name|string|index: true|
+### Association
+- has_many :products
