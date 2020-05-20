@@ -44,13 +44,14 @@ freemarket_sample_75e DB設計
 ## addressesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|prefecture_id |integer|null: false, foreign_key: true|
+|prefecture_id |references|null: false, foreign_key: true|
 |zipcode       |string |null: false |
 |city          |string |null: false |
 |street        |string |null: false |
 |apartment     |string | |
 ### Association
 - belongs_to :user
+- belongs_to :prefecture
 
 ## person_infosテーブル
 |Column|Type|Options|
@@ -83,6 +84,8 @@ freemarket_sample_75e DB設計
 
 ### Association
 - has_many :items
+- has_many :shippings
+- has_many :addresses
 
 ## brandsテーブル
 |Column|Type|Options|
@@ -118,10 +121,11 @@ freemarket_sample_75e DB設計
 |family_kana|string |null: false |
 |first_kana |string |null: false |
 |zip code   |string |null: false |
-|prefecture_id|integer|null: false, foreign_key: true |
+|prefecture_id|references|null: false, foreign_key: true |
 |city|string|null: false |
 |street|string|null: false |
 |apartment|string| |
 |tell|string| |
 ### Association
 - has_many :users
+- belongs_to :prefecture
