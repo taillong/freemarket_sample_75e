@@ -1,6 +1,6 @@
-freemarket_sample_75e　DB設計
+freemarket_sample_75e DB設計
 
-## Productsテーブル
+## itemsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null: false, limit:30|
@@ -24,17 +24,17 @@ freemarket_sample_75e　DB設計
 |Column|Type|Options|
 |------|----|-------|
 |img|integer|null: false|
-|product_id|integer|null: false, foregin_key: true|
+|item_id|integer|null: false, foregin_key: true|
 ### Association
-- belongs_to :products
+- belongs_to :item
 
 ## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
 |nickname|string|null: false , unique: true , index: true|
-|email   |string||
+|email   |string|null: false, unique: true, index: true|
 |password|string|null: false, unique: true, index: true|
-- has_many :products
+- has_many :items
 
 ## adressesテーブル
 |Column|Type|Options|
