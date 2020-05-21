@@ -107,19 +107,3 @@ freemarket_sample_75e DB設計
 ### Association
 - belongs_to :user
 
-## shippingテーブル
-|Column|Type|Options|
-|------|----|-------|
-|family_name|string |null: false |
-|first_name |string |null: false |
-|family_kana|string |null: false |
-|first_kana |string |null: false |
-|zipcode   |string |null: false |
-|prefecture_id|integer|null: false|
-|city|string|null: false |
-|street|string|null: false |
-|apartment|string| |
-|tell|string| |
-### Association
-- has_many :users
-- belongs_to_active_hash :prefecture
