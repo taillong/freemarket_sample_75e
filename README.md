@@ -15,7 +15,7 @@ freemarket_sample_75e DB設計
 |seller_id|references|null: false, foreign_key: true|
 |buyer_id|references|foreign_key: true|
 ### Association
-- has_many :images
+- has_many :images, dependent: :destroy
 - has_many :category_items
 - has_many :categories,  through: :category_items
 - belongs_to :brand
@@ -38,10 +38,9 @@ freemarket_sample_75e DB設計
 |email   |string|null: false, unique: true, add_index|
 |password|string|null: false, unique: true, add_index|
 ### Association
-- has_many :items
-- has_one :card
-- has_one :address
-- has_one :person_info
+- has_one :card, dependent: :destroy
+- has_one :address, dependent: :destroy
+- has_one :person_info, dependent: :destroy
 - has_many :sell_items, class_name: 'Item', foreign_key: 'seller_id',dependent: :destroy
 - has_many :buy_items, class_name: 'Item', foreign_key: 'buyer_id'
 
