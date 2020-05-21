@@ -10,7 +10,7 @@ freemarket_sample_75e DB設計
 |method|string|null: false|
 |date|string|null: false|
 |price|integer|null: false|
-|prefecture_id|references|null: false, foreign_key: true|
+|prefecture_id|integer|null: false, foreign_key: true|
 |brand_id|references|null: false, foreign_key: true|
 |seller_id|references|null: false, foreign_key: true|
 |buyer_id|references|foreign_key: true|
@@ -19,7 +19,6 @@ freemarket_sample_75e DB設計
 - has_many :category_items
 - has_many :categories,  through: :category_items
 - belongs_to :brand
-- belongs_to :prefecture
 - belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
 - belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id'
 
@@ -49,14 +48,13 @@ freemarket_sample_75e DB設計
 |Column|Type|Options|
 |------|----|-------|
 |user_id       |integer|null: false, foreign_key: true|
-|prefecture_id |references|null: false, foreign_key: true|
+|prefecture_id |integer|null: false, foreign_key: true|
 |zipcode       |string |null: false |
 |city          |string |null: false |
 |street        |string |null: false |
 |apartment     |string | |
 ### Association
 - belongs_to :user
-- belongs_to :prefecture
 
 ## person_infosテーブル
 |Column|Type|Options|
@@ -82,15 +80,6 @@ freemarket_sample_75e DB設計
 - has_many :category_items
 - has_many :items ,through: :category_items
 
-## prefecturesテーブル
-|Column|Type|Options|
-|------|----|-------|
-|name|string||
-
-### Association
-- has_many :items
-- has_many :shippings
-- has_many :addresses
 
 ## brandsテーブル
 |Column|Type|Options|
@@ -125,7 +114,7 @@ freemarket_sample_75e DB設計
 |family_kana|string |null: false |
 |first_kana |string |null: false |
 |zipcode   |string |null: false |
-|prefecture_id|references|null: false, foreign_key: true |
+|prefecture_id|integer|null: false, foreign_key: true |
 |city|string|null: false |
 |street|string|null: false |
 |apartment|string| |
