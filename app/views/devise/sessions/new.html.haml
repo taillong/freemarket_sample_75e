@@ -1,0 +1,28 @@
+.user__new
+  = render "header"
+  
+  .account
+    .account__login
+      %p アカウントをお持ちでない方はこちら
+      %br
+      = link_to "新規会員登録",  new_user_registration_path, class: "account__login__new"
+    .account__input
+      %form.account__input__form
+
+        .field
+          .field__input 
+            %input{type: "text", placeholder: "メールアドレス",class: "field__input__defalut"}
+
+        .field
+          .field__input 
+            %input{type: "text", placeholder: "パスワード", class: "field__input__defalut"}
+
+        .submit
+          %input{type: "submit", value: "ログイン", class: "submit__btn"}
+
+        .notation
+          = link_to "プライバシーポリシー", "#"
+          = link_to "メルカリ利用規約", "#"
+          = link_to "特定商取引に関する表記", "#"
+               
+  .footer

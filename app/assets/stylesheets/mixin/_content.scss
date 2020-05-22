@@ -1,0 +1,14 @@
+@mixin foucus{
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid skyblue;
+}
+
+@mixin input {
+  border-radius: 5px;
+  -webkit-appearance: none;
+  border: 1px solid #cccccc;
+}
+
+$blackColor: #333333;
+$whiteColor: #ffffff;
