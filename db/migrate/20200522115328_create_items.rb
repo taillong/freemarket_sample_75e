@@ -9,9 +9,9 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.string  :date,           null: false
       t.integer :price,          null: false
       t.integer :prefecture_id,  null: false
-      t.references :brand_id,    null: false, foreign_key: true
-      t.references :seller_id,   null: false, foreign_key: true
-      t.references :buyer_id,    foreign_key: true
+      t.references :brand,       null: false, foreign_key: true
+      t.references :seller,      null: false, foreign_key: { to_table: :users }
+      t.references :buyer,       foreign_key: { to_table: :users }
 
       t.timestamps
     end

@@ -10,6 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_075957) do
+ActiveRecord::Schema.define(version: 2020_05_22_115328) do
 
+  create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_brands_on_name", unique: true
+  end
+
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", limit: 30, null: false
+    t.text "explanation", null: false
+    t.string "condition", null: false
+    t.string "delivery_fee", null: false
+    t.string "method", null: false
+    t.string "date", null: false
+    t.integer "price", null: false
+    t.integer "prefecture_id", null: false
+    t.bigint "brand_id", null: false
+    t.bigint "seller_id", null: false
+    t.bigint "buyer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_items_on_brand_id"
+    t.index ["buyer_id"], name: "index_items_on_buyer_id"
+    t.index ["seller_id"], name: "index_items_on_seller_id"
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "nickname", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["nickname"], name: "index_users_on_nickname", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "items", "brands"
+  add_foreign_key "items", "users", column: "buyer_id"
+  add_foreign_key "items", "users", column: "seller_id"
 end
