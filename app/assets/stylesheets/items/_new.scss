@@ -1,0 +1,46 @@
+*{
+  box-sizing: border-box;
+  background-color: rgb(245, 245, 245);
+}
+
+.sell-header{
+  height: 128px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__logo{
+    display: block;
+    height: 50px;
+  }
+}
+
+.sell-footer{
+  height: 200px;
+  width: 100%;
+  padding: 20px 0 40px;
+  &__rules{
+    height: 54px;
+    &__lists{
+      display: flex;
+      justify-content: center;
+      li{
+        margin: 16px 0 0 16px;
+        a{
+          text-decoration: none;
+          color:black;
+        }
+      }
+    }
+  }
+  &__logo{
+    display: block;
+    margin: auto;
+    height: 65px;
+  }
+  &__copyright{
+    text-align: center;
+    font-size: 12px;
+    color: black;
+  }
+}
