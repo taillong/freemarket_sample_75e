@@ -45,7 +45,8 @@
   #image-box
     = f.fields_for :images do |i|
       .js-file_group{ data: {index: "#{i.index}"}}
-        = i.file_field :src 
+        = i.file_field :src ,class: "js_file"
+        %br
         %span.js-remove
           削除
   %br
