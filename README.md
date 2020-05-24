@@ -26,7 +26,7 @@ freemarket_sample_75e DB設計
 ## imagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|img|string|null: false|
+|src|string|null: false|
 |item_id|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :item
