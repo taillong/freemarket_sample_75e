@@ -4,72 +4,83 @@
       %label.sell-form__title 出品画像
       %span.sell-form__require 必須
       %p 最大１０枚までアップロードできます
-      = f.fields_for :images do |i|
-        = i.file_field :src 
-        %br
-        %span 削除
+      .sell-form__input
+        = f.fields_for :images do |i|
+          = i.file_field :src 
+          %br
+          %span 削除
     %hr
 
     .sell-form__profile
       .sell-form__profile__group--name
         %label.sell-form__title 出品名
         %span.sell-form__require 必須
-      = f.text_field :name, placeholder: "40文字まで" 
+        .sell-form__input
+          = f.text_field :name, placeholder: "40文字まで" ,class: "sell-form__input--text_field"
 
       .sell-form__profile__group--explanation
         %label.sell-form__title 出品の説明
         %span.sell-form__require 必須
-      = f.text_area :explanation, placeholder: "商品の説明（必須1,000文字以内)\n（色、素材、重さ、定価、注意点など）\n\n例） 2010年頃に1万円で購入したジャケットです。ライトグレーで傷ではありません。合わせやすいのでおすすめです。" 
+        .sell-form__input
+          = f.text_area :explanation, rows: "7",class:"sell-form__input--text_area", placeholder: "商品の説明（必須1,000文字以内)\n（色、素材、重さ、定価、注意点など）\n\n例） 2010年頃に1万円で購入したジャケットです。ライトグレーで傷ではありません。合わせやすいのでおすすめです。" 
     %hr
 
     .sell-form__content
-      %h3.sell-form__content__sub-title　商品詳細
+      %h3.sell-form__content__sub-title 商品詳細
       .sell-form__content__group
         %label.sell-form__title カテゴリー
         %span.sell-form__require 必須
-      = f.select :category,[["本",1],["洋服",2],["ハンドメイド",3]], prompt: "選択してください"
+        .sell-form__input
+          = f.select :category,[["本",1],["洋服",2],["ハンドメイド",3]], prompt: "選択してください"
       
       .sell-form__content__group
         %label.sell-form__title ブランド
         %span.sell-form__optional 任意
-      = f.text_field :brand, placeholder: "例）シャネル" 
+        .sell-form__input
+          = f.text_field :brand, placeholder: "例）シャネル" ,class: "sell-form__input--text_field"
       
       .sell-form__content__group
         %label.sell-form__title 商品の状態
         %span.sell-form__require 必須
-      = f.select :condition,[["新品、未使用",1],["未使用に近い",2],["目立った傷や汚れなし",3],["やや傷や汚れあり",4],["傷や汚れあり",5],["全体的に状態が悪い",6]], prompt: "選択してください"
+        .sell-form__input
+          = f.select :condition,[["新品、未使用",1],["未使用に近い",2],["目立った傷や汚れなし",3],["やや傷や汚れあり",4],["傷や汚れあり",5],["全体的に状態が悪い",6]], prompt: "選択してください"
     %hr
     
     .sell-form__content
-      %h3.sell-form__content__sub-title　発送について
+      %h3.sell-form__content__sub-title 発送について
       .sell-form__content__group
         %label.sell-form__title 発送料の負担
         %span.sell-form__require 必須
-      = f.select :delivery_fee,[["送料込み(出品者負担)",1],["着払い(購入者負担)",2]], prompt: "選択してください"
+        .sell-form__input
+          = f.select :delivery_fee,[["送料込み(出品者負担)",1],["着払い(購入者負担)",2]], prompt: "選択してください"
 
       .sell-form__content__group
         %label.sell-form__title 発送元の地域
         %span.sell-form__require 必須
-      = f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択してください'
+        .sell-form__input
+          = f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択してください'
       
       .sell-form__content__group
         %label.sell-form__title 発送までの日数
         %span.sell-form__require 必須
-      = f.select :date,[["1~2日で発送",1],["2~3日で発送",2],["4~7日で発送",3]], prompt: "選択してください"
+        .sell-form__input
+          = f.select :date,[["1~2日で発送",1],["2~3日で発送",2],["4~7日で発送",3]], prompt: "選択してください"
     %hr
     
-    .sell-form__content.price
-      %h3.sell-form__content__sub-title　価格 (¥300~9,999,999)
-      .sell-form__content__group
+    .sell-form__content--price
+      %h3.sell-form__content__sub-title 価格 (¥300~9,999,999)
+      .sell-form__content--price__group
         %label.sell-form__title 販売価格
         %span.sell-form__require 必須
-      = f.number_field :price, min:300 ,max:9999999 
+        .sell-form__input--price
+          %span ¥
+          = f.number_field :price, placeholder: 0,min:300 ,max:9999999 ,class: "sell-form__input--price--number_field"
 
-      .sell-form__content__group--price
-        %label.sell-form__title 販売手数料（10%）
-        %hr
-      .sell-form__content__group--price
-        %label.sell-form__title 販売利益
+      .sell-form__content--price--fee
+        %label.sell-form__content--price--fee__title 販売手数料（10%）
+      %hr
+      .sell-form__content--price--fee
+        %label.sell-form__content--price--fee__title 販売利益
 
 
     .sell-form__submit
