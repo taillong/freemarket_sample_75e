@@ -43,7 +43,7 @@
         %label.sell-form__title 商品の状態
         %span.sell-form__require 必須
         .sell-form__input
-          = f.select :condition,[["新品、未使用",1],["未使用に近い",2],["目立った傷や汚れなし",3],["やや傷や汚れあり",4],["傷や汚れあり",5],["全体的に状態が悪い",6]], {prompt: "選択してください"}, {class: "sell-form__input--select"}
+          = f.collection_select :condition_id, Condition.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select"}
     %hr
     
     .sell-form__content
@@ -52,7 +52,7 @@
         %label.sell-form__title 発送料の負担
         %span.sell-form__require 必須
         .sell-form__input
-          = f.select :delivery_fee,[["送料込み(出品者負担)",1],["着払い(購入者負担)",2]], {prompt: "選択してください"}, {class: "sell-form__input--select"}
+          = f.collection_select :delivery_fee_id, DeliveryFee.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select"}
 
       .sell-form__content__group
         %label.sell-form__title 発送元の地域
