@@ -7,5 +7,7 @@ class User < ApplicationRecord
   validates :nickname, presence: true
   validates :email, presence: true, uniqueness: true
   has_one   :person_info, dependent: :destroy, inverse_of: :user
+  has_one   :address,     dependent: :destroy
   accepts_nested_attributes_for :person_info
+  accepts_nested_attributes_for :address
 end

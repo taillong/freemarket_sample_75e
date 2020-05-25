@@ -107,88 +107,86 @@
                   -#   %option{value: "31"}31
                   -# 日
           
-          -# .person__confirmation
-          -#   %h3 商品送付先住所情報
+          .person__confirmation
+            %h3 商品送付先住所情報
 
-          -# .field
-          -#   .field__label
-          -#     送付先氏名
-          -#     %span.field__label__require
-          -#       必須
-          -#   .field__input 
-          -#     %input{placeholder: "例)山田", class: "field__input__ecality"}
-          -#     %input{placeholder: "例)彩", class: "field__input__ecality"}
-            
-          -# .field
-          -#   .field__label
-          -#     送付先氏名カナ(全角)
-          -#     %span.field__label__require
-          -#       必須
-          -#   .field__input 
-          -#     %input{placeholder: "例)ヤマダ", class: "field__input__ecality"}
-          -#     %input{placeholder: "例)アヤ",  class: "field__input__ecality"}
+          = f.fields_for :address do |i|
+            .field
+              .field__label
+                送付先氏名
+                %span.field__label__require
+                  必須
+              .field__input 
+                = i.text_field :family_name, placeholder: "例)山田", class: "field__input__ecality"
+                = i.text_field :first_name,  placeholder: "例)彩",  class: "field__input__ecality"
+              
+            .field
+              .field__label
+                送付先氏名カナ(全角)
+                %span.field__label__require
+                  必須
+              .field__input 
+                = i.text_field :family_kana, placeholder: "例)ヤマダ", class: "field__input__ecality"
+                = i.text_field :first_kana,  placeholder: "例)アヤ",  class: "field__input__ecality"
 
-          -# .field
-          -#   .field__label
-          -#     郵便番号
-          -#     %span.field__label__require
-          -#       必須
-          -#   .field__input 
-          -#     %input{type: "text", placeholder: "例)123-4567", class: "field__input__defalut"}
+            .field
+              .field__label
+                郵便番号
+                %span.field__label__require
+                  必須
+              .field__input 
+                = i.text_field :zipcode ,placeholder: "例)123-4567", class: "field__input__defalut"
 
-          -# .field
-          -#   .field__label
-          -#     都道府県
-          -#     %span.field__label__require
-          -#       必須
-          -#   .field__input 
-          -#     %select{name: "year",class: "field__input__prefecture"}
-          -#       %option{value: "北海道"}北海道
-          -#       %option{value: "青森"}青森
-          -#       %option{value: "沖縄"}沖縄
+            .field
+              .field__label
+                都道府県
+                %span.field__label__require
+                  必須
+              .field__input 
+                = i.select :prefecture_id, Prefecture.all.map { |pre| [pre.name, pre.id] },{}, class: "field__input__prefecture"
 
-          -# .field
-          -#   .field__label
-          -#     市区町村
-          -#     %span.field__label__require
-          -#       必須
-          -#   .field__input 
-          -#     %input{type: "text", placeholder: "例)横浜市緑区", class: "field__input__defalut"}
+            .field
+              .field__label
+                市区町村
+                %span.field__label__require
+                  必須
+              .field__input 
+                = i.text_field :city, placeholder: "例)横浜市緑区", class: "field__input__defalut"
 
 
-          -# .field
-          -#   .field__label
-          -#     番地
-          -#     %span.field__label__require
-          -#       必須
-          -#   .field__input 
-          -#     %input{type: "text", placeholder: "例)青山1-1-1", class: "field__input__defalut"}
-            
-          -# .field
-          -#   .field__label
-          -#     建物名
-          -#     %span.field__label__any
-          -#       任意
-          -#   .field__input 
-          -#     %input{type: "text", placeholder: "例)柳ビル103", class: "field__input__defalut"}
+            .field
+              .field__label
+                番地
+                %span.field__label__require
+                  必須
+              .field__input 
+                = i.text_field :street, placeholder: "例)青山1-1-1", class: "field__input__defalut"
+              
+            .field
+              .field__label
+                建物名
+                %span.field__label__any
+                  任意
+              .field__input 
+                = i.text_field :apartment, placeholder: "例)柳ビル103", class: "field__input__defalut"
 
-          -# .field
-          -#   .field__label
-          -#     お届け先の電話番号
-          -#     %span.field__label__any
-          -#       任意
-          -#   .field__input 
-          -#     %input{type: "text", placeholder: "例)09012345678", class: "field__input__defalut"}
+            .field
+              .field__label
+                お届け先の電話番号
+                %span.field__label__any
+                  任意
+              .field__input 
+                %input{type: "text", placeholder: "例)09012345678", class: "field__input__defalut"}
 
 
-          -# .input__confirmation
-          -#   ※ 本人情報は正しく入力してください。会員登録後、
-          -#   修正するにはお時間を頂く場合があります。
+          .input__confirmation
+            ※ 本人情報は正しく入力してください。会員登録後、
+            修正するにはお時間を頂く場合があります。
 
-          -# .input__terms
-          -#   「次へ進む」のボタンを押すことにより、
-          -#   = link_to " 利用規約", "#"
-          -#   に同意したものとみなします
+          .input__terms
+            「次へ進む」のボタンを押すことにより、
+            = link_to " 利用規約", "#"
+            に同意したものとみなします
           
           .submit
             %input{type: "submit", value: "登録", class: "submit__btn"}
