@@ -1,67 +1,120 @@
-.sell-form
-  .sell-form__photos
-    出品画像
-.sell-form
-  .sell-form__name
-    商品名
-  .sell-form__description
-    商品の説明
-.sell-form
-  %p.sell_form__title
-    商品の詳細
-  .sell-form__category
-    カテゴリー
-  .sell-form__brand
-    ブランド
-  .sell-form__condition
-    商品の状態
-.sell-form
-  %p.sell_form__title
-    発送について
-  .sell-form__shipping-payer
-    発送料の負担
-  .sell-form__shipping-from-area
-    発送元の地域
-  .sell-form__shipping-duration
-    発送までの日数
-.sell-form
-  %p.sell_form__title
-    価格 (¥300~9,999,999)
-  .sell-form__price
-    販売価格
-  .sell-form__fee
-    販売手数料
-  .sell-form__profit
-    販売利益
-.sell-form
-  .sell-form__btn
-    出品する
-.sell-form
-  .sell-form__notation
-    禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。
+-# .sell-form
+-#   .sell-form__photos
+-#     出品画像
+-# .sell-form
+-#   .sell-form__name
+-#     商品名
+-#   .sell-form__description
+-#     商品の説明
+-# .sell-form
+-#   %p.sell_form__title
+-#     商品の詳細
+-#   .sell-form__category
+-#     カテゴリー
+-#   .sell-form__brand
+-#     ブランド
+-#   .sell-form__condition
+-#     商品の状態
+-# .sell-form
+-#   %p.sell_form__title
+-#     発送について
+-#   .sell-form__shipping-payer
+-#     発送料の負担
+-#   .sell-form__shipping-from-area
+-#     発送元の地域
+-#   .sell-form__shipping-duration
+-#     発送までの日数
+-# .sell-form
+-#   %p.sell_form__title
+-#     価格 (¥300~9,999,999)
+-#   .sell-form__price
+-#     販売価格
+-#   .sell-form__fee
+-#     販売手数料
+-#   .sell-form__profit
+-#     販売利益
+-# .sell-form
+-#   .sell-form__btn
+-#     出品する
+-# .sell-form
+-#   .sell-form__notation
+-#     禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。
 
 
-= form_with model:@item do |f|
-  #image-box
+= form_with model:@item, class: "sell-form" do |f|
+  .sell-form__image
+    %h3.sell-form__title 出品画像
+    %span.sell-form__require 必須
+    %p 最大１０枚までアップロードできます
     = f.fields_for :images do |i|
-      .js-file_group{ data: {index: "#{i.index}"}}
-        = i.file_field :src ,class: "js_file"
-        %br
-        %span.js-remove
-          削除
+      = i.file_field :src 
+      %br
+      %span 削除
   %br
-  = f.text_field :name, placeholder: "40文字まで" 
+
+  .sell-form__profile
+    .sell-form__profile__group
+      %label.sell-form__title 出品名
+      %span.sell-form__require 必須
+    = f.text_field :name, placeholder: "40文字まで" 
+
+    .sell-form__profile__group
+      %label.sell-form__title 出品の説明
+      %span.sell-form-require 必須
+    = f.text_area :explanation, placeholder: "商品の説明（必須1,000文字以内)\n（色、素材、重さ、定価、注意点など）\n\n例） 2010年頃に1万円で購入したジャケットです。ライトグレーで傷ではありません。合わせやすいのでおすすめです。" 
   %br
-  = f.text_area :explanation, placeholder: "商品の説明（必須1,000文字以内)\n（色、素材、重さ、定価、注意点など）\n\n例） 2010年頃に1万円で購入したジャケットです。ライトグレーで傷ではありません。合わせやすいのでおすすめです。" 
+
+  .sell-form__content
+    %h3.sell-form__content__sub-title　商品詳細
+    .sell-form__content__group
+      %label.sell-form__title カテゴリー
+      %span.form-require 必須
+    = f.select :category,[["本",1],["洋服",2],["ハンドメイド",3]], prompt: "選択してください"
+    
+    .sell-form__content__group
+      %label.sell-form__title ブランド
+      %span.form-optional 任意
+    = f.text_field :brand, placeholder: "例）シャネル" 
+    
+    .sell-form__content__group
+      %label.sell-form__title 商品の状態
+      %span.form-require 必須
+    = f.select :condition,[["新品、未使用",1],["未使用に近い",2],["目立った傷や汚れなし",3],["やや傷や汚れあり",4],["傷や汚れあり",5],["全体的に状態が悪い",6]], prompt: "選択してください"
   %br
-  = f.select :condition,[["新品、未使用",1],["未使用に近い",2],["目立った傷や汚れなし",3],["やや傷や汚れあり",4],["傷や汚れあり",5],["全体的に状態が悪い",6]], prompt: "選択してください"
+  
+  .sell-form__content
+    %h3.sell-form__content__sub-title　発送について
+    .sell-form__content__group
+      %label.sell-form__title 発送料の負担
+      %span.form-require 必須
+    = f.select :delivery_fee,[["送料込み(出品者負担)",1],["着払い(購入者負担)",2]], prompt: "選択してください"
+
+    .sell-form__content__group
+      %label.sell-form__title 発送元の地域
+      %span.form-require 必須
+    = f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択してください'
+    
+    .sell-form__content__group
+      %label.sell-form__title 発送までの日数
+      %span.form-require 必須
+    = f.select :date,[["1~2日で発送",1],["2~3日で発送",2],["4~7日で発送",3]], prompt: "選択してください"
   %br
-  = f.select :delivery_fee,[["送料込み(出品者負担)",1],["着払い(購入者負担)",2]], prompt: "選択してください"
+  
+  .sell-form__content
+    %h3.sell-form__content__sub-title　価格 (¥300~9,999,999)
+    .sell-form__content__group
+      %label.sell-form__title 販売価格
+      %span.form-require 必須
+    = f.number_field :price, min:300 ,max:9999999 
+
+    .sell-form__content__group
+      %label.sell-form__title 販売手数料（10%）
+    
+    .sell-form__content__group
+      %label.sell-form__title 販売利益
   %br
-  = f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択してください'
-  %br
-  = f.select :date,[["1~2日で発送",1],["2~3日で発送",2],["4~7日で発送",3]], prompt: "選択してください"
-  %br
-  = f.number_field :price, min:300 ,max:9999999 
-  %br
+
   = f.submit
+
+.sell-notation
+  %p 禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。
