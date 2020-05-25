@@ -1,6 +1,5 @@
 *{
   box-sizing: border-box;
-  background-color: rgb(245, 245, 245);
 }
 
 .sell-header{
@@ -9,93 +8,95 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(245, 245, 245);
   &__logo{
     display: block;
-    height: 50px;
+    height: 55px;
   }
 }
 
-
-.sell-form{
-  width: 700px;
-  margin: 0 auto;
-  padding: 40px;
-  background-color: rgb(255, 255, 255);
-  &__require{
-    background-color: #ff0211;
-    color: #fff;
-    margin-left: 8px;
-    font-size: 15px;
-    padding: 0 4px;
-    border-radius: 2px;
-  }
-  &__title{
-    font-size: 15px;
-    font-weight: 550;
-  }
-  &__image{
+.sell-form__container{
+  background-color: rgb(245, 245, 245);
+  .sell-form{
+    width: 700px;
+    margin: 0 auto;
     background-color: rgb(255, 255, 255);
-    height: 300px;
-    p{
-      font-size: 14px;
-      margin-top: 16px;
+    border-radius: 10px;
+    hr{
+      height: 2px;
+      background-color: rgb(245, 245, 245);
+      border: none;
+    }
+    &__title{
+      font-size: 15px;
+      font-weight: 550;
+    }
+    &__require{
+      background-color: #ff0211;
+      color: #fff;
+      margin-left: 8px;
+      font-size: 15px;
+      padding: 0 4px;
+      border-radius: 2px;
+    }
+    &__optional{
+      background-color: #bfbfbf;
+      color: #fff;
+      margin-left: 8px;
+      font-size: 15px;
+      padding: 0 4px;
+      border-radius: 2px;
+    }
+    &__image{
+      height: 300px;
+      padding: 16px;
+      p{
+        font-size: 14px;
+        margin-top: 16px;
+      }
+    }
+    &__profile{
+      height: 451px;
+      padding: 16px;
+      &__group--explanation{
+        margin-top: 32px;
+      }
+    }
+    &__content{
+      height: 444px;
+      padding: 16px;
+      &__sub-title{
+        color: rgb(136, 136, 136);
+        font-weight: 550;
+        margin-bottom: 24px;
+      }
+      &__group{
+        margin-top: 32px;
+      }
+    }
+    &__content.price{
+      height: 270px;
+      padding: 16px 16px 0;
+    }
+    &__submit{
+      width: 360px;
+      height: 164px;
+      margin: auto;
+    }
+    &__notation{
+      height: 96px;
+      font-size: 12px;
+      padding: 0 40px;
     }
   }
-  &__profile{
-    background-color: rgb(255, 255, 255);
-    height: 451px;
-  }
-  &__content{
-    background-color: rgb(255, 255, 255);
-    height: 444px;
-  }
-  &__content.price{
-    height: 270px;
-  }
-  &__submit{
-    width: 360px;
-    height: 164px;
-    margin: auto;
-  }
-  &__notation{
-    width: 620px;
-    margin: 0 auto;
-    font-size: 12px;
-    background-color: rgb(255, 255, 255);
-  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .sell-footer{
   height: 200px;
   width: 100%;
   padding: 20px 0 40px;
+  background-color: rgb(245, 245, 245);
   &__rules{
     height: 54px;
     &__lists{
@@ -112,8 +113,8 @@
   }
   &__logo{
     display: block;
-    margin: auto;
-    height: 65px;
+    margin: 0 auto 10px;
+    height: 60px;
   }
   &__copyright{
     text-align: center;
