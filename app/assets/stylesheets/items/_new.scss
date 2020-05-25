@@ -15,6 +15,83 @@
   }
 }
 
+
+.sell-form{
+  width: 700px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: rgb(255, 255, 255);
+  &__require{
+    background-color: #ff0211;
+    color: #fff;
+    margin-left: 8px;
+    font-size: 15px;
+    padding: 0 4px;
+    border-radius: 2px;
+  }
+  &__title{
+    font-size: 15px;
+    font-weight: 550;
+  }
+  &__image{
+    background-color: rgb(255, 255, 255);
+    height: 300px;
+    p{
+      font-size: 14px;
+      margin-top: 16px;
+    }
+  }
+  &__profile{
+    background-color: rgb(255, 255, 255);
+    height: 451px;
+  }
+  &__content{
+    background-color: rgb(255, 255, 255);
+    height: 444px;
+  }
+  &__content.price{
+    height: 270px;
+  }
+  &__submit{
+    width: 360px;
+    height: 164px;
+    margin: auto;
+  }
+  &__notation{
+    width: 620px;
+    margin: 0 auto;
+    font-size: 12px;
+    background-color: rgb(255, 255, 255);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .sell-footer{
   height: 200px;
   width: 100%;
