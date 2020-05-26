@@ -5,14 +5,11 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.images.new
-    @category_parent_array = []
-    Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent.name
-    end
+    @category = Category.where(ancestry: nil)
   end
 
   def get_category_children
-    @category_children = Category.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
+    @category_children = Category.find("#{params[:parent_id]}").children
   end
 
   def get_category_grandchildren
@@ -23,7 +20,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     
     if @item.save
-      redirect_to root_path
+      redirect_to root_path 
     else
       render :new
     end
@@ -31,6 +28,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src])
+    tmp = params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src])
+    params.permit(:category_id).merge(tmp)
   end
 end

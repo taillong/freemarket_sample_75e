@@ -33,8 +33,9 @@
         %span.sell-form__require 必須
         .sell-form__wrapper
           .sell-form__input
-            = f.select :category, @category_parent_array, {prompt: "選択してください"}, {class: "sell-form__input--select" , id: "parent_category"}
-      
+            -# = f.select :category, @category_parent_array, {prompt: "選択してください"}, {class: "sell-form__input--select" , id: "parent_category"}
+            = f.collection_select :category, @category, :id, :name, {prompt: "選択してください"}, {class: "sell-form__input--select", id: "parent_category"}
+
       .sell-form__content__group
         %label.sell-form__title ブランド
         %span.sell-form__optional 任意
