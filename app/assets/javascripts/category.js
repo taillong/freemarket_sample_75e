@@ -37,7 +37,7 @@ $(function(){
       .done(function(children){
         $('#child_category').remove();
         $('#grandchild_category').remove();
-        let insertOption = ``
+        let insertOption = ``;
         children.forEach(function(child){
           insertOption += appendOption(child);
         })
@@ -54,7 +54,8 @@ $(function(){
 
   //子カテゴリーのchangeイベントでajaxが発火する 
   $('.sell-form__wrapper').on('change', '#child_category',function(){
-    let childId = $('#child_category option:selected').data('category_id');
+    // let childId = $('#child_category option:selected').data('category_id');
+    let childId = $('#child_category').val();
     if (childId != null ){
       $.ajax({
         url: 'get_category_grandchildren',
