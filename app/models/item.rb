@@ -4,7 +4,8 @@ class Item < ApplicationRecord
   belongs_to_active_hash :condition
   belongs_to_active_hash :delivery_fee
   belongs_to_active_hash :duration
-  
+
   has_many :images
   accepts_nested_attributes_for :images, allow_destroy: true
+  belongs_to :category
 end
