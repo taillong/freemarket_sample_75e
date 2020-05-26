@@ -65,7 +65,7 @@
         %label.sell-form__title 発送までの日数
         %span.sell-form__require 必須
         .sell-form__input
-          = f.select :date,[["1~2日で発送",1],["2~3日で発送",2],["4~7日で発送",3]], {prompt: "選択してください"}, {class: "sell-form__input--select"}
+          = f.collection_select :duration_id, Duration.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select"}
     %hr
     
     .sell-form__content--price
