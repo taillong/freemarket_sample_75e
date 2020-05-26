@@ -4,11 +4,12 @@
       %label.sell-form__title 出品画像
       %span.sell-form__require 必須
       %p 最大１０枚までアップロードできます
-      .sell-form__input
+      .sell-form__image__input
         = f.fields_for :images do |i|
-          = i.file_field :src 
-          %br
-          %span 削除
+          .js-file_group{data: {index: "#{i.index}"}}
+            = i.file_field :src, class: "js-file"
+            %br
+            %span.js-remove 削除
     %hr
 
     .sell-form__profile
