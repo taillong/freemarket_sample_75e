@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    
+    binding.pry
     if @item.save
       redirect_to root_path 
     else
@@ -28,10 +28,15 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    tmp = params.require(:item).permit(:name, :explanation, :category_id, :condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src])
-    brand_id = Item.brand_id_search(params.require(:item).permit(:brand))
-    params.permit(:category_id).merge(tmp).merge(brand_id: brand_id)
-
+    tmp1 = params.require(:item).permit(:name, :explanation, :condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src])
+    tmp2 = params.permit(:category_id).merge(tmp1)
+    if params.require(:item).permit(:brand)[:brand] != ""
+      brand_id = Item.brand_id_search(params.require(:item).permit(:brand))
+      tmp3 = {"brand_id"=> brand_id}.merge(tmp2)
+      return tmp3
+    else 
+      tmp3 = {"brand_id"=> nil}.merge(tmp2)
+      return tmp3
+    end
   end
-
 end

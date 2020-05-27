@@ -11,11 +11,11 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :images, allow_destroy: true
 
   def self.brand_id_search(input)
-    if input[:brand] != ""
       brand = Brand.find_by(name: input[:brand])
-      brand_id = brand.id
-      return brand_id
-    end
+      if brand 
+        brand_id = brand.id
+      else 
+        brand_id = nil
+      end
   end
-
 end
