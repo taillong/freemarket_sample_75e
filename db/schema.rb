@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_05_24_151030) do
     t.string "city", null: false
     t.string "street", null: false
     t.string "apartment"
-    t.integer "tell"
+    t.string "tell"
     t.integer "prefecture_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2020_05_24_151030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["nickname"], name: "index_users_on_nickname", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

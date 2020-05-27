@@ -1,17 +1,59 @@
 .user__new {
   box-sizing: border-box;
   background-color:#F5F5F5;
-}
-
-
-.header__user {
-  height: 150px;
-  text-align: center;
-  &--tag {
-    padding-top: 40px;
-    height: 50px;
+  .header {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    &__user {
+      height: 150px;
+      &--tag {
+        padding-top: 40px;
+        height: 50px;
+      }
+    }
+    &__list {
+      ol {
+        display: flex;
+        margin-left: 30px;
+        .header__list__text {
+          padding-top: 40px;
+          font-size: 13px;
+          // padding-right: 15px;  
+          width: 120px;
+          position: relative; 
+          display: inline-block;
+          .header__list__user__rod {
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            margin: 0 auto;
+            background-color: #cccccc;
+          }
+          .red {
+            background-color: red;
+          }
+        }
+        .header__list__text:before {
+          content: '';
+          position: absolute;
+          bottom: 5px;
+          left:  68px;
+          width: 115px;
+          height: 5px;
+          background-color: #cccccc;
+        }
+        .text__none:before {
+          content: none;
+        }
+        .red:before {
+          background-color: red;
+        }
+      }
+    }
   }
 }
+
 .account {
   width: 700px;
   margin: 0 auto;
@@ -64,8 +106,18 @@
           &__defalut:focus {
             @include foucus()
           }
+          &__defalut__none {
+            width: 100%;
+            height: 40px;
+            padding-left: 10px;
+            @include input()
+          }
+          &__defalut__none:focus {
+            @include foucus()
+          }
           &__ecality {
-            width: 46%;
+            display: inline-block;
+            width: 40%;
             height: 40px;
             padding-left: 10px;
             @include input()
@@ -73,11 +125,25 @@
           &__ecality:focus {
             @include foucus()
           }
-          &__year {
+          .year {
             height: 40px;
             width: 20%;
           }
-          &__year:focus {
+          .year:focus {
+            @include foucus()
+          }
+          .month {
+            height: 40px;
+            width: 20%;
+          }
+          .month:focus {
+            @include foucus()
+          }
+          .day {
+            height: 40px;
+            width: 20%;
+          }
+          .day:focus {
             @include foucus()
           }
           &__prefecture {
@@ -97,11 +163,15 @@
       }
       .field__checkbox {
         margin-top: 5px;
-        height: 20px;
-        cursor: pointer;
         color:$blackColor;
         #test1 {
           line-height: 20px;
+          cursor: pointer;
+        }
+        .checkbox__confirmation {
+          margin-top: 5px;
+          display: inline-block;
+          background-color: #cccccc;
         }
       }
       .person__confirmation {
@@ -117,6 +187,9 @@
           color:$blackColor;
           text-align: justify;
         }
+      }
+      .peron__address {
+        margin-top: -5px;
       }
       .input__terms {
         margin-top: 25px;
@@ -175,4 +248,13 @@
 }
 .footer {
   height: 200px;
+}
+
+.field__error {
+  margin-top: 5px;
+  color: red;
+}
+
+.field_with_errors {
+  display: contents;
 }
