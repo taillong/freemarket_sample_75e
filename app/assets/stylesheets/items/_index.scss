@@ -49,32 +49,38 @@
     font-size: 14px;
     display: flex;
     margin-bottom: 10px;
-    ul.navbar__left{
-      li.navbar__left__categories{
-        text-decoration: none;
+    .navbar__left{
+      position: relative;
+      .navbar__left__categories{
         padding: 0;
-        a#catebtn{
+        #catebtn{
         }
       }
-      li.navbar__left__brands{
-        display: flex;
-        a#brandbtn{
+      .navbar__left__brands{
+        position: relative;
+        #brandbtn{
           line-height: 32px;
           background-size: 18px;
           padding-right: 30px;
         }
-        ul.brands__list{
+        .brands__list{
         }
       }
     }
-    ul.navbar__right{
+    .navbar__right{
       margin-left: auto;
+      .login{
+        a{
+        }
+      }
+      .newmemmber{
+        a{
+        }
+      }
     }
     ul{
       display: flex;
       li{
-        color: #333;
-        line-height: 38px;
         padding: 0 0 0 16px;
         a{
           display: flex;
@@ -84,7 +90,6 @@
           line-height: 32px;
         }
       }
-
     }
   }
 }
@@ -122,6 +127,7 @@
         display: flex;
         margin: 24px 0 0 0;
         a{
+          height: 53px;
           margin-right: 10px;
           .app__btn{
 
@@ -355,12 +361,12 @@
     .productbox{
       &__head{
         text-align: center;
-        a{
-          font-size: 24px;
-          text-decoration: none;
-          color: #3ccace;
-          h3{
-            font-weight: bold;
+        h3{
+          font-weight: bold;
+          a{
+            font-size: 24px;
+            text-decoration: none;
+            color: #3ccace;
           }
         }
       }
@@ -420,7 +426,7 @@
   }
 
   &__pickupbrand{
-    padding: 80px 0 0;
+    padding: 80px 0;
     background-color: #f8f8f8;
     height: 100%;
     .title{
@@ -432,12 +438,12 @@
     .productbox{
       &__head{
         text-align: center;
-        a{
-          font-size: 24px;
-          text-decoration: none;
-          color: #3ccace;
-          h3{
-            font-weight: bold;
+        h3{
+          font-weight: bold;
+          a{
+            font-size: 24px;
+            text-decoration: none;
+            color: #3ccace;
           }
         }
       }

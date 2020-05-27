@@ -16,18 +16,18 @@
   .header__navbar
     %ul.navbar__left
       %li.navbar__left__categories
-        %a{ href: '#', id:'catebtn' } カテゴリー
+        = link_to "カテゴリー", "#",  id: 'catebtn'
         .categories__lists
           %ul.categories__list
             %li.categories__list__pearent
       %li.navbar__left__brands
-        %a{ href: '#', id:'brandbtn' } ブランド
+        = link_to "ブランド", "#", id: 'brandbtn'
         %ul.brands__list
     %ul.navbar__right
       %li.login
-        %a{ href: '#' }ログイン
+        = link_to "ログイン", "#"
       %li.newmemmber
-        %a{ href: '#' }新規会員登録
+        = link_to "新規会員登録", "#"
 
 .main
   .main__topvisual
@@ -39,10 +39,8 @@
         %br
         フリマアプリです。
       .content__btn
-        %a{ href: '#' }
-          = image_tag "itemsimage/appstoer.png", size: "180x53", class: 'app__btn' 
-        %a{ href: '#' }
-          = image_tag "itemsimage/googleplay.png", size: "180x53", class: 'app__btn' 
+        = link_to image_tag("itemsimage/appstoer.png", size: '180x53', class: 'app__btn'),"#" 
+        = link_to image_tag("itemsimage/googleplay.png", size: '180x53', class: 'app__btn'),"#" 
 
   .main__topreason
     %h2.main__topreason__title
@@ -93,10 +91,8 @@
         %br
         ほしかったあの商品に出会えるかもしれません。
       .content__btn
-        %a{ href: '#' }
-          = image_tag "itemsimage/appstoer.png", size: "180x53", class: 'linkapp__btn' 
-        %a{ href: '#' }
-          = image_tag "itemsimage/googleplay.png", size: "180x53", class: 'linkapp__btn' 
+        = link_to image_tag("itemsimage/appstoer.png", size: '180x53', class: 'linkapp__btn'),"#" 
+        = link_to image_tag("itemsimage/googleplay.png", size: '180x53', class: 'linkapp__btn'),"#" 
 
   .main__topchara
     %h2.main__topchara__title
@@ -128,12 +124,12 @@
     %h2.title ピックアップカテゴリー
     .productbox
       .productbox__head
-        %a{ href: '#' }
-          %h3.link__title
-            新規投稿商品
+        %h3.link__title
+          = link_to "新規投稿商品", "#"
+            
       .productbox__lists
         .productbox__lists__list
-          %a{ href: '#' }
+          = link_to "#" do
             %figure.productlist__image
               = image_tag "itemsimage/pict-reason-01.jpg"
             .productlist__text
@@ -143,7 +139,7 @@
                   %li 3000円
                 %p (税込)
         .productbox__lists__list
-          %a{ href: '#' }
+          = link_to "#" do
             .productlist__image
               = image_tag "itemsimage/pict-reason-01.jpg"
             .productlist__text
@@ -153,7 +149,7 @@
                   %li 2000円
                 %p (税込)
         .productbox__lists__list
-          %a{ href: '#' }
+          = link_to "#" do
             .productlist__image
               = image_tag "itemsimage/pict-reason-01.jpg"
             .productlist__text
@@ -167,12 +163,11 @@
     %h2.title ピックアップブランド
     .productbox
       .productbox__head
-        %a{ href: '#' }
-          %h3.link__title
-            アーカイバ
+        %h3.link__title
+          = link_to "アーカイバ", "#"
       .productbox__lists
         .productbox__lists__list
-          %a{ href: '#' }
+          = link_to "#" do
             %figure.productlist__image
               = image_tag "itemsimage/pict-reason-01.jpg"
             .productlist__text
@@ -182,7 +177,7 @@
                   %li 35000円
                 %p (税込)
         .productbox__lists__list
-          %a{ href: '#' }
+          = link_to "#" do
             %figure.productlist__image
               = image_tag "itemsimage/pict-reason-01.jpg"
             .productlist__text
@@ -192,7 +187,7 @@
                   %li 25000円
                 %p (税込)
         .productbox__lists__list
-          %a{ href: '#' }
+          = link_to "#" do
             %figure.productlist__image
               = image_tag "itemsimage/pict-reason-01.jpg"
             .productlist__text
@@ -209,10 +204,8 @@
     .applink__inner__text
       今すぐ無料ダウンロード！
     .applink__inner__link
-      %a{ href: '#' }
-        = image_tag "itemsimage/appstoer.png", size: "180x53", class: 'link__btn' 
-      %a{ href: '#' }
-        = image_tag "itemsimage/googleplay.png", size: "180x53", class: 'link__btn' 
+      = link_to image_tag("itemsimage/appstoer.png", size: "180x53", class: 'link__btn'),"#"
+      = link_to image_tag("itemsimage/googleplay.png", size: "180x53", class: 'link__btn'),"#"
 
 .footer
   %ul.contents
@@ -220,34 +213,34 @@
       %h2.content__head FURIMAについて
       %ul
         %li
-          %a{ href: '#' }会社概要(運営会社)
+          = link_to "会社概要(運営会社)", "#"
         %li
-          %a{ href: '#' }プライバシーポリシー
+          = link_to "プライバシーポリシー", "#"
         %li
-          %a{ href: '#' }FURIMA利用規約
+          = link_to "FURIMA利用規約", "#"
         %li
-          %a{ href: '#' }ポイントに関する特約
+          = link_to "ポイントに関する特約", "#"
     %li.content
       %h2.content__head FURIMAを見る
       %ul
         %li
-          %a{ href: '#' }カテゴリー一覧
+          = link_to "カテゴリー一覧", "#"
         %li
-          %a{ href: '#' }ブランド一覧
+          = link_to "ブランド一覧", "#"
     %li.content
       %h2.content__head ヘルプ＆ガイド
       %ul
         %li
-          %a{ href: '#' }FURIMAガイド
+          = link_to "FURIMAガイド", "#"
         %li
-          %a{ href: '#' }FURIMAロゴ利用ガイドライン
+          = link_to "FURIMAロゴ利用ガイドライン", "#"
         %li
-          %a{ href: '#' }お知らせ
+          = link_to "お知らせ", "#"
   .footer__logo
-    = link_to image_tag("itemsimage/logo-white.png", size: "160x46", class: 'link__btn'),"#"
+    = link_to image_tag("itemsimage/logo-white.png", size: "160x46", class: 'link__btn'),"/"
   %p ©︎ FURIMA
 
-%a{ href: '#' }
+= link_to "#" do
   .purchasebtn
     %span.purchasebtn__text
       出品する
