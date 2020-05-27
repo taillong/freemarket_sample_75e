@@ -54,9 +54,8 @@ $(function(){
 
   //子カテゴリーのchangeイベントでajaxが発火する 
   $('.sell-form__wrapper').on('change', '#child_category',function(){
-    // let childId = $('#child_category option:selected').data('category_id');
     let childId = $('#child_category').val();
-    if (childId != null ){
+    if (childId != "" ){
       $.ajax({
         url: 'get_category_grandchildren',
         type: 'GET',
@@ -65,7 +64,7 @@ $(function(){
       })
       .done(function(grandchildren){
         $('#grandchild_category').remove();
-        let insertOption = ``
+        let insertOption = ``;
         grandchildren.forEach(function(grandchild){
           insertOption += appendOption(grandchild);
         })
