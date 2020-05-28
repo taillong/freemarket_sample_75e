@@ -3,16 +3,20 @@
     .sell-form__image
       %label.sell-form__title 出品画像
       %span.sell-form__require 必須
-      %p 最大１０枚までアップロードできます
+      %p.sell-form__image__attention 最大１０枚までアップロードできます
       .sell-form__image__input
-        %ul#preview
-          %li.sell-form__image__input__box
-            = f.fields_for :images do |i|
-              .js-file_group{data: {index: "#{i.index}"}}
-                = i.file_field :src, class: "sell-form__image__input__box__field"
-                %br
-                %span.js-remove 削除
+        .sell-form__image__input__preview
+          aiueo
+        %label.sell-form__image__input__box
+          = f.fields_for :images do |i|
+            = i.file_field :src ,class: "sell-form__image__input__box__field"
+          = image_tag "material/icon/icon_camera.png", class: "sell-form__image__input__box__icon"
+          %p.sell-form__image__input__box__text 
+            ドラッグアンドドロップ
+            %br
+            またはクリックしてファイルをアップロード
 
+        
     %hr
 
     .sell-form__profile
