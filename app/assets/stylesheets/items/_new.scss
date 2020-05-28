@@ -89,6 +89,25 @@
       padding: 40px;
       &__input{
         margin-top: 16px;
+        height: 150px;
+        &__preview{
+
+        }
+        &__box{
+          align-items: center;
+          background-color: rgb(245, 245, 245);
+          cursor: pointer;
+          display: flex;
+          height: 100%;
+          flex-wrap: wrap;
+          justify-content: center;
+          border-width: 1px;
+          border-style: dashed;
+          border-color: rgb(204, 204, 204);
+          &__field{
+            display: none;
+          }
+        }
       }
       p{
         font-size: 14px;

@@ -8,6 +8,7 @@ $(function(){
                     <div class="js-remove">削除</div>
                   </div>`;
     return html;
+    
   }
 
   // file_fieldのnameに動的なindexをつける為の配列
