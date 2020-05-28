@@ -5,16 +5,31 @@
       %span.sell-form__require 必須
       %p.sell-form__image__attention 最大１０枚までアップロードできます
       .sell-form__image__input
-        .sell-form__image__input__preview
-          aiueo
+        .sell-form__image__input__previews
+          .sell-form__image__input__previews__preview
+            %p.sell-form__image__input__previews__preview__photo
+              = image_tag "material/pict/pict-reason-01.jpeg", width: "100%"
+            %hr
+            .sell-form__image__input__previews__preview__btn
+              .sell-form__image__input__previews__preview__btn--remove 削除
         %label.sell-form__image__input__box
           = f.fields_for :images do |i|
             = i.file_field :src ,class: "sell-form__image__input__box__field"
-          = image_tag "material/icon/icon_camera.png", class: "sell-form__image__input__box__icon"
+          = image_tag "material/icon/icon_camera.png",alt: "画像", width: "104", class: "sell-form__image__input__box__icon"
           %p.sell-form__image__input__box__text 
             ドラッグアンドドロップ
             %br
             またはクリックしてファイルをアップロード
+      -# .sell-form__image__input
+      -#   .sell-form__image__input__previews
+      -#   %label.sell-form__image__input__box
+      -#     = f.fields_for :images do |i|
+      -#       = i.file_field :src ,class: "sell-form__image__input__box__field"
+      -#     = image_tag "material/icon/icon_camera.png", class: "sell-form__image__input__box__icon"
+      -#     %p.sell-form__image__input__box__text 
+      -#       ドラッグアンドドロップ
+      -#       %br
+      -#       またはクリックしてファイルをアップロード
 
         
     %hr
