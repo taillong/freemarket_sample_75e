@@ -38,13 +38,13 @@ RSpec.describe PersonInfo, type: :model do
     end
 
     it "family_nameが全角でないと登録できない" do
-      person_info = build(:person_info, family_name: "yaaa")
+      person_info = build(:person_info, family_name: "yamada")
       person_info.valid?
       expect(person_info.errors[:family_name]).to include("は不正な値です")
     end
 
     it "first_nameが全角でないと登録できない" do
-      person_info = build(:person_info, first_name: "カナ")
+      person_info = build(:person_info, first_name: "aoi")
       person_info.valid?
       expect(person_info.errors[:first_name]).to include("は不正な値です")
     end
