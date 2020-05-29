@@ -21,7 +21,9 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path 
     else
-      redirect_to new_item_path
+      @item.images.new
+      @category = Category.where(ancestry: nil)
+      render action: :new
     end
   end
 

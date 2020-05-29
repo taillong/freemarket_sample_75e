@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :condition
   belongs_to_active_hash :delivery_fee
   belongs_to_active_hash :duration
-  belongs_to :category
+  belongs_to :category, optional: true
   belongs_to :brand, optional: true
   has_many :images
   accepts_nested_attributes_for :images, allow_destroy: true
