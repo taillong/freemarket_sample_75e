@@ -23,7 +23,7 @@
       %h3 商品送付先住所情報
     .account__input
       .account__input__form
-        = form_for :@address, url:addresses_path, id: "new__user__address" do |f|
+        = form_for @address, url:addresses_path, id: "new__user__address" do |f|
           .field
             .field__label
               送付先氏名
