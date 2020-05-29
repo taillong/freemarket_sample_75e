@@ -5,11 +5,13 @@
     display: flex;
     text-align: center;
     justify-content: center;
-    &__user {
+    &__registrations {
       height: 150px;
+      width: 150px;
       &--tag {
         padding-top: 40px;
-        height: 50px;
+        height: 70%;
+        width: 100%;
       }
     }
     &__list {
@@ -246,7 +248,7 @@
     }  
   }
 }
-.footer {
+.footer__user {
   height: 200px;
 }
 
