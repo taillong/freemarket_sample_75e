@@ -1,7 +1,6 @@
 .user__new
   .header
-    .header__user
-      = render 'header'
+    = render 'header'
     .header__list
       %ol
         %li.header__list__text.red
@@ -99,8 +98,8 @@
             修正するにはお時間を頂く場合があります。
 
           .input__terms
-            「次へ進む」のボタンを押すことにより、
+            「送信」のボタンを押すことにより、
             = link_to " 利用規約", "#"
             に同意したものとみなします
 
-  .footer
+  .footer__user
