@@ -1,3 +1,4 @@
+
 $(function(){
   // file_fieldをつける
   function appendFileField(index){
@@ -17,22 +18,6 @@ $(function(){
                   <div class="previews__preview__btn js-remove">削除</div>
                 </div>`
     $('.previews').append(html);
-  }
-
-  function appendInputBox(num){
-    let html = `<label class="sell-form__image__input__box" for=" item_images_attributes_${num}_src">
-                  <img alt="画像" width="104" class="sell-form__image__input__box__icon" src="/assets/material/icon/icon_camera-24c5a3dec3f777b383180b053077a49d0416a4137a1c541d7dd3f5ce93194dee.png">
-                  <div class="js-file__group" data-index="${num}">
-                    <input class="sell-form__image__input__box__field js-file" accept="image/png,image/jpeg" type="file" name="item[images_attributes][${num}][src]" id="item_images_attributes_${num}_src">
-                  </div>
-                  <p class="sell-form__image__input__box__text">
-                   ドラッグアンドドロップ
-                   <br>
-                   またはクリックしてファイルをアップロード
-                   </p>
-                </label>`
-
-    $('.sell-form__image__input').append(html);
   }
 
   // 数えるのに必要
