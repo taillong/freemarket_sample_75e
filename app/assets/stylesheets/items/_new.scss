@@ -96,13 +96,16 @@
         height: 150px;
         width: 620px;
         display: flex;
-        &__previews{
+        justify-content: space-between;
+        .previews{
           display: flex;
-          padding: 0 8px;
           &__preview{
-            width: 104px;
-            margin-right: 8px;
+            width: 108px;
+            margin: 0 6px;
             background-color: rgb(245, 245, 245);
+            &__photo{
+              text-align: center;
+            }
             hr{
               height: 1px;
               background-color: rgb(204, 204, 204)
