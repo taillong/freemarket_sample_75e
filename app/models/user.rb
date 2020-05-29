@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   validates :nickname, presence: true
-  validates :email, presence: true, uniqueness: true, format: {with:  /\A[a-zA-Z0-9_#!$%&`'*+-{|}~^\/=?.]+@[a-zA-Z0-9][a-zA-Z0-9.-]+\z/}
-  validates :password,  length: { minimum: 7 }, format: {with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,}\Z/}
+  validates :email, uniqueness: true, format: {with:  /\A[a-zA-Z0-9_#!$%&`'*+-{|}~^\/=?.]+@[a-zA-Z0-9][a-zA-Z0-9.-]+\z/}
+  validates :password, format: {with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,}\Z/}
   has_one   :person_info, dependent: :destroy
   has_one   :address,     dependent: :destroy
 end

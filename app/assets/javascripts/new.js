@@ -51,14 +51,12 @@ $(function(){
     }
     else {
       $(`#${name}`).remove();
-      console.log("ok");
       var html = addHTML(name)
       $(this).parent().append(html)
     }
   });
 
   $('input[type="checkbox"]').on('change', function() {
-    console.log('ok')
     var password = $('#field__input__password').val()
     var prop = $('#test1').prop('checked')
     console.log(prop)
@@ -78,7 +76,6 @@ $(function(){
     if (input != "") {
       $(`#${name}`).remove();
       if ((name == "性" || name == "名") && input == input.match(/[一-龥ぁ-ん]+/)) {
-        console.log(input.match(/[一-龥ぁ-ん]+/))
         $(`#${name}`).remove();
       } else if ((name == "性かな" || name == "名かな") && input == input.match(/[ぁ-んー－]+/)) {
         $(`#${name}`).remove();
@@ -99,76 +96,3 @@ $(function(){
     }
   });
 });
-
-  // else if (name === "性") {
-  //   var html = addEmail(name, "全角で入力してください")
-  //   $(this).parent().append(html) 
-  // }
-
-  // $('.field__input__defalut').on('focusout', function(e) {
-  //   e.preventDefault();
-  //   var input = $(this).val()
-  //   var name = $(this).attr('name');
-  //   console.log()
-  //   if (input === "") {
-  //     $(`#${name}`).remove();
-  //     var html = addHTML(name)
-  //     $(this).parent().append(html)
-  //   }
-  //   else {
-  //     $(`#${name}`).remove();
-  //   }
-  // });
-
-  // $('#field__input__email').on('focusout', function(e) {
-  //   e.preventDefault();
-  //   var input = $(this).val()
-  //   var name = $(this).attr('name');
-  //   console.log(input.match(/.+@.+/));
-  //   if (input.match(/.+@.+/)) {
-  //     console.log("ok");
-  //     $(`#${name}`).remove();
-  //   }else {
-  //     $(`#${name}`).remove();
-  //     var html = addEmail(name)
-  //     $(this).parent().append(html)
-  //   }
-  // });
-
-  // $('#field__input__password').on('focusout', function(e) {
-  //   e.preventDefault();
-  //   var input = $(this).val()
-  //   var name = $(this).attr('name');
-  //   console.log(input.match(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,}$/i));
-  //   if (input.match(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,}$/i)) {
-  //     console.log("ok");
-  //     $(`#${name}`).remove();
-  //   }else {
-  //     $(`#${name}`).remove();
-  //     var html = addPassword(name)
-  //     $(this).parent().append(html)
-  //   }
-  // });
-
-  // $('#field__input__password_confirmation').on('focusout', function(e) {
-  //   e.preventDefault();
-  //   var password = $('#field__input__password').val()
-  //   var input = $(this).val()
-  //   console.log(password)
-  //   var name = $(this).attr('name');
-  //   console.log(input.match(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,}$/i));
-  //   if (input.match(/^(?=.*?[a-z])(?=.*?\d)[a-z\d]{7,}$/i)) {
-  //     $(`#${name}`).remove();
-  //     if (password != input) {
-  //       $(`#${name}`).remove();
-  //       var html = addDisgrement(name)
-  //       $(this).parent().append(html)
-  //     }
-  //   }else {
-  //     $(`#${name}`).remove();
-  //     var html = addPassword(name)
-  //     $(this).parent().append(html)
-  //   }
-  // });
-
-  
