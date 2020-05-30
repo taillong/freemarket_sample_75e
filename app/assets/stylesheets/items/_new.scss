@@ -176,6 +176,18 @@
         }
         &--fee{
           padding: 12px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          &__title{
+            font-size: 14px;
+          }
+        }
+        &--profit{
+          padding: 12px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           &__title{
             font-size: 14px;
           }
@@ -194,7 +206,7 @@
     &__btn{
       width: 360px;
       height: 164px;
-      margin: auto;
+      margin: 40px auto 0;
       font-size: 17px;
       text-align: center;
       &--submit{
