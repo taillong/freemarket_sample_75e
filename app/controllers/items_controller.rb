@@ -20,10 +20,8 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.save
       redirect_to root_path 
-    else
-      @item.images.new
-      @category = Category.where(ancestry: nil)
-      render action: :new
+    else      
+      redirect_to new_item_path, flash: { errors: @item.errors.messages }
     end
   end
 

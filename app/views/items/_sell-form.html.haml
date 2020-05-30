@@ -15,6 +15,9 @@
             ドラッグアンドドロップ
             %br
             またはクリックしてファイルをアップロード
+      .errors
+        - if flash[:errors].present? && flash[:errors]["images"].present?
+          %p 画像がありません
     %hr
 
     .sell-form__profile
@@ -23,12 +26,18 @@
         %span.sell-form__require 必須
         .sell-form__input
           = f.text_field :name, placeholder: "40文字まで" ,class: "sell-form__input--text_field"
+        .errors
+          - if flash[:errors].present? && flash[:errors]["name"].present?
+            %p 入力してください
 
       .sell-form__profile__group--explanation
         %label.sell-form__title 出品の説明
         %span.sell-form__require 必須
         .sell-form__input
           = f.text_area :explanation, rows: "7",class:"sell-form__input--text_area", placeholder: "商品の説明（必須1,000文字以内)\n（色、素材、重さ、定価、注意点など）\n\n例） 2010年頃に1万円で購入したジャケットです。ライトグレーで傷ではありません。合わせやすいのでおすすめです。" 
+        .errors
+          - if flash[:errors].present? && flash[:errors]["explanation"].present?
+            %p 入力してください
     %hr
 
     .sell-form__content
@@ -39,6 +48,9 @@
         .sell-form__wrapper
           .sell-form__input
             = f.collection_select :category, @category, :id, :name, {prompt: "選択してください"}, {class: "sell-form__input--select", id: "parent_category"}
+          .errors
+            - if flash[:errors].present? && flash[:errors]["category_id"].present?
+              %p 選択してください
 
       .sell-form__content__group
         %label.sell-form__title ブランド
@@ -51,6 +63,9 @@
         %span.sell-form__require 必須
         .sell-form__input
           = f.collection_select :condition_id, Condition.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select"}
+        .errors
+          - if flash[:errors].present? && flash[:errors]["condition_id"].present?
+            %p 選択してください
     %hr
     
     .sell-form__content
@@ -60,28 +75,41 @@
         %span.sell-form__require 必須
         .sell-form__input
           = f.collection_select :delivery_fee_id, DeliveryFee.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select"}
+        .errors
+          - if flash[:errors].present? && flash[:errors]["delivery_fee_id"].present?
+            %p 選択してください
 
       .sell-form__content__group
         %label.sell-form__title 発送元の地域
         %span.sell-form__require 必須
         .sell-form__input
           = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: '選択してください'}, {class: "sell-form__input--select"}
-      
+        .errors
+          - if flash[:errors].present? && flash[:errors]["prefecture_id"].present?
+            %p 選択してください
+
       .sell-form__content__group
         %label.sell-form__title 発送までの日数
         %span.sell-form__require 必須
         .sell-form__input
           = f.collection_select :duration_id, Duration.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select"}
+        .errors
+          - if flash[:errors].present? && flash[:errors]["duration_id"].present?
+            %p 選択してください
     %hr
     
     .sell-form__content--price
       %h3.sell-form__content__sub-title 価格 (¥300~9,999,999)
       .sell-form__content--price__group
-        %label.sell-form__title 販売価格
-        %span.sell-form__require 必須
+        .sell-form__content--price__group--left
+          %label.sell-form__title 販売価格
+          %span.sell-form__require 必須
         .sell-form__input--price
-          %span ¥
+          .yen ¥
           = f.number_field :price, placeholder: 0,min:300 ,max:9999999 ,class: "sell-form__input--price--number_field"
+      .errors--price
+        - if flash[:errors].present? && flash[:errors]["price"].present?
+          %p 300以上9999999以下で入力してください
 
       .sell-form__content--price--fee
         %label.sell-form__content--price--fee__title 販売手数料（10%）
@@ -96,7 +124,3 @@
 
     .sell-form__notation
       %p 禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。
-
-    -# エラーメッセージ
-    - if @item.errors.any?
-      = @item.errors.messages

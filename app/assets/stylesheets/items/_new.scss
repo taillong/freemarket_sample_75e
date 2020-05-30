@@ -22,6 +22,17 @@
     margin: 0 auto;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
+    .errors{
+      color: #ff0211;
+      font-size: 14px;
+      margin-top: 8px;
+      padding: 0 10px;
+      &--price{
+        color: #ff0211;
+        font-size: 14px;
+        text-align: right;
+      }
+    }
     hr{
       height: 2px;
       background-color: rgb(245, 245, 245);
@@ -74,8 +85,8 @@
         width: 100%;
       }
       &--price{
-        display: inline-block;
-        margin-left: 200px;
+        display: flex;
+        align-items: center;
         &--number_field{
           border: 1px solid #ccc;
           border-radius: 4px;
@@ -155,7 +166,13 @@
       &--price{
         padding: 40px 40px 0;
         &__group{
-          padding: 30px 0;
+          padding: 30px 0 10px;
+          display: flex;
+          justify-content: space-between;
+          &--left{
+            display: flex;
+            align-items: center;
+          }
         }
         &--fee{
           padding: 12px 0;
