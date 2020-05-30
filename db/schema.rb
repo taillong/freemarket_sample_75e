@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_22_115328) do
+ActiveRecord::Schema.define(version: 2020_05_24_151030) do
+
+  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "family_name"
+    t.string "first_name"
+    t.string "family_kana"
+    t.string "first_kana", null: false
+    t.string "zipcode", null: false
+    t.string "city", null: false
+    t.string "street", null: false
+    t.string "apartment"
+    t.string "tell"
+    t.integer "prefecture_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -38,6 +55,18 @@ ActiveRecord::Schema.define(version: 2020_05_22_115328) do
     t.index ["seller_id"], name: "index_items_on_seller_id"
   end
 
+  create_table "person_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "family_name", null: false
+    t.string "first_name", null: false
+    t.string "family_kana", null: false
+    t.string "first_kana", null: false
+    t.date "birth_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_person_infos_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", default: "", null: false
@@ -48,11 +77,12 @@ ActiveRecord::Schema.define(version: 2020_05_22_115328) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["nickname"], name: "index_users_on_nickname", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "users"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "users", column: "buyer_id"
   add_foreign_key "items", "users", column: "seller_id"
+  add_foreign_key "person_infos", "users"
 end
