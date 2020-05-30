@@ -3,7 +3,6 @@ $(function(){
   // nameのtext_fieldのエラーハンドル
   $('.sell-form__input--text_field--name').on('blur',function(){
     let input = $('.sell-form__input--text_field--name').val();
-    console.log($(this).parent())
     if (input == ""){
       $('.sell-form__profile__group--name').find('.errors').remove();
       let html =  `<div class="errors">
