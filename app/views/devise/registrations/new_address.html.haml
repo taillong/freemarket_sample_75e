@@ -88,7 +88,7 @@
               %span.field__label__any
                 任意
             .field__input 
-              = f.telephone_field :tell, placeholder: "例)09012345678", class: "field__input__defalut__none"
+              = f.telephone_field :tell, placeholder: "例)09012345678", class: "field__input__defalut__none", data: {name: "電話番号"}
 
           .submit
             = f.submit "送信", class: "submit__btn"

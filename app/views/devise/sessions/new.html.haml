@@ -6,7 +6,7 @@
     .account__login
       %p アカウントをお持ちでない方はこちら
       %br
-      = link_to "新規会員登録",  new_user_registration_path, class: "account__login__new"
+      = link_to "新規会員登録",  new_user_registration_path, method: :get, class: "account__login__new"
     .account__input
       .account__input__form
         = form_for(@user, url: user_session_path) do |f|

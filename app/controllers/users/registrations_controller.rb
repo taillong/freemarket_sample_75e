@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session["devise_regist_data"] = {user: @user.attributes}
     session["devise_regist_data"][:user]["password"] = params[:user][:password]
     @person_info = @user.build_person_info
-    render :new_person_info 
+    render :new_person_info
   end
 
   def create_person_info
