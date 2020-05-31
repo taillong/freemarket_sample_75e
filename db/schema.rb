@@ -36,22 +36,38 @@ ActiveRecord::Schema.define(version: 2020_05_24_151030) do
     t.index ["name"], name: "index_brands_on_name", unique: true
   end
 
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
+    t.index ["name"], name: "index_categories_on_name"
+  end
+
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "src"
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_images_on_item_id"
+  end
+
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 30, null: false
     t.text "explanation", null: false
-    t.string "condition", null: false
-    t.string "delivery_fee", null: false
-    t.string "method", null: false
-    t.string "date", null: false
     t.integer "price", null: false
     t.integer "prefecture_id", null: false
-    t.bigint "brand_id", null: false
-    t.bigint "seller_id", null: false
+    t.bigint "seller_id"
     t.bigint "buyer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "condition_id", null: false
+    t.integer "delivery_fee_id", null: false
+    t.integer "duration_id", null: false
+    t.bigint "category_id"
+    t.bigint "brand_id"
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["buyer_id"], name: "index_items_on_buyer_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["seller_id"], name: "index_items_on_seller_id"
   end
 
@@ -80,8 +96,10 @@ ActiveRecord::Schema.define(version: 2020_05_24_151030) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "images", "items"
   add_foreign_key "addresses", "users"
   add_foreign_key "items", "brands"
+  add_foreign_key "items", "categories"
   add_foreign_key "items", "users", column: "buyer_id"
   add_foreign_key "items", "users", column: "seller_id"
   add_foreign_key "person_infos", "users"
