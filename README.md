@@ -51,12 +51,17 @@ freemarket_sample_75e DB設計
 ## addressesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id       |integer|null: false, foreign_key: true|
+|user_id       |references|null: false, foreign_key: true|
+|family_name   |string |null: false |
+|first_name    |string |null: false |
+|family_kana   |string |null: false |
+|first_kana    |string |null: false |
 |prefecture_id |integer|null: false|
 |zipcode       |string |null: false |
 |city          |string |null: false |
 |street        |string |null: false |
 |apartment     |string | |
+|tell          |string| |
 ### Association
 - belongs_to :user
 - belongs_to_active_hash :prefecture
@@ -69,10 +74,8 @@ freemarket_sample_75e DB設計
 |first_name |string |null: false |
 |family_kana|string |null: false |
 |first_kana |string |null: false |
-|birth_year |integer|null: false |
-|birth_month|integer|null: false |
-|birth_day  |integer|null: false |
-|tell       |integer| |
+|birth_data |data   |null: false |
+
 ### Association
 - belongs_to :user
 
