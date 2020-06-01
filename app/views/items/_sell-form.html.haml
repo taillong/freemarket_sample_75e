@@ -1,0 +1,131 @@
+.sell-form__container
+  = form_with model:@item, class: "sell-form", local: true do |f|
+    .sell-form__image
+      %label.sell-form__title 出品画像
+      %span.sell-form__require 必須
+      %p.sell-form__image__attention 最大１０枚までアップロードできます
+      .sell-form__image__input
+        .previews
+        = f.label :images_attributes_0_src ,class: "sell-form__image__input__box" do
+          = image_tag "material/icon/icon_camera.png",alt: "画像", width: "104", class: "sell-form__image__input__box__icon"
+          %p.sell-form__image__input__box__text 
+            ドラッグアンドドロップ
+            %br
+            またはクリックしてファイルをアップロード
+          = f.fields_for :images do |i|
+            .js-file__group{data: {index: "0"}} 
+              = i.file_field :src ,class: "sell-form__image__input__box__field js-file", accept: "image/png,image/jpeg"
+      .errors
+        - if flash[:errors].present? && flash[:errors]["images"].present?
+          %p 画像がなかったため保存できませんでした
+    %hr
+
+    .sell-form__profile
+      .sell-form__profile__group--name
+        %label.sell-form__title 出品名
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.text_field :name, placeholder: "40文字まで" ,class: "sell-form__input--text_field--name"
+        .errors
+          - if flash[:errors].present? && flash[:errors]["name"].present?
+            %p 入力されてなかったため保存できませんでした
+
+      .sell-form__profile__group--explanation
+        %label.sell-form__title 出品の説明
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.text_area :explanation, rows: "7",class:"sell-form__input--text_area", placeholder: "商品の説明（必須1,000文字以内)\n（色、素材、重さ、定価、注意点など）\n\n例） 2010年頃に1万円で購入したジャケットです。ライトグレーで傷ではありません。合わせやすいのでおすすめです。" 
+          .errors
+            - if flash[:errors].present? && flash[:errors]["explanation"].present?
+              %p 入力されてなかったため保存できませんでした
+    %hr
+
+    .sell-form__content
+      %h3.sell-form__content__sub-title 商品詳細
+      .sell-form__content__group
+        %label.sell-form__title カテゴリー
+        %span.sell-form__require 必須
+        .sell-form__wrapper
+          .sell-form__input
+            = f.collection_select :category, @category, :id, :name, {prompt: "選択してください"}, {class: "sell-form__input--select", id: "parent_category"}
+            .errors
+              - if flash[:errors].present? && flash[:errors]["category_id"].present?
+                %p 選択されてなかったため保存できませんでした
+
+      .sell-form__content__group
+        %label.sell-form__title ブランド
+        %span.sell-form__optional 任意
+        .sell-form__input
+          = f.text_field :brand, placeholder: "例）シャネル" ,class: "sell-form__input--text_field--brand"
+      
+      .sell-form__content__group
+        %label.sell-form__title 商品の状態
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.collection_select :condition_id, Condition.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select"}
+          .errors
+            - if flash[:errors].present? && flash[:errors]["condition_id"].present?
+              %p 選択されてなかったため保存できませんでした
+    %hr
+    
+    .sell-form__content
+      %h3.sell-form__content__sub-title 発送について
+      .sell-form__content__group
+        %label.sell-form__title 発送料の負担
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.collection_select :delivery_fee_id, DeliveryFee.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select"}
+          .errors
+            - if flash[:errors].present? && flash[:errors]["delivery_fee_id"].present?
+              %p 選択されてなかったため保存できませんでした
+
+      .sell-form__content__group
+        %label.sell-form__title 発送元の地域
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: '選択してください'}, {class: "sell-form__input--select"}
+          .errors
+            - if flash[:errors].present? && flash[:errors]["prefecture_id"].present?
+              %p 選択されてなかったため保存できませんでした
+
+      .sell-form__content__group
+        %label.sell-form__title 発送までの日数
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.collection_select :duration_id, Duration.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select"}
+          .errors
+            - if flash[:errors].present? && flash[:errors]["duration_id"].present?
+              %p 選択されてなかったため保存できませんでした
+    %hr
+    
+    .sell-form__content--price
+      %h3.sell-form__content__sub-title 価格 (¥300~9,999,999)
+      
+      .sell-form__content--price__group__wrapper
+        .sell-form__content--price__group
+          .sell-form__content--price__group--left
+            %label.sell-form__title 販売価格
+            %span.sell-form__require 必須
+          .sell-form__input--price
+            .yen ¥
+            = f.number_field :price, placeholder: 0,min:300 ,max:9999999 ,class: "sell-form__input--price--number_field"
+        .errors--price
+          - if flash[:errors].present? && flash[:errors]["price"].present?
+            %p 適切に入力されていなかったため保存できませんでした
+
+      .sell-form__content--price--fee
+        %label.sell-form__content--price--fee__title 販売手数料（10%）
+        %span.sell-form__content--price--fee__value ー
+      %hr
+      .sell-form__content--price--profit
+        %label.sell-form__content--price--profit__title 販売利益
+        %span.sell-form__content--price--profit__value ー
+
+
+
+    .sell-form__btn
+      = f.submit "出品する", class: "sell-form__btn--submit"
+      = link_to "もどる", "/", class: "sell-form__btn--back"
+
+    .sell-form__notation
+      %p 禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。

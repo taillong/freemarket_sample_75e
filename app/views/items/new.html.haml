@@ -1,0 +1,17 @@
+%header.sell-header
+  = link_to image_tag("material/logo/logo.png", alt: "FURIMA" ,class: "sell-header__logo"), root_path
+
+= render partial: "sell-form", locals: { item: @item}
+
+%footer.sell-footer
+  .sell-footer__rules
+    %ul.sell-footer__rules__lists
+      %li.sell-footer__rules__lists__list
+        = link_to "プライバシーポリシー", "#"
+      %li.sell-footer__rules__lists__list
+        = link_to "フリマ利用規約", "#"
+      %li.sell-footer__rules__lists__list
+        = link_to "特定商取引に関する表記", "#"
+  = link_to image_tag("material/logo/logo-white.png", alt: "FURIMA" ,class: "sell-footer__logo"), root_path
+  %p.sell-footer__copyright
+    © FURIMA
