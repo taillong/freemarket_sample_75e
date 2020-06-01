@@ -1,0 +1,50 @@
+.user__new
+  .header
+    = render 'devise/header'
+  
+  .account
+    .account__number
+      %h3 支払情報
+    .account__input
+      .account__input__form
+      
+        .field
+          .field__label
+            カード番号
+            %span.field__label__require
+              必須
+          .field__input
+            %input{type: 'text', placeholder: "半角英数のみ",class: "field__input__defalut__none"} 
+
+        .field 
+          .field__label
+            有効期限
+            %span.field__label__require
+              必須
+          .field__input 
+            %select{name: 'text', class: "field__input__deadline"} 
+              %option{value: "01"}01
+              %option{value: "12"}12
+            月
+            %select{name: "year", class: "field__input__deadline"}
+              %option{value: "20"}20
+              %option{value: "30"}30
+            年
+
+        .field
+          .field__label
+            セキュリティーコード
+            %span.field__label__require
+              必須
+          .field__input 
+            %input{type: 'text', placeholder: "カード背面4桁もしくは３桁の番号",class: "field__input__defalut__none"} 
+      
+        .submit
+          %input{type: "submit", value: "登録する", placeholder: "次に進む", class: "submit__btn"}
+
+        .input__privasy
+          = link_to "プライバシーポリシー", "#"
+          = link_to "メルカリ利用規約", "#"
+          = link_to "商品取引に関する表記", "#"
+            
+  .footer__user
