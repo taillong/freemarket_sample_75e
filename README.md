@@ -7,8 +7,7 @@ freemarket_sample_75e DB設計
 |explanation|text|null: false, limit:1000|
 |condition_id|integer|null: false|
 |delivery_fee_id|integer|null: false|
-|method|string|null: false|
-|duration|integer|null: false|
+|duration_id|integer|null: false|
 |price|integer|null: false|
 |prefecture_id|integer|null: false|
 |brand_id|references|foreign_key: true|
