@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:destroy]
+
   def index
     @items = Item.limit(3)
   end
@@ -31,7 +33,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
     if item.destroy
       redirect_to root_path
     else
@@ -51,5 +52,9 @@ class ItemsController < ApplicationController
       tmp3 = {"brand_id"=> nil}.merge(tmp2)
       return tmp3
     end
+  end
+
+  def set_item
+    item = Item.find(params[:id])
   end
 end
