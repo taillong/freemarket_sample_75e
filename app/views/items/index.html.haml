@@ -126,38 +126,24 @@
       .productbox__head
         %h3.link__title
           = link_to "新規投稿商品", "#"
-            
       .productbox__lists
-        .productbox__lists__list
-          = link_to "#" do
-            %figure.productlist__image
-              = image_tag "itemsimage/pict-reason-01.jpg"
-            .productlist__text
-              %h3.name product3
-              .details
-                %ul
-                  %li 3000円
-                %p (税込)
-        .productbox__lists__list
-          = link_to "#" do
-            .productlist__image
-              = image_tag "itemsimage/pict-reason-01.jpg"
-            .productlist__text
-              %h3.name product2
-              .details
-                %ul
-                  %li 2000円
-                %p (税込)
-        .productbox__lists__list
-          = link_to "#" do
-            .productlist__image
-              = image_tag "itemsimage/pict-reason-01.jpg"
-            .productlist__text
-              %h3.name product1
-              .details
-                %ul
-                  %li 1000円
-                %p (税込)
+        - @items.each do |item|
+          .productbox__lists__list
+            = link_to item_path(item.id) do
+              %figure.productlist__image
+                -# = item.image.src
+                = image_tag "itemsimage/pict-reason-01.jpg"
+              .productlist__text
+                %h3.name
+                  = item.name
+                .details
+                  %ul
+                    %li
+                      ¥
+                      = item.price
+                  %p (税込)
+
+
 
   .main__pickupbrand
     %h2.title ピックアップブランド
@@ -204,10 +190,10 @@
     .applink__inner__text
       今すぐ無料ダウンロード！
     .applink__inner__link
-      = link_to image_tag("itemsimage/appstoer.png", size: "180x53", class: 'link__btn'),"#"
-      = link_to image_tag("itemsimage/googleplay.png", size: "180x53", class: 'link__btn'),"#"
+      = link_to image_tag("itemsimage/appstoer.png", size: "180x53", class: 'applink__btn'),"#"
+      = link_to image_tag("itemsimage/googleplay.png", size: "180x53", class: 'applink__btn'),"#"
 
-.footer
+.top__footer
   %ul.contents
     %li.content
       %h2.content__head FURIMAについて
@@ -236,8 +222,8 @@
           = link_to "FURIMAロゴ利用ガイドライン", "#"
         %li
           = link_to "お知らせ", "#"
-  .footer__logo
-    = link_to image_tag("itemsimage/logo-white.png", size: "160x46", class: 'link__btn'),"/"
+  .top__footer__logo
+    = link_to image_tag("itemsimage/logo-white.png", size: "160x46" ),"/"
   %p ©︎ FURIMA
 
 = link_to "#" do
