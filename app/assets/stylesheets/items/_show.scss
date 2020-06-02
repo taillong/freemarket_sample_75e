@@ -1,10 +1,10 @@
 .main{
-  background-color: #f8f8f8;
+  background-color: $GrayColor;
   .showmain{
     padding: 40px;
     margin: 0 auto;
     &__item{
-      background-color: #fff;
+      background-color: $whiteColor;
       width: 700px;
       margin: 0 auto;
       padding:  24px 40px 40px;
@@ -14,7 +14,7 @@
         font-size: 24px;
       }
       .item__image{
-        margin: 16px 0 0;
+        margin-top: 16px;
         ul{
           display: flex;
           position: relative;
@@ -35,7 +35,7 @@
               margin-top: 10px;
               li{
                 width: 25%;
-                margin: 0 10px 0 0;
+                margin-right: 10px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -57,7 +57,7 @@
         span{
           font-size: 46px;
           font-weight: bold;
-          margin: 0 10px 0 0;
+          margin-right: 10px;
         }
         p{
           font-size: 16px;
@@ -74,7 +74,7 @@
           width: 100%;
           height: 375px;
           border-collapse: collapse;
-          border: 1px solid #f8f8f8;
+          border: 1px solid $GrayColor;
           tbody{
             display: table-row-group;
             vertical-align: middle;
@@ -102,7 +102,7 @@
           }
         }
         a{
-          color: #3ccace;
+          color: $FurimaColor;
           text-decoration: none;
         }
       }
@@ -111,7 +111,7 @@
 }
 
 .link__btn{
-  background-color: #f8f8f8;
+  background-color: $GrayColor;
   width: 100%;
   padding: 5px 10px;
   &__sell{
@@ -122,7 +122,7 @@
       background-color: rgb(204, 201, 201);
       width: 90%;
       max-width: 800px;
-      color: black;
+      color: $blackColor;
       font-weight: bold;
       margin-right: 10px;
     }
@@ -130,20 +130,20 @@
       background-color: red;
       width: calc(100% - 60%);
       max-width: 300px;
-      color: #fff;
+      color: $whiteColor;
     }
   }
   &__buy{
     background-color: red;
     width: 100%;
     font-weight: bold;
-    color: #fff;
+    color: $whiteColor;
   }
   &__login{
-    background-color: #3ccace;
+    background-color: $FurimaColor;
     width: 100%;
     font-weight: bold;
-    color: #fff;
+    color: $whiteColor;
   }
   a{
     font-size: 20px;
