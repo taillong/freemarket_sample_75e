@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    tmp1 = params.require(:item).permit(:name, :explanation, :condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src])
+    tmp1 = params.require(:item).permit(:name, :explanation, :condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src]).merge(seller_id: current_user.id)
     tmp2 = params.permit(:category_id).merge(tmp1)
     if params.require(:item).permit(:brand)[:brand] != ""
       brand_id = Item.brand_id_search(params.require(:item).permit(:brand))
