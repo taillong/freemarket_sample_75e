@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:destroy]
 
   def index
+    @users = User.new
     @items = Item.limit(3)
   end
 
