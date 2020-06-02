@@ -1,6 +1,12 @@
 .user__show {
   background-color:#F5F5F5;
   box-sizing: border-box;
+  .header {
+    background-color: $whiteColor;
+    width: 100%;
+    margin: initial;
+    max-width: none;
+  }
 }
 .user__mypage {
   width: 70%;
@@ -174,6 +180,57 @@
           color: #CCCCCC;
         }
       }
+    }
+  }
+}
+
+// logout.html.haml
+.submit__erea {
+  height: 200px;
+  background-color: $whiteColor;
+  text-align: center;
+  &__btn {
+    height: 50px;
+    width: 60%;
+    background-color: red;
+    margin-top: 75px;
+    color: $whiteColor;
+    cursor: pointer;
+  }
+}
+
+// card.html.haml
+.card__erea {
+  background-color: $whiteColor;
+  &__text {
+    font-weight: bold;
+    line-height: 50px;
+    border-bottom: 1px solid skyblue;
+    text-align: center;
+  }
+  &__add {
+    text-align: center;
+    margin-top: 20px;
+    .button_to {
+      padding-bottom: 20px;
+      .submit__erea__btn {
+        margin-top: 20px;
+      }
+    }
+  }
+  &__method {
+    border-top: 1px solid skyblue;
+    height: 100px;
+    text-align: right;
+    padding-top: 40px;
+    margin: 0px 30px;
+    a {
+      text-decoration: none;
+      color: skyblue;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: blue;
     }
   }
 }

@@ -27,76 +27,7 @@
           = link_to "新規会員登録", "#"
 
   .user__mypage
-    .user__left
-      %ul.user_boxes
-        %li.user_box
-          = link_to  user_path(current_user), class: "user_box__text" do
-            マイページ
-            %i{class: "fas fa-chevron-right user_box__icon"} 
-        %li.user_box
-          = link_to "#", class: "user_box__text" do
-            お知らせ
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to "#", class: "user_box__text" do
-            やることリスト
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to "#", class: "user_box__text" do
-            "いいね!一覧", 
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to  "#", class: "user_box__text" do
-            出品する
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to  "#", class: "user_box__text" do
-            出品した商品.出品中
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to  "#", class: "user_box__text" do
-            出品した商品.取引中
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to "#", class: "user_box__text" do
-            出品した商品.売却済み
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to  "#", class: "user_box__text" do
-            購入した商品.取引中
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to "#", class: "user_box__text" do
-            購入した商品.過去の取引
-            %i{class: "fas fa-chevron-right user_box__icon"}
-
-      .setting
-        設定
-      %ul.user_boxes
-        %li.user_box
-          = link_to  "#", class: "user_box__text"  do
-            プロフィール
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to "#", class: "user_box__text" do
-            商品送付先住所変更
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box 
-          = link_to  new_user_card_path(current_user), class: "user_box__text" do
-            支払方法
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to  "#", class: "user_box__text" do
-            メール/パスワード
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to  "#", class: "user_box__text" do
-            本人情報
-            %i{class: "fas fa-chevron-right user_box__icon"}
-        %li.user_box
-          = link_to destroy_user_session_path(current_user), method: :DELETE, class: "user_box__text" do
-            ログアウト
-            %i{class: "fas fa-chevron-right user_box__icon"}
+    = render "user__left"
 
 
     .user__right

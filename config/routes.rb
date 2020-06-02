@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   root 'items#index'
   resources :users, only: :show do
     resources :cards, only: :new
+    member do
+      get :logout, :card
+    end
   end
   resources :items, except: :index do
     collection do 
