@@ -1,7 +1,9 @@
 @import "reset";
+@import "config/colors";
 @import "mixin/content";
 @import "items/index";
 @import "items/new";
 @import "items/show";
 @import "devise/new";
 @import "devise/new_login";
+@import "flash";

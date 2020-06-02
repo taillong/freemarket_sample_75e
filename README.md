@@ -5,28 +5,30 @@ freemarket_sample_75e DB設計
 |------|----|-------|
 |name|string|null: false, limit:30|
 |explanation|text|null: false, limit:1000|
-|condition|string|null: false|
-|delivery_fee|string|null: false|
-|method|string|null: false|
-|date|string|null: false|
+|condition_id|integer|null: false|
+|delivery_fee_id|integer|null: false|
+|duration_id|integer|null: false|
 |price|integer|null: false|
 |prefecture_id|integer|null: false|
-|brand_id|references|null: false, foreign_key: true|
+|brand_id|references|foreign_key: true|
+|category_id|references|null: false, foreign_key: true|
 |seller_id|references|null: false, foreign_key: true|
 |buyer_id|references|foreign_key: true|
 ### Association
 - has_many :images, dependent: :destroy
-- has_many :category_items
-- has_many :categories,  through: :category_items
 - belongs_to_active_hash :prefecture
+- belongs_to_active_hash :condition
+- belongs_to_active_hash :delivery_fee
+- belongs_to_active_hash :duration
 - belongs_to :brand
+- belongs_to :category
 - belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
 - belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id'
 
 ## imagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|img|string|null: false|
+|src|string|null: false|
 |item_id|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :item
@@ -48,12 +50,17 @@ freemarket_sample_75e DB設計
 ## addressesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id       |integer|null: false, foreign_key: true|
+|user_id       |references|null: false, foreign_key: true|
+|family_name   |string |null: false |
+|first_name    |string |null: false |
+|family_kana   |string |null: false |
+|first_kana    |string |null: false |
 |prefecture_id |integer|null: false|
 |zipcode       |string |null: false |
 |city          |string |null: false |
 |street        |string |null: false |
 |apartment     |string | |
+|tell          |string| |
 ### Association
 - belongs_to :user
 - belongs_to_active_hash :prefecture
@@ -66,10 +73,8 @@ freemarket_sample_75e DB設計
 |first_name |string |null: false |
 |family_kana|string |null: false |
 |first_kana |string |null: false |
-|birth_year |integer|null: false |
-|birth_month|integer|null: false |
-|birth_day  |integer|null: false |
-|tell       |integer| |
+|birth_data |data   |null: false |
+
 ### Association
 - belongs_to :user
 
@@ -77,9 +82,10 @@ freemarket_sample_75e DB設計
 |Column|Type|Options|
 |------|----|-------|
 |name|string|add_index|
+|ancestry|string||
 ### Association
 - has_many :category_items
-- has_many :items ,through: :category_items
+- has_ancestry
 
 
 ## brandsテーブル
@@ -89,14 +95,6 @@ freemarket_sample_75e DB設計
 ### Association
 - has_many :items
 
-## category_itemsテーブル
-|Column|Type|Options|
-|------|----|-------|
-|item_id|references|null: false, foreign_key: true|
-|category_id|references|null: false, foreign_key: true|
-### Association
-- belongs_to :item
-- belongs_to :category
 
 ## cardsテーブル
 |Column|Type|Options|
