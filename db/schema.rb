@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(version: 2020_05_27_164652) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_brands_on_name", unique: true
   end
 
@@ -54,9 +52,13 @@ ActiveRecord::Schema.define(version: 2020_05_27_164652) do
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 30, null: false
     t.text "explanation", null: false
-    t.string "date", null: false
+    t.integer "condition_id", null: false
+    t.integer "delivery_fee_id", null: false
+    t.integer "duration_id", null: false
     t.integer "price", null: false
     t.integer "prefecture_id", null: false
+    t.bigint "brand_id"
+    t.bigint "category_id", null: false
     t.bigint "seller_id", null: false
     t.bigint "buyer_id"
     t.datetime "created_at", null: false
@@ -68,7 +70,6 @@ ActiveRecord::Schema.define(version: 2020_05_27_164652) do
     t.bigint "brand_id"
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["buyer_id"], name: "index_items_on_buyer_id"
-    t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["seller_id"], name: "index_items_on_seller_id"
   end
 
