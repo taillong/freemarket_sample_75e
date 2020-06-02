@@ -327,3 +327,18 @@ others_8.children.create([{name: "オフィス用品一般"},{name: "オフィ�
 others_9 = others.children.create(name: "その他")
 others_9.children.create([{name: "すべて"}])
 
+# brandsテーブル
+Brand.create(name: "ナイキ")
+Brand.create(name: "アディダス")
+Brand.create(name: "プーマ")
+Brand.create(name: "シャネル")
+Brand.create(name: "カシオ")
+Brand.create(name: "CITIZEN")
+Brand.create(name: "ぺんてる")
+Brand.create(name: "ユニクロ")
+Brand.create(name: "無印良品")
+Brand.create(name: "サロモン")
+Brand.create(name: "フィシャー")
+Brand.create(name: "ロシニョール")
+
+
