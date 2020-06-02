@@ -46,7 +46,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user.save
     session["devise_regist_data"]["user"].clear
     session["devise_person_info_data"]["person_info"].clear
-    sign_in(:user, @user)
+    sign_in @user
+    redirect_to root_path(@user)
   end
 
   # GET /resource/edit
