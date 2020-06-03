@@ -1,0 +1,93 @@
+.user__show 
+  .header
+    =render "header"
+
+  .user__mypage
+    = render "user__left"
+
+    .user__right
+      .user__content
+        .user__image
+          = image_tag("itemsimage/member_photo_noimage.png", size: "80")
+          .user__image__name
+            = @user.nickname
+          .user__image__count
+            .user__image__count__evaluation
+              評価  
+              %span 0
+            .user__image__count__exhibit
+              出品数
+              %span 0
+        .user__message
+          .user__message__block
+            .user__message__block__title1
+              お知らせ
+            .user__message__block__title2
+              やることリスト
+
+          .user__message__content
+            %ul
+              %li.user__message__notice
+                = link_to "" "#"  do
+                  .user__message__notice__tag
+                    = image_tag("itemsimage/logo.png", width: "80%")
+                  .user__message__notice__text
+                    会員登録ありがとうございました
+                  .user__message__notice__icon
+                    %i{class: "fas fa-chevron-right user_box__icon"}
+              %li.user__message__notice
+                = link_to "" "#" do
+                  .user__message__notice__tag
+                    = image_tag("itemsimage/logo.png", width: "80%")
+                  .user__message__notice__text
+                    最大500ポイントもらえる
+                  .user__message__notice__icon
+                    %i{class: "fas fa-chevron-right user_box__icon"}
+                
+          .user__message__list
+            %ul
+              %li.user__message__notice
+                = link_to "" "#" do
+                  .user__message__notice__tag
+                    = image_tag("itemsimage/logo.png", width: "80%")
+                  .user__message__notice__text
+                    発表
+                  .user__message__notice__icon
+                    %i{class: "fas fa-chevron-right user_box__icon"}
+              %li.user__message__notice
+                = link_to "" "#" do
+                  .user__message__notice__tag
+                    = image_tag("itemsimage/logo.png", width: "80%")
+                  .user__message__notice__text
+                    いろいろ
+                  .user__message__notice__icon
+                    %i{class: "fas fa-chevron-right user_box__icon"}
+
+          .user__message__look
+            .user__message__look__btn
+              一覧をみる
+
+      .user__product
+        .user__product__purchase
+          購入した商品
+        .user__product__trading
+          .user__product__trading__block1
+            取引中
+          .user__product__trading__block2
+            過去の取引
+        .user__product__item
+          .user__product__item__tag
+            = image_tag("itemsimage/logo.png", width: '140')
+          .user__product__item__text
+            取引中の商品はありません
+        .user__product__past
+          .user__product__past__tag
+            = image_tag("itemsimage/logo.png", width: '140')
+          .user__product__past__text
+            過去に取引きした商品はありません
+
+  .applink
+    = render "applink"
+
+  .footer
+    = render "footer"

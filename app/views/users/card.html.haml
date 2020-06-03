@@ -1,0 +1,22 @@
+.user__show 
+  .header
+    = render "header"
+
+  .user__mypage
+    = render "user__left"
+
+    .user__right
+      .card__erea
+        .card__erea__text
+          支払方法
+        .card__erea__add
+          クレジットカード一覧
+          = button_to "クレジットカードを追加する", new_user_card_path(current_user), method: :get, class: "submit__erea__btn"
+        .card__erea__method
+          = link_to "支払方法について  >", "#"
+        
+  .applink
+    = render "applink"
+
+  .footer
+    = render "footer"
