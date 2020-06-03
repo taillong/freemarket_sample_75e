@@ -47,7 +47,7 @@
         %span.sell-form__require 必須
         .sell-form__wrapper
           .sell-form__input
-            = f.collection_select :category, @category, :id, :name, {prompt: "選択してください"}, {class: "sell-form__input--select", id: "parent_category"}
+            -# = f.collection_select :category, @category, :id, :name, {prompt: "選択してください"}, {class: "sell-form__input--select", id: "parent_category"}
             .errors
               - if flash[:errors].present? && flash[:errors]["category_id"].present?
                 %p 選択されてなかったため保存できませんでした
