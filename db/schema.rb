@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_05_27_164652) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.index ["name"], name: "index_brands_on_name", unique: true
@@ -44,6 +45,14 @@ ActiveRecord::Schema.define(version: 2020_05_27_164652) do
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src"
     t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_images_on_item_id"
+  end
+
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "src", null: false
+    t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_images_on_item_id"
@@ -97,6 +106,7 @@ ActiveRecord::Schema.define(version: 2020_05_27_164652) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 
   add_foreign_key "addresses", "users"
   add_foreign_key "images", "items"

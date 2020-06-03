@@ -36,7 +36,7 @@
       }
       .submit{
         width: 36px;
-        background-color: #3ccace;
+        background-color: $FurimaColor;
         padding: 8px;
         &__icon{
           img{
@@ -85,7 +85,7 @@
         a{
           display: flex;
           align-items: center;
-          color: #333;
+          color: $blackColor;
           text-decoration: none;
           line-height: 32px;
         }
@@ -95,7 +95,7 @@
 }
 
 .main{
-  background-color: #f8f8f8;
+  background-color: $GrayColor;
   &__topvisual{
     width: 100%;
     height: 560px;
@@ -114,12 +114,12 @@
         text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
         font-size: 60px;
         line-height: 1.2;
-        color: #fff;
+        color: $whiteColor;
       }
       &__text{
         text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
         font-size: 18px;
-        color: #fff;
+        color: $whiteColor;
         line-height: 1.8;
         margin: 16px 0 0 0;
       }
@@ -152,7 +152,7 @@
         content: "";
         width: 70px;
         height: 4px;
-        background-color: #3ccace;
+        background-color: $FurimaColor;
         position: absolute;
         bottom: 0;
         left: 50%;
@@ -184,8 +184,8 @@
             text-align: center;
             margin: 0 5px 0 0;
             padding: 10px 20px;
-            background-color: #3ccace;
-            color: #fff;
+            background-color: $FurimaColor;
+            color: $whiteColor;
           }
           .image{
             width: 100%;
@@ -198,7 +198,7 @@
           line-height: 50px;
           margin: 0 0 0 2px;
           span{
-            color: #3ccace;
+            color: $FurimaColor;
           }
         }
         p{
@@ -227,8 +227,8 @@
             text-align: center;
             margin: 0 5px 0 0;
             padding: 10px 20px;
-            background-color: #3ccace;
-            color: #fff;
+            background-color: $FurimaColor;
+            color: $whiteColor;
           }
           .image{
             width: 100%;
@@ -241,7 +241,7 @@
           line-height: 50px;
           margin: 0 0 0 2px;
           span{
-            color: #3ccace;
+            color: $FurimaColor;
           }
         }
         p{
@@ -261,7 +261,7 @@
     align-items: center;
     display: flex;
     &__contents{
-      color: white;
+      color: $whiteColor;
       text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
       text-align: left;
       max-width: 1040px;
@@ -293,7 +293,7 @@
 
   &__topchara{
     padding: 60px 100px;
-    background-color: #fff;
+    background-color: $whiteColor;
     &__title{
       font-size: 27px;
       text-align: center;
@@ -306,7 +306,7 @@
         content: "";
         width: 70px;
         height: 4px;
-        background-color: #3ccace;
+        background-color: $FurimaColor;
         position: absolute;
         bottom: 0;
         left: 50%;
@@ -350,7 +350,7 @@
 
   &__pickupcate{
     padding: 80px 0 0;
-    background-color: #f8f8f8;
+    background-color: $GrayColor;
     height: 100%;
     .title{
       text-align: center;
@@ -366,7 +366,7 @@
           a{
             font-size: 24px;
             text-decoration: none;
-            color: #3ccace;
+            color: $FurimaColor;
           }
         }
       }
@@ -381,7 +381,7 @@
           float: left;
           a{
             text-decoration: none;
-            background-color: #fff;
+            background-color: $whiteColor;
             .productlist__image{
               width: 220px;
               height: 150px;
@@ -402,8 +402,8 @@
               }
             }
             .productlist__text{
-              background-color: white;
-              color: #333;
+              background-color: $whiteColor;
+              color: $blackColor;
               font-size: 16px;
               padding: 16px;
               h3{
@@ -427,7 +427,7 @@
 
   &__pickupbrand{
     padding: 80px 0;
-    background-color: #f8f8f8;
+    background-color: $GrayColor;
     height: 100%;
     .title{
       text-align: center;
@@ -443,7 +443,7 @@
           a{
             font-size: 24px;
             text-decoration: none;
-            color: #3ccace;
+            color: $FurimaColor;
           }
         }
       }
@@ -458,7 +458,7 @@
           float: left;
           a{
             text-decoration: none;
-            background-color: #fff;
+            background-color: $whiteColor;
             .productlist__image{
               width: 220px;
               height: 150px;
@@ -479,8 +479,8 @@
               }
             }
             .productlist__text{
-              background-color: white;
-              color: #333;
+              background-color: $whiteColor;
+              color: $blackColor;
               font-size: 16px;
               padding: 16px;
               h3{
@@ -509,7 +509,7 @@
   background-position: center;
   padding: 100px 40px;
   &__inner{
-    color: #fff;
+    color: $whiteColor;
     text-align: center;
     &__title{
       text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
@@ -529,7 +529,8 @@
       a{
         height: 53px;
         margin-right: 10px;
-        .link__btn{
+        .applink__btn{
+
         }
       }
     }
@@ -537,9 +538,9 @@
 }
 
 
-.footer{
+.top__footer{
   padding: 60px 0;
-  color: #fff;
+  color: $whiteColor;
   background-color: #272727;
   text-align: center;
   .contents{
@@ -557,7 +558,7 @@
       ul{
         li{
           a{
-            color: #fff;
+            color: $whiteColor;
             text-decoration: none;
             font-size: 12px;
             line-height: 32px;
@@ -579,7 +580,7 @@
 a{
   .purchasebtn{
     width: 120px;
-    background: #3ccace;
+    background: $FurimaColor;
     text-align: center;
     border-radius: 4%;
     bottom: 32px;
@@ -587,7 +588,7 @@ a{
     position: fixed;
     padding: 15px;
     &__text{
-      color: #fff;
+      color: $whiteColor;
       display: block;
       font-size: 18px;
       text-decoration: none;

@@ -1,6 +1,9 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:destroy]
+
   def index
     @users = User.new
+    @items = Item.limit(3)
   end
 
   def new
@@ -26,6 +29,18 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    @item = Item.find(params[:id])
+  end
+
+  def destroy
+    if item.destroy
+      redirect_to root_path
+    else
+      render :show
+    end
+  end
+
   private
   def item_params
     tmp1 = params.require(:item).permit(:name, :explanation, :condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src]).merge(seller_id: current_user.id)
@@ -38,5 +53,9 @@ class ItemsController < ApplicationController
       tmp3 = {"brand_id"=> nil}.merge(tmp2)
       return tmp3
     end
+  end
+
+  def set_item
+    item = Item.find(params[:id])
   end
 end

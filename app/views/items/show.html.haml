@@ -1,0 +1,167 @@
+.header
+  .header__heading
+    %h1.header__heading__icon
+      = link_to image_tag("itemsimage/logo.png", width: '140'),"/" 
+    .header__heading__searchbox
+      .from
+        ※(追加実装項目)カテゴリーから探す※
+      .submit
+        .submit__icon
+          = image_tag "itemsimage/icon-search 1.png", size: "20x20"
+
+  .header__navbar
+    %ul.navbar__left
+      %li.navbar__left__categories
+        = link_to "カテゴリー", "#",  id: 'catebtn'
+        .categories__lists
+          %ul.categories__list
+            %li.categories__list__pearent
+      %li.navbar__left__brands
+        = link_to "ブランド", "#", id: 'brandbtn'
+        %ul.brands__list
+    %ul.navbar__right
+      %li.login
+        = link_to "ログイン", "#"
+      %li.newmemmber
+        = link_to "新規会員登録", "#"
+
+.main
+  .showmain
+    .showmain__item
+      %h2.item__name
+        = @item.name
+      .item__image
+        -# imagesモデルの表示はマージ後行う。
+        %ul
+          %li
+            = image_tag "itemsimage/appstoer.png", width: '346'
+            %ul
+              %li
+                = image_tag "itemsimage/pict-reason-01.jpg", size: '140x87'
+              %li
+                = image_tag "itemsimage/pict-reason-02.jpg", size: '140x87'
+              %li
+                = image_tag "itemsimage/pict-reason-03.jpg", size: '140x87'
+      .item__price
+        %span 
+          ¥
+          = @item.price
+        %p (税込)送料込み
+      - if user_signed_in? && current_user.id == @item.seller_id
+        .link__btn
+          .link__btn__sell
+            = link_to "この商品情報を編集する", "#", class: "link__btn__sell__edit"
+            = link_to item_path(@item.id), method: :delete, class: "link__btn__sell__destory" do
+              この商品を削除する
+      -elsif user_signed_in? && current_user.id != @item.seller_id
+        .link__btn
+          = link_to "購入画面に進む", "#", class: "link__btn__buy"
+      -else
+        .link__btn
+          = link_to "ログインして下さい", "#", class: "link__btn__login"
+      .item__explanation
+        = @item.explanation
+      .table
+        %table
+          %tbody
+            %tr.item__username
+              %th 出品者
+              %td 
+                = link_to "#" do
+                  -# ココリンク
+                  = @item.seller.nickname
+            %tr.item__categories
+              %th カテゴリー
+              %td
+                = link_to "#" do
+                  -# ココリンク
+                  item.category.parent.name的な
+                %br
+                = link_to "#" do
+                  -# ココリンク
+                  >
+                  item.category.children.name的な
+                %br
+                = link_to "#" do
+                  -# ココリンク
+                  >>
+                  item.category.indirects.name的な
+            %tr.item__brand
+              %th ブランド
+              %td
+                = link_to "#" do
+                  -# ココリンク？必須ではない？
+                  = @item.brand.name
+            %tr.item__condition
+              %th 商品の状態
+              %td 
+                = @item.condition
+            %tr.item__deliveryfee
+              %th 配送料の負担
+              %td 
+                = @item.delivery_fee
+            %tr.item__methd
+              %th 発送の方法
+              %td 
+                = @item.method
+            %tr.item__prefecture
+              %th 発送元の地域
+              %td 
+                = @item.prefecture_id
+            %tr.item__date
+              %th 発送日の目安
+              %td 
+                = @item.duration
+
+  
+.applink
+  .applink__inner
+    .applink__inner__title
+      だれでもかんたん、人生を変えるフリマアプリ
+    .applink__inner__text
+      今すぐ無料ダウンロード！
+    .applink__inner__link
+      = link_to image_tag("itemsimage/appstoer.png", size: "180x53", class: 'applink__btn'),"#"
+      = link_to image_tag("itemsimage/googleplay.png", size: "180x53", class: 'applink__btn'),"#"
+
+.top__footer
+  %ul.contents
+    %li.content
+      %h2.content__head FURIMAについて
+      %ul
+        %li
+          = link_to "会社概要(運営会社)", "#"
+        %li
+          = link_to "プライバシーポリシー", "#"
+        %li
+          = link_to "FURIMA利用規約", "#"
+        %li
+          = link_to "ポイントに関する特約", "#"
+    %li.content
+      %h2.content__head FURIMAを見る
+      %ul
+        %li
+          = link_to "カテゴリー一覧", "#"
+        %li
+          = link_to "ブランド一覧", "#"
+    %li.content
+      %h2.content__head ヘルプ＆ガイド
+      %ul
+        %li
+          = link_to "FURIMAガイド", "#"
+        %li
+          = link_to "FURIMAロゴ利用ガイドライン", "#"
+        %li
+          = link_to "お知らせ", "#"
+  .top__footer__logo
+    = link_to image_tag("itemsimage/logo-white.png", size: "160x46" ),"/"
+  %p ©︎ FURIMA
+
+= link_to "#" do
+  .purchasebtn
+    %span.purchasebtn__text
+      出品する
+    = image_tag "itemsimage/icon_camera.png", width: '54', class: 'purchasebtn__icon'
+
+
+
