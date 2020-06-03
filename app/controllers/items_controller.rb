@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:destroy]
+  before_action :set_item, only: [:destroy, :sell]
 
   def index
     @users = User.new
@@ -41,6 +41,9 @@ class ItemsController < ApplicationController
     end
   end
 
+  def sell
+  end
+
   private
   def item_params
     tmp1 = params.require(:item).permit(:name, :explanation, :condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src]).merge(seller_id: current_user.id)
@@ -56,6 +59,6 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    item = Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
 end

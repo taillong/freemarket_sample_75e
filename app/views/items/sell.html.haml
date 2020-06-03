@@ -1,0 +1,10 @@
+.user__new
+  .header
+    = render 'devise/header'
+
+  .item__sell
+    購入内容の確認
+    = @item.name
+    = @item.price
+    = @item.delivery_fee.text
+  .footer__user

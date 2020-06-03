@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_27_164652) do
+ActiveRecord::Schema.define(version: 2020_05_26_105052) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "family_name", null: false
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2020_05_27_164652) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
-
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -50,14 +49,6 @@ ActiveRecord::Schema.define(version: 2020_05_27_164652) do
     t.index ["item_id"], name: "index_images_on_item_id"
   end
 
-  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "src", null: false
-    t.bigint "item_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_images_on_item_id"
-  end
-
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 30, null: false
     t.text "explanation", null: false
@@ -67,17 +58,11 @@ ActiveRecord::Schema.define(version: 2020_05_27_164652) do
     t.integer "price", null: false
     t.integer "prefecture_id", null: false
     t.bigint "brand_id"
-    t.bigint "category_id", null: false
+    t.bigint "category_id"
     t.bigint "seller_id", null: false
     t.bigint "buyer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "condition_id"
-    t.integer "delivery_fee_id"
-    t.integer "duration_id"
-    t.bigint "category_id"
-    t.bigint "brand_id"
-    t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["buyer_id"], name: "index_items_on_buyer_id"
     t.index ["seller_id"], name: "index_items_on_seller_id"
   end
@@ -107,11 +92,8 @@ ActiveRecord::Schema.define(version: 2020_05_27_164652) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-
   add_foreign_key "addresses", "users"
   add_foreign_key "images", "items"
-  add_foreign_key "items", "brands"
-  add_foreign_key "items", "categories"
   add_foreign_key "items", "users", column: "buyer_id"
   add_foreign_key "items", "users", column: "seller_id"
   add_foreign_key "person_infos", "users"
