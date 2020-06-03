@@ -1,0 +1,16 @@
+.user__show 
+  .header
+    = render "header"
+
+  .user__mypage
+    = render "user__left"
+
+    .user__right
+      .submit__erea
+        = button_to "ログアウト", destroy_user_session_path, method: :delete, class: "submit__erea__btn"
+
+  .applink
+    = render "applink"
+
+  .footer
+    = render "footer"

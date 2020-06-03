@@ -10,6 +10,20 @@
   border: 1px solid #cccccc;
 }
 
+@mixin block__title {
+  background-color: $whiteColor;
+  width: 50%;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+
+@mixin block {
+  height: 50px;
+  display: flex;
+  font-weight: bold;
+}
+
 $blackColor: #333333;
 $whiteColor: #ffffff;
 $FurimaColor: #3ccace;
