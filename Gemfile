@@ -41,6 +41,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem 'rubocop', require: false
 gem 'payjp'
+gem 'dotenv-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
