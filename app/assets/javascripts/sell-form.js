@@ -24,6 +24,7 @@ $(function(){
   let file_fieldIndex = [1,2,3,4]
   let previewIndex = [0,1,2,3,4]
   let num = 4
+  
   $('.sell-form__image__input__box').on('change', '.js-file',function(){
 
     // 新しいfile_fieldを加える
