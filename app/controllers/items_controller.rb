@@ -42,6 +42,7 @@ class ItemsController < ApplicationController
   end
 
   def sell
+    @user = current_user
   end
 
   private

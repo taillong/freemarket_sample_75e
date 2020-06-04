@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :brand, optional: true
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
   has_many :images
+  #belongs_to :image
   accepts_nested_attributes_for :images, allow_destroy: true
 
   validates :name, :explanation, :price, :prefecture_id, :condition_id, :delivery_fee_id, :duration_id, presence: true

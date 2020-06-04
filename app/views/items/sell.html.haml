@@ -2,9 +2,71 @@
   .header
     = render 'devise/header'
 
-  .item__sell
-    購入内容の確認
-    = @item.name
-    = @item.price
-    = @item.delivery_fee.text
+  .account
+    .account__number
+      %h3 購入内容の確認
+    .account__input
+      .account__input__form
+        .confirm
+          .confirm__image
+            = image_tag @item.images.first.src.model.src.url, height: "60px", width: "80px"
+          .confirm__text
+            .confirm__text__name
+              = @item.name
+            .confirm__text__price
+              = number_to_currency(@item.price)
+              (税込み)
+              = @item.delivery_fee.text
+        
+        .money
+          .money__text
+            支払い金額
+          .money__sum
+            = number_to_currency(@item.price)
+        
+        .method
+          .method__text
+            支払方法
+          .method__register
+            = link_to "登録してください", new_user_card_path(current_user)
+
+        .delivery
+          .delivery__text
+            配送先
+            = @user.address.id
+          .delivery__address
+            お名前
+            = @user.address.family_name
+            = @user.address.first_name
+          .delivery__address
+            お名前(かな)
+            = @user.address.family_kana
+            = @user.address.first_kana
+          .delivery__address
+            郵便番号
+            = @user.address.zipcode
+          .delivery__address 
+            都道府県
+            = @user.address.prefecture.name
+          .delivery__address
+            市区町村
+            = @user.address.city
+          .delivery__address
+            番地
+            = @user.address.street
+          .delivery__address
+            建物名
+            = @user.address.apartment
+          .delivery__address
+            電話
+            = @user.address.tell
+      
+        .submit
+          %input{type: "submit", value: "登録する", placeholder: "次に進む", class: "submit__btn"}
+
+        .input__privasy
+          = link_to "プライバシーポリシー", "#"
+          = link_to "メルカリ利用規約", "#"
+          = link_to "商品取引に関する表記", "#"   
+
   .footer__user
