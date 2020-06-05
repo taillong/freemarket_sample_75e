@@ -7,44 +7,58 @@
       %h3 支払情報
     .account__input
       .account__input__form
-      
-        .field
-          .field__label
-            カード番号
-            %span.field__label__require
-              必須
-          .field__input
-            %input{type: 'text', placeholder: "半角英数のみ",class: "field__input__defalut__none"} 
+        = form_with url: user_cards_path, method: :post do |f|
+          -# = form_with url: cards_path, method: :post, html: { name: "inputForm" } do |f|
+          .field
+            .field__label
+              カード番号
+              %span.field__label__require
+                必須
+            .field__input
+              = f.text_field :card_number, placeholder: "半角英数のみ",class: "field__input__defalut__none", maxlength: "16"
+              -# = text_field_tag "number", "", class: "number", placeholder: "半角数字のみ" ,maxlength: "16", type: "text", id: "card_number"
+              -# = f.text_field :card_number, name: "card_number", id:"card_number", type: "text", placeholder: '半角数字のみ', class: 'input-default', maxlength: "16"
 
-        .field 
-          .field__label
-            有効期限
-            %span.field__label__require
-              必須
-          .field__input 
-            %select{name: 'text', class: "field__input__deadline"} 
-              %option{value: "01"}01
-              %option{value: "12"}12
-            月
-            %select{name: "year", class: "field__input__deadline"}
-              %option{value: "20"}20
-              %option{value: "30"}30
-            年
+          .field 
+            .field__label
+              有効期限
+              %span.field__label__require
+                必須
+            .field__input 
+              -# %select{name: 'text', class: "field__input__deadline"} 
+              = f.select :exp_month, [["01",1],["02",2],["03",3],["04",4],["05",5],["06",6],["07",7],["08",8],["09",9],["10",10],["11",11],["12",12]], {}, class: "field__input__deadline" 
+              月
+              = f.select :exp_year, [["20",2020],["21",2021],["22",2022],["23",2023],["24",2024],["25",2025],["26",2026],["27",2027],["28",2028],["29",2029],["30",2030]],{}, class: "field__input__deadline" 
+              年
+              -#   %option{value: "01"}01
+              -#   %option{value: "12"}12
+              -# 月
+              -# %select{name: "year", class: "field__input__deadline"}
+              -#   %option{value: "20"}20
+              -#   %option{value: "30"}30
+              -# 年
 
-        .field
-          .field__label
-            セキュリティーコード
-            %span.field__label__require
-              必須
-          .field__input 
-            %input{type: 'text', placeholder: "カード背面4桁もしくは３桁の番号",class: "field__input__defalut__none"} 
-      
-        .submit
-          %input{type: "submit", value: "登録する", placeholder: "次に進む", class: "submit__btn"}
+              -# = f.select :exp_year, [["19",2019],["20",2020],["21",2021],["22",2022],["23",2023],["24",2024],["25",2025],["26",2026],["27",2027],["28",2028],["29",2029]], {}, class: 'input-default harf', name: "exp_year", id:"exp_year"
+              -# %span 年
+              -# = f.select :exp_month, [["01",1],["02",2],["03",3],["04",4],["05",5],["06",6],["07",7],["08",8],["09",9],["10",10],["11",11],["12",12]],{}, class: 'input-default harf', name: "exp_month", id:"exp_month"
+              -# %span 月
 
-        .input__privasy
-          = link_to "プライバシーポリシー", "#"
-          = link_to "メルカリ利用規約", "#"
-          = link_to "商品取引に関する表記", "#"
+          .field
+            .field__label
+              セキュリティーコード
+              %span.field__label__require
+                必須
+            .field__input 
+              = f.text_field :cvc , placeholder: "カード背面4桁もしくは３桁の番号",class: "field__input__defalut__none"
+              -# = f.text_field :cvc, name: "cvc", id:"cvc", class:"cvc", type: "text", placeholder: 'カード背面4桁もしくは3桁の番号', class: 'input-default', maxlength: "16"
+        
+          .submit
+            = f.submit '登録する', class: "submit__btn"
+            -# %input{type: "submit", value: "登録する", placeholder: "次に進む", class: "submit__btn"}
+
+          .input__privasy
+            = link_to "プライバシーポリシー", "#"
+            = link_to "メルカリ利用規約", "#"
+            = link_to "商品取引に関する表記", "#"
             
   .footer__user

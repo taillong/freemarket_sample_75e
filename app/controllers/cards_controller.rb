@@ -1,10 +1,16 @@
 class CardsController < ApplicationController
-  require 'payjp'
+  # require 'payjp'
+  require "payjp"
 
   def new
+    card = Card.where(user_id: current_user.id)
+    # redirect_to action: "show" if card.exists?
+    # @card = Card.new
+    # @card = Card.where(user_id: current_user.id)
+    # @user = User.find(params[:id])
   end
 
-  def pay
+  def create 
     Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
     if params['payjpToken'].blank?
       render :new
@@ -16,7 +22,7 @@ class CardsController < ApplicationController
       if @card.save
         redirect_to root_path
       else
-        render: new
+        render :new
       end
     end
   end
