@@ -35,14 +35,17 @@ class ItemsController < ApplicationController
     @category = Category.where(ancestry: nil)
     @category_child = Category.where(id: @item.category.parent().siblings().ids)
     @category_grandchild = Category.where(id: @item.category.siblings().ids)
+    @fee = (@item.price * 0.1).round
+    @profit = @item.price - @fee
+
   end
 
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      redirect_to root_path
+      redirect_to @item
     else
-      redirect_to :edit
+      redirect_to edit_item_path(@item.id)
     end
   end
 
