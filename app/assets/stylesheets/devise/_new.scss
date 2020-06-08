@@ -116,6 +116,15 @@
           &__defalut__none:focus {
             @include foucus()
           }
+          &__defalut__card {
+            width: 100%;
+            height: 40px;
+            padding-left: 10px;
+            @include input()
+          }
+          &__defalut__card:focus {
+            @include foucus()
+          }
           &__ecality {
             display: inline-block;
             width: 40%;
