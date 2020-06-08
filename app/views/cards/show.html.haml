@@ -21,10 +21,8 @@
             - exp_year = @default_card_information.exp_year.to_s.slice(2,3)
             = exp_month + " / " + exp_year
         .card__erea__add
-          = button_to "削除する", user_card_path(current_user, @user.card.id), method: :DELETE, class: "submit__erea__btn"
-          -# = button_to "クレジットカードの詳細をみる", user_card_path(current_user, @user.card.id), method: :get, class: "submit__erea__btn"
-         
-        
+          = button_to "削除する", user_card_path(current_user, @user.card.id), method: :delete, class: "submit__erea__btn"
+                
   .applink
     = render "users/applink"
 

@@ -23,9 +23,9 @@ class CardsController < ApplicationController
         metadata: {user_id: current_user.id}
       )
       @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
-      binding.pry
+      #binding.pry
       if @card.save
-        redirect_to root_path
+        redirect_to user_path(current_user)
       else
         flash.now[:alert] = @card.errors.full_messages
         binding.pry
@@ -50,13 +50,24 @@ class CardsController < ApplicationController
     end
   end
 
-  # def edit
-  # end
+  def edit
+  end
 
   def update
   end
 
-  def destroy
+  def destroy  
+    #binding.pry
+    card = Card.find_by(user_id: current_user.id)
+    if card.blank?
+      edirect_to action: "new" 
+    else
+      Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+      customer = Payjp::Customer.retrieve(card.customer_id)
+      customer.delete
+      card.delete
+    end
+    redirect_to user_path(current_user)
   end 
 
 end
