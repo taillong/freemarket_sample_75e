@@ -2,7 +2,9 @@
 
 
   = form_with model:@item, class: "sell-form", local: true do |f|
-    .sell-form__header 商品情報を入力
+    %h2.sell-form__header 商品の情報を入力
+    %hr
+
     .sell-form__image
       %label.sell-form__title 出品画像
       %span.sell-form__require 必須

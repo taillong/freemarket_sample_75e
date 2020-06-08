@@ -2,7 +2,6 @@ $(function(){
 
   // 編集ページが読み込ませるときに発火
   let price  = $('.sell-form__input--price--number_field').val();
-  console.log(price)
   let fee    = Math.round(price * 0.1)
   let profit = price - fee
   $('.sell-form__content--price--fee__value').html(`¥ ${fee}`);
