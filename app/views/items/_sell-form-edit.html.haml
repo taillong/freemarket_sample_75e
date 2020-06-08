@@ -1,5 +1,8 @@
 .sell-form__container
+
+
   = form_with model:@item, class: "sell-form", local: true do |f|
+    .sell-form__header 商品情報を入力
     .sell-form__image
       %label.sell-form__title 出品画像
       %span.sell-form__require 必須
@@ -56,7 +59,7 @@
         %label.sell-form__title ブランド
         %span.sell-form__optional 任意
         .sell-form__input
-          = f.text_field :brand, placeholder: "例）シャネル" ,class: "sell-form__input--text_field--brand"
+          = f.text_field :brand_id, placeholder: "例）シャネル" ,class: "sell-form__input--text_field--brand"
       
       .sell-form__content__group
         %label.sell-form__title 商品の状態
