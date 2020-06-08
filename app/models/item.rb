@@ -6,6 +6,10 @@ class Item < ApplicationRecord
   belongs_to_active_hash :duration
   belongs_to :category, optional: true
   belongs_to :brand, optional: true
+
+  belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
+  belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id'
+  
   has_many :images
   accepts_nested_attributes_for :images, allow_destroy: true
 

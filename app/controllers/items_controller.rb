@@ -28,6 +28,23 @@ class ItemsController < ApplicationController
       redirect_to new_item_path, flash: { errors: @item.errors.messages }
     end
   end
+  
+  def edit
+    @item = Item.find(params[:id])
+    @item.brand_id = @item.brand.name
+    @category = Category.where(ancestry: nil)
+    @category_child = Category.where(id: @item.category.parent().siblings().ids)
+    @category_grandchild = Category.where(id: @item.category.siblings().ids)
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to root_path
+    else
+      redirect_to :edit
+    end
+  end
 
   def show
     @item = Item.find(params[:id])
@@ -40,20 +57,7 @@ class ItemsController < ApplicationController
       render :show
     end
   end
-
-  def edit
-    @item = Item.find(params[:id])
-    @item.brand_id = @item.brand.name
-    # @category = Category.where(id: @item.category.id)
-    # binding.pry
-  end
-
-  def update
-  end
-
-
-
-
+  
   private
   def item_params
     if brand = Brand.find_by(name: params[:item][:brand_id])

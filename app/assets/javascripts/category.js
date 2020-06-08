@@ -8,7 +8,7 @@ $(function(){
   }
   // 子カテゴリーのselectタグを追加
   function appendSelectChild(insertOption){
-    let html = `<select class="sell-form__input--select" id="child_category" name="category_id">
+    let html = `<select class="sell-form__input--select" id="child_category" name="category">
                   <option value="">選択してください</option>
                   ${insertOption}
                 </select>`;
@@ -24,57 +24,56 @@ $(function(){
     $('.sell-form__wrapper').append(html);
   }
 
-  //親カテゴリーのchangeイベントでajaxが発火する 
+    //親カテゴリーのchangeイベントでajaxが発火する 
   $('#parent_category').on('change', function(){
-    let parentId = $('#parent_category').val();
-    if (parentId != ""){
-      $.ajax({
-        url: 'get_category_children',
-        type: 'GET',
-        data: {parent_id: parentId},
-        dataType: 'json'
-      })
-      .done(function(children){
+      let parentId = $('#parent_category').val();
+      if (parentId != ""){
+        $.ajax({
+          url: '/items/get_category_children',
+          type: 'GET',
+          data: {parent_id: parentId},
+          dataType: 'json'
+        })
+        .done(function(children){
+          $('#child_category').remove();
+          $('#grandchild_category').remove();
+          let insertOption = ``;
+          children.forEach(function(child){
+            insertOption += appendOption(child);
+          })
+          appendSelectChild(insertOption);
+        })
+        .fail(function(){
+          alert('カテゴリーの取得に失敗しました');
+        })
+      } else {
         $('#child_category').remove();
         $('#grandchild_category').remove();
-        let insertOption = ``;
-        children.forEach(function(child){
-          insertOption += appendOption(child);
-        })
-        appendSelectChild(insertOption);
-      })
-      .fail(function(){
-        alert('カテゴリーの取得に失敗しました');
-      })
-    } else {
-      $('#child_category').remove();
-      $('#grandchild_category').remove();
-    }
+      }
   });
-
   //子カテゴリーのchangeイベントでajaxが発火する 
   $('.sell-form__wrapper').on('change', '#child_category',function(){
-    let childId = $('#child_category').val();
-    if (childId != "" ){
-      $.ajax({
-        url: 'get_category_grandchildren',
-        type: 'GET',
-        data: {child_id: childId},
-        dataType: 'json'
-      })
-      .done(function(grandchildren){
-        $('#grandchild_category').remove();
-        let insertOption = ``;
-        grandchildren.forEach(function(grandchild){
-          insertOption += appendOption(grandchild);
+      let childId = $('#child_category').val();
+      if (childId != "" ){
+        $.ajax({
+          url: '/items/get_category_grandchildren',
+          type: 'GET',
+          data: {child_id: childId},
+          dataType: 'json'
         })
-        appendSelectGrandchild(insertOption);
-      })
-      .fail(function(){
-        alert('カテゴリーの取得に失敗しました');
-      })
-    } else {
-      $('#grandchild_category').remove();
-    }
+        .done(function(grandchildren){
+          $('#grandchild_category').remove();
+          let insertOption = ``;
+          grandchildren.forEach(function(grandchild){
+            insertOption += appendOption(grandchild);
+          })
+          appendSelectGrandchild(insertOption);
+        })
+        .fail(function(){
+          alert('カテゴリーの取得に失敗しました');
+        })
+      } else {
+        $('#grandchild_category').remove();
+      }
   });
 });
