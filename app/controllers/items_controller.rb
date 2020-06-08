@@ -22,7 +22,6 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    binding.pry
     if @item.save
       redirect_to root_path 
     else      
@@ -44,7 +43,7 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    # binding.pry
+    @item.brand_id = @item.brand.name
   end
 
   def update
@@ -55,7 +54,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    if  brand = Brand.find_by(name: params[:item][:brand_id])
+    if brand = Brand.find_by(name: params[:item][:brand_id])
       params[:item][:brand_id] = brand.id
     else
       params[:item][:brand_id] = Brand.create(name: params[:item][:brand_id]).id
