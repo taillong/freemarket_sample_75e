@@ -44,6 +44,8 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @item.brand_id = @item.brand.name
+    # @category = Category.where(id: @item.category.id)
+    # binding.pry
   end
 
   def update
