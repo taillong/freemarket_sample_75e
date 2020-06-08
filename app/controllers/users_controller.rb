@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   end
 
   def card
+    @user = current_user
   end
 
 end

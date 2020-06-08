@@ -32,8 +32,31 @@ class CardsController < ApplicationController
         render :new
       end
     end
-
-    
   end
+  
+  def show
+    #binding.pry
+    @user = current_user
+    card = Card.find_by(user_id: current_user.id)
+    #card = Card.find(params[:current_user.cards.id])
+    if card.blank?
+      redirect_to action: "new" 
+    else
+      #binding.pry
+      Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+      customer = Payjp::Customer.retrieve(card.customer_id)
+      @default_card_information = customer.cards.retrieve(card.card_id)
+      #binding.pry
+    end
+  end
+
+  # def edit
+  # end
+
+  def update
+  end
+
+  def destroy
+  end 
 
 end
