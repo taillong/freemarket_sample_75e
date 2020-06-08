@@ -9,6 +9,8 @@ class Item < ApplicationRecord
   has_many :images
   accepts_nested_attributes_for :images, allow_destroy: true
 
+  belongs_to :sell_user, class_name: 'User', foreign_key: 'seller_id'
+
   validates :name, :explanation, :price, :prefecture_id, :condition_id, :delivery_fee_id, :duration_id, :category_id, presence: true
   validates_associated :images
   validates :images, presence: true
@@ -21,4 +23,12 @@ class Item < ApplicationRecord
       brand_id = nil
     end
   end
+
+  def previous 
+    Item.where("id < ?", self.id).order("id DESC").first 
+  end 
+  def next 
+    Item.where("id > ?", self.id).order("id ASC").first 
+  end
+  
 end
