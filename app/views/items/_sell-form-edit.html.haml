@@ -11,6 +11,11 @@
       %p.sell-form__image__attention 最大５枚までアップロードできます
       .sell-form__image__input
         .previews
+        -# 明日はここから
+          - @images.each do |image|
+            = image.src
+
+
         = f.label :images_attributes_0_src ,class: "sell-form__image__input__box" do
           = image_tag "material/icon/icon_camera.png",alt: "画像", width: "104", class: "sell-form__image__input__box__icon"
           %p.sell-form__image__input__box__text 

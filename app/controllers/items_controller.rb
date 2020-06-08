@@ -32,6 +32,9 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @item.brand_id = @item.brand.name
+    
+    @images = @item.images
+
     @category = Category.where(ancestry: nil)
     @category_child = Category.where(id: @item.category.parent().siblings().ids)
     @category_grandchild = Category.where(id: @item.category.siblings().ids)
