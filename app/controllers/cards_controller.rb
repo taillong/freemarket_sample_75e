@@ -29,6 +29,7 @@ class CardsController < ApplicationController
   
   def show
     @user = current_user
+    @parents = Category.where(ancestry: nil)
     card = Card.find_by(user_id: current_user.id)
     if card.blank?
       redirect_to action: "new" 
@@ -55,7 +56,6 @@ class CardsController < ApplicationController
       card.delete
       customer.save
       if @card.update(card_id: customer.default_card)
-        #binding.pry
         redirect_to user_path(current_user)
       else
         flash.now[:alert] = @card.errors.full_messages
@@ -93,12 +93,12 @@ class CardsController < ApplicationController
       customer: card.customer_id,
       currency: 'jpy',
       )
-      binding.pry
       if @item.update(buyer_id: current_user.id)
-        flash[:notice] = '購入しました。'
+        flash[:notice] = '購入しました'
         redirect_to controller: 'items', action: 'show', id: @item.id
       else
-        flash[:alert] = '購入に失敗しました。'
+        flash[:alert] = '購入に失敗しました'
+        flash[:alert] = @item.errors.full_messages
         redirect_to controller: 'items', action: 'show', id: @item.id
       end
     end

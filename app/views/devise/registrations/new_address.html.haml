@@ -38,8 +38,8 @@
               %span.field__label__require
                 必須
             .field__input 
-              = f.text_field :family_kana, placeholder: "例)ヤマダ", class: "field__input__ecality", data: {name: "性かな"}
-              = f.text_field :first_kana,  placeholder: "例)アヤ",  class: "field__input__ecality", data: {name: "名かな"}
+              = f.text_field :family_kana, placeholder: "例)やまだ", class: "field__input__ecality", data: {name: "性かな"}
+              = f.text_field :first_kana,  placeholder: "例)あや",  class: "field__input__ecality", data: {name: "名かな"}
 
           .field
             .field__label
@@ -80,7 +80,7 @@
               %span.field__label__any
                 任意
             .field__input 
-              = f.text_field :apartment, placeholder: "例)柳ビル103", class: "field__input__defalut__none"
+              = f.text_field :apartment, placeholder: "例)柳ビル103", class: "field__input__defalut__card"
 
           .field
             .field__label

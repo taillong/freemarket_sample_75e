@@ -91,7 +91,7 @@
             .submit__btn 
               %P 売り切れです
           -else 
-            = button_to "購入する", buy_user_card_path(current_user, @item.id), method: :post, class: "submit__btn"
+            = button_to "購入する", buy_user_card_path(@item.id), method: :post, class: "submit__btn"
 
         .input__privasy
           = link_to "プライバシーポリシー", "#"

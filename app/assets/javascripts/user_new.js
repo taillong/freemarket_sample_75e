@@ -73,7 +73,6 @@ $(function(){
 
   // 電話番号バリデーションチェック
   function tell_error(input, name, place) {
-    console.log(input)
     if (name === "電話番号" && input.match(/^[0-9]+$/)) {
       $(`#${name}`).remove();
     } else if(input == "") {
@@ -103,7 +102,6 @@ $(function(){
    $('.field__input__defalut__none').on('focusout', function() {
     var input = $(this).val()
     var name = $(this).data("name");
-    console.log(input)
     tell_error(input, name, this);
   });
 
@@ -131,7 +129,6 @@ $(function(){
   $('input[type="checkbox"]').on('change', function() {
     var password = $('#field__input__password').val()
     var prop = $('#test1').prop('checked')
-    console.log(prop)
     if (prop) {
       $('.field__checkbox').append(`<div class="checkbox__confirmation">${password}</div>`)
     }else {
