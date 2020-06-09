@@ -92,9 +92,9 @@ class CardsController < ApplicationController
     else
       Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
       Payjp::Charge.create(
-      amount: @item.price,
-      customer: card.customer_id,
-      currency: 'jpy',
+        amount: @item.price,
+        customer: card.customer_id,
+        currency: 'jpy'
       )
       if @item.update(buyer_id: current_user.id)
         flash[:notice] = '購入しました'

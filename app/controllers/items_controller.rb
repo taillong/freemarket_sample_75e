@@ -39,7 +39,6 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @parents = Category.where(ancestry: nil)
-
   end
 
   def destroy
@@ -59,6 +58,7 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def item_params
     tmp1 = params.require(:item).permit(:name, :explanation, :condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src]).merge(seller_id: current_user.id)
     tmp2 = params.permit(:category_id).merge(tmp1)
@@ -79,5 +79,4 @@ class ItemsController < ApplicationController
   def product_params
     params.require(:product)
   end
-
 end

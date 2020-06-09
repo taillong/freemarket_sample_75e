@@ -1,18 +1,21 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :user_parents
+  before_action :user_current, only: [:show, :card]
   
-  def show
+  def show; end
+
+  def logout; end
+
+  def card; end
+
+  private 
+
+  def user_parents
+    @parents = Category.where(ancestry: nil)
+  end
+
+  def user_current
     @user = current_user
-    @parents = Category.where(ancestry: nil)
   end
-
-  def logout
-    @parents = Category.where(ancestry: nil)
-  end
-
-  def card
-    @user = current_user
-    @parents = Category.where(ancestry: nil)
-  end
-
 end
