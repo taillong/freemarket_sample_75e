@@ -12,7 +12,7 @@
         -if @user.card.present? 
           .card__erea__add 
             クレジットカード一覧
-            = button_to "クレジットカードを編集する", edit_user_card_path(current_user), method: :get, class: "submit__erea__btn"
+            = button_to "クレジットカードを編集する", edit_user_card_path(current_user, @user.card.id), method: :get, class: "submit__erea__btn"
             = button_to "クレジットカードの詳細をみる", user_card_path(current_user, @user.card.id), method: :get, class: "submit__erea__btn"
 
         -else 

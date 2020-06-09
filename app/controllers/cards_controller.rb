@@ -1,5 +1,4 @@
 class CardsController < ApplicationController
-  # require 'payjp'
   require "payjp"
 
   def new
@@ -35,25 +34,40 @@ class CardsController < ApplicationController
   end
   
   def show
-    #binding.pry
     @user = current_user
     card = Card.find_by(user_id: current_user.id)
-    #card = Card.find(params[:current_user.cards.id])
     if card.blank?
       redirect_to action: "new" 
     else
-      #binding.pry
       Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
       customer = Payjp::Customer.retrieve(card.customer_id)
       @default_card_information = customer.cards.retrieve(card.card_id)
-      #binding.pry
     end
   end
 
   def edit
+    card = Card.where(user_id: current_user.id)
   end
 
   def update
+    Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+    if params['payjpToken'].blank?
+      render :edit
+    else 
+      @card = Card.find(params[:id])
+      customer = Payjp::Customer.retrieve(@card.customer_id)
+      card = customer.cards.retrieve(@card.card_id)
+      card.card = params['payjpToken']
+      #binding.pry
+      card.save
+      if @card.update(card_id: customer.default_card)
+        redirect_to user_path(current_user)
+      else
+        flash.now[:alert] = @card.errors.full_messages
+        binding.pry
+        render :edit
+      end
+    end
   end
 
   def destroy  
