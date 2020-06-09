@@ -128,7 +128,8 @@
               %th ブランド
               %td
                 = link_to "#" do
-                  = @item.brand.name
+                  - unless @item.brand == nil
+                    = @item.brand.name
             %tr.item__condition
               %th 商品の状態
               %td 

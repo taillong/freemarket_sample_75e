@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :duration
   belongs_to :category, optional: true
   belongs_to :brand, optional: true
-  has_many :images
+  has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
 
   belongs_to :sell_user, class_name: 'User', foreign_key: 'seller_id'
