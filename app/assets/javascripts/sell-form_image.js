@@ -10,7 +10,7 @@ $(function(){
   }
   // プレビューをつける
   function appendPreview(url,index){
-    let html = `<div class="previews__preview" data-index="${index}">
+    let html = `<div class="previews__preview to-save-images" data-index="${index}">
                   <img width="100" height="100" src="${url}" ,class="previews__preview__photo">
                   <hr>
                   <div class="previews__preview__btn js-remove">削除</div>
@@ -22,7 +22,15 @@ $(function(){
   let file_fieldIndex = [1,2,3,4]
   let previewIndex = [0,1,2,3,4]
   let num = 4
-  
+  let previews_number = $('.previews__preview').length
+  let saved_number = $('.saved-images').length
+  let to_save_number = $('.to-save-images').length
+  let file_file_number = $('.js-file').length
+  console.log(previews_number)
+  console.log(saved_number)
+  console.log(to_save_number)
+  console.log(file_file_number)
+
   $('.sell-form__image__input__box').on('change', '.js-file',function(){
 
     // 新しいfile_fieldを加える
@@ -43,14 +51,25 @@ $(function(){
     let file_reader = new FileReader
     file_reader.readAsDataURL(file);
     file_reader.onload = function(e){
+      let previews_number = $('.previews__preview').length
+
       appendPreview(file_reader.result, previewIndex[0]);
       num += 1
       previewIndex.shift();
       // 五枚目のプレビューを表示する時だけdisplay none
-      if ($('.previews__preview').length == 5){
+      if (previews_number.length == 5){
         $('.sell-form__image__input__box').css('display','none');
       }
+      // let previews_number = $('.previews__preview').length
+      let saved_number = $('.saved-images').length
+      let to_save_number = $('.to-save-images').length
+      let file_file_number = $('.js-file').length
+      console.log(previews_number)
+      console.log(saved_number)
+      console.log(to_save_number)
+      console.log(file_file_number)
     }
+    
   })
 
   // クリックした時削除

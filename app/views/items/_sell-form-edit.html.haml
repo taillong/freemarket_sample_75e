@@ -12,20 +12,20 @@
       .sell-form__image__input
         .previews
           - @images.each do |image|
-            .previews__preview
+            .previews__preview.saved-images
               = image_tag "#{image.src}", class: 'previews__preview__photo', size: '100x100'
               %hr
               .previews__preview__btn.js-remove 削除
 
-        = f.label :images_attributes_0_src ,class: "sell-form__image__input__box" do
-          = image_tag "material/icon/icon_camera.png",alt: "画像", width: "104", class: "sell-form__image__input__box__icon"
-          %p.sell-form__image__input__box__text 
-            ドラッグアンドドロップ
-            %br
-            またはクリックしてファイルをアップロード
-          = f.fields_for :images do |i|
-            .js-file__group{data: {index: "0"}} 
-              = i.file_field :src ,class: "sell-form__image__input__box__field js-file", accept: "image/png,image/jpeg"
+        = f.fields_for :images do |i|
+          = f.label "images_attributes_#{i.index}_src" ,class: "sell-form__image__input__box" do
+            = image_tag "material/icon/icon_camera.png",alt: "画像", width: "104", class: "sell-form__image__input__box__icon"
+            %p.sell-form__image__input__box__text 
+              ドラッグアンドドロップ
+              %br
+              またはクリックしてファイルをアップロード
+              .js-file__group{data: {index: "#{i.index}"}} 
+                = i.file_field :src ,class: "sell-form__image__input__box__field js-file", accept: "image/png,image/jpeg"
       .errors
         - if flash[:errors].present? && flash[:errors]["images"].present?
           %p 画像がなかったため保存できませんでした

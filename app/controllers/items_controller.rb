@@ -41,7 +41,6 @@ class ItemsController < ApplicationController
     @fee = (@item.price * 0.1).round
     @profit = @item.price - @fee
 
-    binding.pry
   end
 
   def update
@@ -74,7 +73,7 @@ class ItemsController < ApplicationController
       params[:item][:brand_id] = Brand.create(name: params[:item][:brand_id]).id
     end
 
-    tmp1 = params.require(:item).permit(:name, :explanation, :brand_id,:condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src]).merge(seller_id: current_user.id)
+    tmp1 = params.require(:item).permit(:name, :explanation, :brand_id,:condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src, :_destroy, :id]).merge(seller_id: current_user.id)
     tmp2 = params.permit(:category_id).merge(tmp1)
   end
 
