@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   devise_scope :user do 
     post 'person_infos', to: 'users/registrations#create_person_info'
     post 'addresses',    to: 'users/registrations#create_address'
+    post 'card',         to: 'users/registrations#create_card'
+    post 'skip',         to: 'users/registrations#create_skip'
   end
   root 'items#index'
   resource :user, only: :show do

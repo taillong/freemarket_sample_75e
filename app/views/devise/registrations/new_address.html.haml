@@ -13,6 +13,9 @@
         %li.header__list__text
           商品送付先住所情報
           .header__list__user__rod.red
+        %li.header__list__text
+          クレジットカード登録
+          .header__list__user__rod
         %li.header__list__text.text__none
           完了
           .header__list__user__rod
@@ -92,7 +95,7 @@
               = f.telephone_field :tell, placeholder: "例)09012345678", class: "field__input__defalut__none", data: {name: "電話番号"}
 
           .submit
-            = f.submit "送信", class: "submit__btn"
+            = f.submit "次に進む", class: "submit__btn"
 
           .input__confirmation
             ※ 本人情報は正しく入力してください。会員登録後、

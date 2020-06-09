@@ -97,10 +97,10 @@ class CardsController < ApplicationController
         currency: 'jpy'
       )
       if @item.update(buyer_id: current_user.id)
-        flash[:notice] = '購入しました'
+        flash[:notice] = '商品を購入しました'
         redirect_to controller: 'items', action: 'show', id: @item.id
       else
-        flash[:alert] = '購入に失敗しました'
+        flash[:alert] = '商品の購入に失敗しました'
         redirect_to controller: 'items', action: 'show', id: @item.id
       end
     end
