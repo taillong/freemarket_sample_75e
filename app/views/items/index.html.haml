@@ -1,34 +1,51 @@
-
--# %h1 Items#index
--# %p Find me in app/views/items/index.html.erb
-
-
 .header
   .header__heading
     %h1.header__heading__icon
       = link_to image_tag("itemsimage/logo.png", width: '140'),"/" 
     .header__heading__searchbox
       .from
-        ※(追加実装項目)カテゴリーから探す※
+        カテゴリーから探す
       .submit
         .submit__icon
           = image_tag "itemsimage/icon-search 1.png", size: "20x20"
-
   .header__navbar
     %ul.navbar__left
       %li.navbar__left__categories
-        = link_to "カテゴリー", "#",  id: 'catebtn'
-        .categories__lists
-          %ul.categories__list
-            %li.categories__list__pearent
+        = link_to "#", class: "category__search" do
+          カテゴリー
+        %ul.category__parent
+          - @parents.each do |parent|
+            %li
+              = link_to "#", class: "category__parent--name" do
+                = parent.name
+              %ul.category__child
+                - parent.children.each do |child|
+                  %li
+                    = link_to "#", class: "category__child--name" do
+                      = child.name
+                    %ul.category__grandchild
+                      - child.children.each do |grandchild|
+                        %li
+                          = link_to "#", class: "category__child--name" do
+                            = grandchild.name
       %li.navbar__left__brands
         = link_to "ブランド", "#", id: 'brandbtn'
         %ul.brands__list
     %ul.navbar__right
-      %li.login
-        = link_to "ログイン", "#"
-      %li.newmemmber
-        = link_to "新規会員登録", "#"
+      - if user_signed_in?
+        %li.good
+          = link_to "いいね一覧", "#"
+        %li.information
+          = link_to "お知らせ", "#"
+        %li.todolist
+          = link_to "やることリスト", "#"
+        %li.mypage
+          = link_to "マイページ", "#"
+      -else
+        %li.login
+          = link_to "ログイン", "#"
+        %li.newmemmber
+          = link_to "新規会員登録", "#"
 
 .main
   .main__topvisual
@@ -42,7 +59,6 @@
       .content__btn
         = link_to image_tag("itemsimage/appstoer.png", size: '180x53', class: 'app__btn'),"#" 
         = link_to image_tag("itemsimage/googleplay.png", size: '180x53', class: 'app__btn'),"#" 
-
   .main__topreason
     %h2.main__topreason__title
       FURIMAが選ばれる3つの理由
@@ -80,7 +96,6 @@
             業界最安
         %p.list__last__text
           最大3%でお得に出品&購入！
-
   .main__toplink
     .main__toplink__contents
       %h2.content__title
@@ -94,7 +109,6 @@
       .content__btn
         = link_to image_tag("itemsimage/appstoer.png", size: '180x53', class: 'linkapp__btn'),"#" 
         = link_to image_tag("itemsimage/googleplay.png", size: '180x53', class: 'linkapp__btn'),"#" 
-
   .main__topchara
     %h2.main__topchara__title
       FUROMAの特徴
@@ -120,7 +134,6 @@
           様々な支払いに対応
         %p.item__text
           お支払いは、クレジットカードだけでなく、ポイントや売上金など多彩な方法があります！
-
   .main__pickupcate
     %h2.title ピックアップカテゴリー
     .productbox
@@ -128,24 +141,20 @@
         %h3.link__title
           = link_to "新規投稿商品", "#"
       .productbox__lists
-        - @items.each do |item|
+        - @new_items.each do |new_item|
           .productbox__lists__list
-            = link_to item_path(item.id) do
+            = link_to item_path(new_item.id) do
               %figure.productlist__image
-                -# = item.image.src
-                = image_tag "itemsimage/pict-reason-01.jpg"
+                = image_tag new_item.images.first.src.url
               .productlist__text
                 %h3.name
-                  = item.name
+                  = new_item.name
                 .details
                   %ul
                     %li
                       ¥
-                      = item.price
+                      = new_item.price
                   %p (税込)
-
-
-
   .main__pickupbrand
     %h2.title ピックアップブランド
     .productbox
@@ -153,36 +162,44 @@
         %h3.link__title
           = link_to "アーカイバ", "#"
       .productbox__lists
-        .productbox__lists__list
-          = link_to "#" do
-            %figure.productlist__image
-              = image_tag "itemsimage/pict-reason-01.jpg"
-            .productlist__text
-              %h3.name product3
-              .details
-                %ul
-                  %li 35000円
-                %p (税込)
-        .productbox__lists__list
-          = link_to "#" do
-            %figure.productlist__image
-              = image_tag "itemsimage/pict-reason-01.jpg"
-            .productlist__text
-              %h3.name product2
-              .details
-                %ul
-                  %li 25000円
-                %p (税込)
-        .productbox__lists__list
-          = link_to "#" do
-            %figure.productlist__image
-              = image_tag "itemsimage/pict-reason-01.jpg"
-            .productlist__text
-              %h3.name product1
-              .details
-                %ul
-                  %li 15000円
-                %p (税込)
+        - @pick_items.each do |pick_item|
+          .productbox__lists__list
+            = link_to item_path(pick_item.id) do
+              %figure.productlist__image
+                = image_tag pick_item.images.first.src.url
+              .productlist__text
+                %h3.name
+                  = pick_item.name
+                .details
+                  %ul
+                    %li
+                      ¥
+                      = pick_item.price
+                  %p (税込)
+  .main__pickupbought
+    %h2.title 売れた商品
+    .productbox
+      .productbox__head
+        %h3.link__title
+          = link_to "SOLD OUT", "#"
+      .productbox__lists
+        - @sold_items.each do |sold_item|
+          .productbox__lists__list
+            = link_to item_path(sold_item.id) do
+              .productlist__sold
+                .productlist__sold__text
+                  SOLD
+              %figure.productlist__image
+                = image_tag sold_item.images.first.src.url
+              .productlist__text
+                %h3.name
+                  = sold_item.name
+                .details
+                  %ul
+                    %li
+                      ¥
+                      = sold_item.price
+                  %p (税込)
 
 .applink
   .applink__inner
@@ -231,5 +248,5 @@
   .purchasebtn
     %span.purchasebtn__text
       出品する
-    = image_tag "itemsimage/icon_camera.png", width: '54', class: 'purchasebtn__icon'
+    = image_tag "itemsimage/icon_camera.png", width: '54', class: 'purchasebtn__icon' 
 

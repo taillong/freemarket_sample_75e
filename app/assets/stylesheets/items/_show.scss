@@ -15,36 +15,24 @@
       }
       .item__image{
         margin-top: 16px;
-        ul{
-          display: flex;
-          position: relative;
-          li{
+        .photo__innner{
+          width: 560px;
+          align-items: center;
+          margin: 0 auto;
+          .main__image{
+            background-color: rgb(245, 245, 245);
+            width: 100%;
+            height: 346px;
+            object-fit: cover;
+          }
+          ul{
             display: flex;
-            flex-direction: column;
-            width: 560px;
-            align-items: center;
-            margin: 0 auto;
-            img{
+            justify-content: center;
+            .image__list{
+              background-color: rgb(245, 245, 245);
+              width: 60px;
+              height: 60px;
               object-fit: cover;
-              height: 346px;
-              width: 100%;
-            }
-            ul{
-              display: flex;
-              justify-content: center;
-              margin-top: 10px;
-              li{
-                width: 25%;
-                margin-right: 10px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                img{
-                  object-fit: cover;
-                  height: 87px;
-                  width: 100%;
-                }
-              }
             }
           }
         }
@@ -66,7 +54,7 @@
       .item__explanation{
         line-height: 1.5;
         font-size: 18px;
-        margin-bottom: 30px;
+        margin: 15px 0 30px;
       }
       .table{
         margin-bottom: 20px;
@@ -106,14 +94,98 @@
           text-decoration: none;
         }
       }
+      .optionalarea{
+        display: flex;
+        justify-content: space-between;
+        ul{
+          margin-top: 10px;
+          display: flex;
+        }
+        #likebtn{
+          margin-right: auto;
+          padding: 6px 10px;
+          border-radius: 40px;
+          color: $FurimaColor;
+          border: 1px solid #ffb340;
+        }
+        .optionalbtn{
+          font-size: 14px;
+          a{
+            padding: 6px 10px;
+            display: inline-block;
+            border-radius: 4px;
+            color: #333;
+            border: 1px solid #333;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+    &__commentbox{
+      width: 700px;
+      padding: 24px;
+      background-color: $whiteColor;
+      margin: 0 auto;
+      margin-top: 10px;
+      text-align: center;
+      #comment_body{
+        width: 100%;
+        min-height: 104px;
+        padding: 10px
+      }
+      .noticeMsg{
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        background-color: #f8f8f8;
+        margin: 10px 0;
+        text-align: left;
+      }
+      .commentBtn{
+        width: 100%;
+        line-height: 48px;
+        font-size: 14px;
+        color: white;
+        background-color: $FurimaColor;
+        width: 60%;
+        font-size: 18px;
+        border-radius: 100px;
+      }
+    }
+    &__link{
+      width: 700px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      li{
+        margin-top: 10px;
+        a{
+          size: 22px;
+          text-decoration: none;
+          color: $FurimaColor;
+          font-weight: bold;
+        }
+      }
     }
   }
 }
 
 .link__btn{
-  background-color: $GrayColor;
+  // background-color: $GrayColor;
   width: 100%;
   padding: 5px 10px;
+  &__sold{
+    background-color: red;
+    width: 100%;
+    font-weight: bold;
+    color: $whiteColor;
+    font-size: 20px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
   &__sell{
     display: flex;
     justify-content: center;

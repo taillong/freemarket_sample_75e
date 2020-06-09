@@ -51,11 +51,70 @@
     margin-bottom: 10px;
     .navbar__left{
       position: relative;
-      .navbar__left__categories{
-        padding: 0;
-        #catebtn{
+      &__categories{
+        .category__search{
+        }
+        ul{
+          position: absolute;
+          background-color: white;
+          display: none;
+          z-index: 1;
+        }  
+        &:hover{
+          .category__parent{
+            top: 30px;
+            display: block;
+            a:hover{
+              color: $FurimaColor;
+            }
+            &--name{
+              width: 200px;
+              color: black;
+              font-size: 13px;
+              letter-spacing: 2px;
+              border-bottom: 1px solid #f1ecec;
+              li:hover{
+                color: $FurimaColor;
+              }
+            }
+            li {
+              &:hover{
+                .category__child{
+                  min-height: 429px;
+                  display: block;
+                  top: 0;
+                  left: 216px;
+                  a:hover{
+                    color: $FurimaColor;
+                  }
+                  &--name{
+                    width: 220px;
+                    color: black;
+                    font-size: 13px;
+                    letter-spacing: 2px;
+                    border-bottom: 1px solid #f1ecec;
+                  }
+                  li {
+                    letter-spacing: 2px;
+                    &:hover{
+                      .category__grandchild{
+                        min-height: 429px;
+                        width: 100%;
+                        display: block;
+                        top: 0;
+                        left: 230px;
+                        letter-spacing: 2px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
+
+
       .navbar__left__brands{
         position: relative;
         #brandbtn{
@@ -69,14 +128,6 @@
     }
     .navbar__right{
       margin-left: auto;
-      .login{
-        a{
-        }
-      }
-      .newmemmber{
-        a{
-        }
-      }
     }
     ul{
       display: flex;
@@ -349,7 +400,7 @@
   }
 
   &__pickupcate{
-    padding: 80px 0 0;
+    padding-top: 80px;
     background-color: $GrayColor;
     height: 100%;
     .title{
@@ -372,7 +423,8 @@
       }
       &__lists{
         width: 780px;
-        margin: 26px auto;
+        margin: 0 auto;
+        padding: 26px 0;
         display: flex;
         justify-content: space-around;
         &__list{
@@ -426,7 +478,7 @@
   }
 
   &__pickupbrand{
-    padding: 80px 0;
+    padding-top: 80px;
     background-color: $GrayColor;
     height: 100%;
     .title{
@@ -449,7 +501,8 @@
       }
       &__lists{
         width: 780px;
-        margin: 26px auto;
+        margin: 0 auto;
+        padding: 26px 0;
         display: flex;
         justify-content: space-around;
         &__list{
@@ -459,6 +512,102 @@
           a{
             text-decoration: none;
             background-color: $whiteColor;
+            .productlist__image{
+              width: 220px;
+              height: 150px;
+              position: relative;
+              overflow: hidden;
+              margin: 0;
+              z-index: auto;
+              img{
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                z-index: auto;
+                height: 150px;
+                object-fit: cover;
+              }
+            }
+            .productlist__text{
+              background-color: $whiteColor;
+              color: $blackColor;
+              font-size: 16px;
+              padding: 16px;
+              h3{
+                overflow: hidden;
+                line-height: 1.5;
+                text-align: left;
+              }
+              .details{
+                ul{
+                }
+                p{
+                  font-size: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__pickupbought{
+    padding-top: 80px;
+    background-color: $GrayColor;
+    height: 100%;
+    .title{
+      text-align: center;
+      font-size: 28px;
+      line-height: 1.4;
+      font-weight: bold;
+    }
+    .productbox{
+      &__head{
+        text-align: center;
+        h3{
+          font-weight: bold;
+          a{
+            font-size: 24px;
+            text-decoration: none;
+            color: $FurimaColor;
+          }
+        }
+      }
+      &__lists{
+        width: 780px;
+        margin: 0 auto;
+        padding: 26px 0;
+        display: flex;
+        justify-content: space-around;
+        &__list{
+          width: 220px;
+          display: inline-block;
+          float: left;
+          a{
+            text-decoration: none;
+            background-color: $whiteColor;
+            position: relative;
+            .productlist__sold{
+              width: 0;
+              height: 0;
+              border-top: 38px solid #ea352d ;
+              border-right: 38px solid transparent;
+              border-bottom: 38px solid transparent;
+              border-left: 38px solid #ea352d ;
+              z-index: 1;
+              position: absolute;
+              &__text{
+                transform: rotate(-45deg);
+                font-size: 18px;
+                margin: -15px 0px 0px -30px;
+                color: #fff;
+                font-weight: bold;
+              }
+            }
             .productlist__image{
               width: 220px;
               height: 150px;
@@ -587,6 +736,7 @@ a{
     right: 32px;
     position: fixed;
     padding: 15px;
+    z-index: 100;
     &__text{
       color: $whiteColor;
       display: block;
