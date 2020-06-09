@@ -13,7 +13,7 @@ class CardsController < ApplicationController
     else 
       customer = Payjp::Customer.create(
         description: 'test',
-        email: current_user.email,
+        #email: current_user.email,
         card: params['payjpToken'],
         metadata: {user_id: current_user.id}
       )
@@ -51,9 +51,11 @@ class CardsController < ApplicationController
       @card = Card.find(params[:id])
       customer = Payjp::Customer.retrieve(@card.customer_id)
       card = customer.cards.retrieve(@card.card_id)
-      card.card = params['payjpToken']
-      card.save
+      customer.card = params['payjpToken']
+      card.delete
+      customer.save
       if @card.update(card_id: customer.default_card)
+        #binding.pry
         redirect_to user_path(current_user)
       else
         flash.now[:alert] = @card.errors.full_messages
