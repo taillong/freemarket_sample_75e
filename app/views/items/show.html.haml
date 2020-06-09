@@ -73,7 +73,7 @@
               この商品を削除する
       - elsif user_signed_in? && current_user.id != @item.seller_id && @item.buyer_id == nil
         .link__btn
-          = link_to "購入画面に進む", "#", class: "link__btn__buy"
+          = link_to "購入画面に進む", sell_item_path(@item.id), class: "link__btn__buy"
       - elsif user_signed_in? && @item.buyer_id != nil
         .link__btn
           .link__btn__sold
@@ -128,7 +128,7 @@
               %th ブランド
               %td
                 = link_to "#" do
-                  = @item.brand.name
+                  -# = @item.brand.name
             %tr.item__condition
               %th 商品の状態
               %td 

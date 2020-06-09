@@ -1,7 +1,6 @@
 $(function(){
   // エラーメッセージ
   function addHTML(name, place) {
-    console.log(name)
     var html = `<div class="field__error" id="${name}">
                   <p>${name}を入力してください</p>
                 </div>`
@@ -149,8 +148,6 @@ $(function(){
       person($(this).val(), $(this).data("name"), $(this));
     });
     if ($('.field__error').length > 0 ) {
-      ok = $('.field__error').length
-      console.log(ok);
       return false;
     }
   });
@@ -167,8 +164,6 @@ $(function(){
       tell_error($(this).val(), $(this).data("name"), $(this));
     });
     if ($('.field__error').length > 0 ) {
-      ok = $('.field__error').length
-      console.log(ok);
       return false;
     }
   });
@@ -182,8 +177,6 @@ $(function(){
       person($(this).val(), $(this).data("name"), $(this));
     });
     if ($('.field__error').length > 0 ) {
-      ok = $('.field__error').length
-      console.log(ok);
       return false;
     }
   });

@@ -28,7 +28,18 @@
           .method__text
             支払方法
           -if @user.card.present?
-            .method__register
+            %table
+              %tbody
+                %tr.method__register
+                  %th カード番号
+                  %td
+                    = "**** **** **** " + @default_card_information.last4
+                %tr.method__register
+                  %th 有効期限
+                  %td
+                    - exp_month = @default_card_information.exp_month.to_s
+                    - exp_year = @default_card_information.exp_year.to_s.slice(2,3)
+                    = exp_month + " / " + exp_year
           -else
             .method__register
               = link_to "登録してください", new_user_card_path(current_user)
@@ -36,41 +47,55 @@
         .delivery
           .delivery__text
             配送先
-            = @user.address.id
-          .delivery__address
-            お名前
-            = @user.address.family_name
-            = @user.address.first_name
-          .delivery__address
-            お名前(かな)
-            = @user.address.family_kana
-            = @user.address.first_kana
-          .delivery__address
-            郵便番号
-            = @user.address.zipcode
-          .delivery__address 
-            都道府県
-            = @user.address.prefecture.name
-          .delivery__address
-            市区町村
-            = @user.address.city
-          .delivery__address
-            番地
-            = @user.address.street
-          .delivery__address
-            建物名
-            = @user.address.apartment
-          .delivery__address
-            電話
-            = @user.address.tell
+          %table
+            %tbody
+              %tr.delivery__address
+                %th お名前
+                %td
+                  = @user.address.family_name
+                  = @user.address.first_name
+              %tr.delivery__address
+                %th お名前(かな)
+                %td
+                  = @user.address.family_kana
+                  = @user.address.first_kana
+              %tr.delivery__address
+                %th 郵便番号
+                %td
+                  = @user.address.zipcode
+              %tr.delivery__address 
+                %th 都道府県
+                %td
+                  = @user.address.prefecture.name
+              %tr.delivery__address
+                %th 市区町村
+                %td
+                  = @user.address.city
+              %tr.delivery__address
+                %th 番地
+                %td
+                  = @user.address.street
+              -if @user.address.apartment.present?
+                %tr.delivery__address
+                  %th 建物名
+                  %td
+                    = @user.address.apartment
+              -if @user.address.tell.present?
+                %tr.delivery__address
+                  %th 電話
+                  %td
+                    = @user.address.tell
       
         .submit
-          = button_to "購入する", buy_user_card_path(current_user, @item.id), method: :post, class: "submit__btn"
-          -# = button_to "削除する", user_card_path(current_user, @user.card.id), method: :delete, class: "submit__erea__btn"
+          -if @item.buyer_id.present?
+            .submit__btn 
+              %P 売り切れです
+          -else 
+            = button_to "購入する", buy_user_card_path(current_user, @item.id), method: :post, class: "submit__btn"
 
         .input__privasy
           = link_to "プライバシーポリシー", "#"
           = link_to "メルカリ利用規約", "#"
-          = link_to "商品取引に関する表記", "#"   
+          = link_to "商品取引に関する表記", "#"  
 
   .footer__user

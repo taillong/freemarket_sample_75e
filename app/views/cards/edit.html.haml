@@ -7,7 +7,7 @@
       %h3 支払情報
     .account__input
       .account__input__form
-        = form_with url: user_card_path, method: :patch,class:"form"  do |f|
+        = form_with url: user_card_path, method: :patch,class:"form__card"  do |f|
           
           .field
             .field__label
@@ -23,7 +23,6 @@
               %span.field__label__require
                 必須
             .field__input 
-              -# %select{name: 'text', class: "field__input__deadline"} 
               = f.select :exp_month, [["01",1],["02",2],["03",3],["04",4],["05",5],["06",6],["07",7],["08",8],["09",9],["10",10],["11",11],["12",12]], {}, class: "field__input__deadline", id: "exp_month"
               月
               = f.select :exp_year, [["20",2020],["21",2021],["22",2022],["23",2023],["24",2024],["25",2025],["26",2026],["27",2027],["28",2028],["29",2029],["30",2030]],{}, class: "field__input__deadline", id: "exp_year"
@@ -38,7 +37,7 @@
               = f.text_field :cvc , placeholder: "カード背面4桁もしくは３桁の番号",class: "field__input__defalut__card", id: "cvc"
         
           .submit
-            = f.submit '登録する', class: "submit__btn"
+            = f.submit '登録する', class: "submit__btn", id: "submit__btn"
 
           .input__privasy
             = link_to "プライバシーポリシー", "#"

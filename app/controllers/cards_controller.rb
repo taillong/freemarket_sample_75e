@@ -22,7 +22,6 @@ class CardsController < ApplicationController
         redirect_to user_path(current_user)
       else
         flash.now[:alert] = @card.errors.full_messages
-        binding.pry
         render :new
       end
     end
