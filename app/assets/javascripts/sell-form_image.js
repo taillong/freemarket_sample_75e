@@ -25,12 +25,12 @@ $(function(){
   // 既に使われているfile_fieldIndexを除外
   let lastIndex = $('.js-file__group:last').data('index');
   file_fieldIndex.splice(0, lastIndex);
-  // $('.hidden-destroy').hide();
+  $('.hidden-destroy').hide();
 
   // 新規画像をinputに入れるときに発火
   $('.sell-form__image__input__box').on('change', '.js-file',function(e){
 
-    // $('.sell-form__image__input__box__text').remove();
+    $('.sell-form__image__input__box__text').remove();
 
     // boxのラベルを次のfile_fieldに変更
     $('.sell-form__image__input__box').attr("for", `item_images_attributes_${file_fieldIndex[0]}_src`);
@@ -53,6 +53,10 @@ $(function(){
       // 末尾の数に1足した数を追加する
       file_fieldIndex.push(file_fieldIndex[file_fieldIndex.length - 1] + 1);
     }
+    // プレビューが５個になったらinputは使えなくなる
+    if ($('.previews__preview').length >= 5) {
+      $('.sell-form__image__input__box').css('display','none')
+    }
   });
 
   // クリックした時削除
@@ -64,15 +68,16 @@ $(function(){
     const hiddenCheck = $(`input[data-index="${targetIndex}"].hidden-destroy`);
     // もしチェックボックスが存在すればチェックを入れる
     if (hiddenCheck) hiddenCheck.prop('checked', true);
+    
+    // プレビューが５個あってinput_boxがdisplay:none;されているときは、再度表示されるようにする
+    if ($('.previews__preview').length == 5) {
+      $('.sell-form__image__input__box').css('display','block')
+    }
 
     // プレビューを削除
     $(this).parent().remove();
     // file_fieldを削除
     $(`.js-file__group[data-index=${targetIndex}]`).remove();
 
-    // 画像入力欄が0個にならないようにしておく
-    if ($('.js-file').length == 0) {
-      appendFileField(fileIndex[0]);
-    }
   })
 });
