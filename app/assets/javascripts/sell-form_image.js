@@ -1,5 +1,6 @@
 
 $(function(){
+
   // file_fieldをつける
   function appendFileField(index){
     let html = `<div class="js-file__group" data-index="${index}">
@@ -8,9 +9,9 @@ $(function(){
                 `
     $('.sell-form__image__input__box').append(html);
   }
-  // プレビューをつける
-  function appendPreview(url,index){
-    let html = `<div class="previews__preview to-save-images" data-index="${index}">
+  // 新規登録用の画像のプレビューをつける
+  function appendPreview(index,url){
+    let html = `<div class="previews__preview" data-index="${index}">
                   <img width="100" height="100" src="${url}" ,class="previews__preview__photo">
                   <hr>
                   <div class="previews__preview__btn js-remove">削除</div>
@@ -18,71 +19,60 @@ $(function(){
     $('.previews').append(html);
   }
 
-  // 数えるのに必要
-  let file_fieldIndex = [1,2,3,4]
-  let previewIndex = [0,1,2,3,4]
-  let num = 4
-  let previews_number = $('.previews__preview').length
-  let saved_number = $('.saved-images').length
-  let to_save_number = $('.to-save-images').length
-  let file_file_number = $('.js-file').length
-  console.log(previews_number)
-  console.log(saved_number)
-  console.log(to_save_number)
-  console.log(file_file_number)
+  // file_fieldのnameに動的なindexをつける為の配列
+  let file_fieldIndex = [1,2,3,4,5]
 
-  $('.sell-form__image__input__box').on('change', '.js-file',function(){
+  // 既に使われているfile_fieldIndexを除外
+  let lastIndex = $('.js-file__group:last').data('index');
+  file_fieldIndex.splice(0, lastIndex);
+  // $('.hidden-destroy').hide();
 
-    // 新しいfile_fieldを加える
-    $('.sell-form__image__input__box__text').remove();
-    if (file_fieldIndex.length != 0){
-      $('.sell-form__image__input__box').attr("for", `item_images_attributes_${file_fieldIndex[0]}_src`);
+  // 新規画像をinputに入れるときに発火
+  $('.sell-form__image__input__box').on('change', '.js-file',function(e){
+
+    // $('.sell-form__image__input__box__text').remove();
+
+    // boxのラベルを次のfile_fieldに変更
+    $('.sell-form__image__input__box').attr("for", `item_images_attributes_${file_fieldIndex[0]}_src`);
+    
+    // changeされた選ばれたfile_fieldは何番目か？ 
+    const targetIndex = $(this).parent().data('index')
+    
+    // ファイルのブラウザ上でのURLを取得する
+    const file = e.target.files[0];
+    const blobUrl = window.URL.createObjectURL(file);
+
+    // 該当indexを持つimgタグがあれば取得して変数imgに入れる(画像変更の処理)
+    if (img = $(`img[data-index="${targetIndex}"]`)[0]) {
+      img.setAttribute('src', blobUrl);
+    } else {  // 新規画像追加の処理
+      appendPreview(targetIndex, blobUrl);
+      // fileIndexの先頭の数字を使ってinputを作る
       appendFileField(file_fieldIndex[0]);
       file_fieldIndex.shift();
-    } else {
-      $('.sell-form__image__input__box').attr("for", `item_images_attributes_${previewIndex[0] + 1}_src`);
-      appendFileField(previewIndex[0] + 1)
-      previewIndex.push(previewIndex[0] + 1);
+      // 末尾の数に1足した数を追加する
+      file_fieldIndex.push(file_fieldIndex[file_fieldIndex.length - 1] + 1);
     }
-    
-    // ファイルのurlを用いてプレビューを追加
-    // fileIndexから先頭の数字を削除
-    let file = this.files[0];
-    let file_reader = new FileReader
-    file_reader.readAsDataURL(file);
-    file_reader.onload = function(e){
-      let previews_number = $('.previews__preview').length
-
-      appendPreview(file_reader.result, previewIndex[0]);
-      num += 1
-      previewIndex.shift();
-      // 五枚目のプレビューを表示する時だけdisplay none
-      if (previews_number.length == 5){
-        $('.sell-form__image__input__box').css('display','none');
-      }
-      // let previews_number = $('.previews__preview').length
-      let saved_number = $('.saved-images').length
-      let to_save_number = $('.to-save-images').length
-      let file_file_number = $('.js-file').length
-      console.log(previews_number)
-      console.log(saved_number)
-      console.log(to_save_number)
-      console.log(file_file_number)
-    }
-    
-  })
+  });
 
   // クリックした時削除
   $('.previews').on('click', '.js-remove', function(){
-    let index = $(this).parent().attr("data-index");
-    if ($('.previews__preview').length == 5){
-      $('.sell-form__image__input__box').css('display','block');
-    } 
-    $(`.previews__preview[data-index=${index}]`).remove();
-    $(`.js-file__group[data-index=${index}]`).remove();
-    
-    file_fieldIndex.push(num)
-    previewIndex.push(num)
-    num += 1
+    // クリックしたプレビューは何番目か？
+    const targetIndex = $(this).parent().data('index')
+
+    // 該当indexを振られているチェックボックスを取得する
+    const hiddenCheck = $(`input[data-index="${targetIndex}"].hidden-destroy`);
+    // もしチェックボックスが存在すればチェックを入れる
+    if (hiddenCheck) hiddenCheck.prop('checked', true);
+
+    // プレビューを削除
+    $(this).parent().remove();
+    // file_fieldを削除
+    $(`.js-file__group[data-index=${targetIndex}]`).remove();
+
+    // 画像入力欄が0個にならないようにしておく
+    if ($('.js-file').length == 0) {
+      appendFileField(fileIndex[0]);
+    }
   })
 });

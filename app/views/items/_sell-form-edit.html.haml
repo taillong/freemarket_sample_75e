@@ -10,22 +10,36 @@
       %span.sell-form__require 必須
       %p.sell-form__image__attention 最大５枚までアップロードできます
       .sell-form__image__input
-        .previews
-          - @images.each do |image|
-            .previews__preview.saved-images
-              = image_tag "#{image.src}", class: 'previews__preview__photo', size: '100x100'
-              %hr
-              .previews__preview__btn.js-remove 削除
 
-        = f.fields_for :images do |i|
-          = f.label "images_attributes_#{i.index}_src" ,class: "sell-form__image__input__box" do
-            = image_tag "material/icon/icon_camera.png",alt: "画像", width: "104", class: "sell-form__image__input__box__icon"
-            %p.sell-form__image__input__box__text 
-              ドラッグアンドドロップ
-              %br
-              またはクリックしてファイルをアップロード
-              .js-file__group{data: {index: "#{i.index}"}} 
-                = i.file_field :src ,class: "sell-form__image__input__box__field js-file", accept: "image/png,image/jpeg"
+        .previews
+          -# 登録済みの画像のプレビュー
+          - if @item.persisted?
+            - @item.images.each_with_index do |image, i|
+              .previews__preview{data:{ index: i}} 
+                = image_tag image.src.url, data: { index: i }, class: 'previews__preview__photo', size: '100x100'
+                %hr
+                .previews__preview__btn.js-remove 削除
+
+        -# 新規登録用のボックス
+        = f.label "images_attributes_#{@item.images.count}_src" ,class: "sell-form__image__input__box" do
+          = image_tag "material/icon/icon_camera.png",alt: "画像", width: "104", class: "sell-form__image__input__box__icon"
+          %p.sell-form__image__input__box__text 
+            ドラッグアンドドロップ
+            %br
+            またはクリックしてファイルをアップロード
+          = f.fields_for :images do |image|
+            -# 登録済みのfilefield
+            .js-file__group{data: {index: "#{image.index}"}} 
+              = image.file_field :src ,class: "sell-form__image__input__box__field js-file", accept: "image/png,image/jpeg"
+            - if @item.persisted?
+              = image.check_box :_destroy, data: { index: image.index }, class: 'hidden-destroy'
+          -#一つは新規登録用のfilefieldをつけておく  
+          - if @item.persisted?
+            .js-file__group{data: {index: "#{@item.images.count}"}}
+              = f.file_field :src ,class: 'sell-form__image__input__box__field js-file',name: "item[images_attributes][#{@item.images.count}][src]", accept: "image/png,image/jpeg", id: "item_images_attributes_#{@item.images.count}_src"
+
+
+
       .errors
         - if flash[:errors].present? && flash[:errors]["images"].present?
           %p 画像がなかったため保存できませんでした
