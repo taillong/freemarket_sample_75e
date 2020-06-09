@@ -3,7 +3,14 @@ class ItemsController < ApplicationController
 
   def index
     @users = User.new
-    @items = Item.limit(3)
+    new_items = Item.where(buyer_id: nil)
+    @new_items = new_items.last(3)
+    pickup = Item.where.not(seller_id: "current_user.id").where(buyer_id: nil)
+    random = pickup.shuffle
+    @pick_items = random.take(3)
+    sold = Item.where.not(buyer_id: nil)
+    @sold_items = sold.last(3)
+    @parents = Category.where(ancestry: nil)
   end
 
   def new
@@ -54,10 +61,11 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @parents = Category.where(ancestry: nil)
+
   end
 
   def destroy
-    @item = Item.find(params[:id])
     if @item.destroy
       redirect_to root_path
     else
@@ -78,6 +86,11 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    item = Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
+
+  def product_params
+    params.require(:product)
+  end
+
 end

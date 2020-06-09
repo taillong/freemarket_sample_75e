@@ -4,26 +4,48 @@
       = link_to image_tag("itemsimage/logo.png", width: '140'),"/" 
     .header__heading__searchbox
       .from
-        ※(追加実装項目)カテゴリーから探す※
+        カテゴリーから探す
       .submit
         .submit__icon
           = image_tag "itemsimage/icon-search 1.png", size: "20x20"
-
   .header__navbar
     %ul.navbar__left
       %li.navbar__left__categories
-        = link_to "カテゴリー", "#",  id: 'catebtn'
-        .categories__lists
-          %ul.categories__list
-            %li.categories__list__pearent
+        = link_to "#", class: "category__search" do
+          カテゴリー
+        %ul.category__parent
+          - @parents.each do |parent|
+            %li
+              = link_to "#", class: "category__parent--name" do
+                = parent.name
+              %ul.category__child
+                - parent.children.each do |child|
+                  %li
+                    = link_to "#", class: "category__child--name" do
+                      = child.name
+                    %ul.category__grandchild
+                      - child.children.each do |grandchild|
+                        %li
+                          = link_to "#", class: "category__child--name" do
+                            = grandchild.name
       %li.navbar__left__brands
         = link_to "ブランド", "#", id: 'brandbtn'
         %ul.brands__list
     %ul.navbar__right
-      %li.login
-        = link_to "ログイン", "#"
-      %li.newmemmber
-        = link_to "新規会員登録", "#"
+      - if user_signed_in?
+        %li.good
+          = link_to "いいね一覧", "#"
+        %li.information
+          = link_to "お知らせ", "#"
+        %li.todolist
+          = link_to "やることリスト", "#"
+        %li.mypage
+          = link_to "マイページ", "#"
+      -else
+        %li.login
+          = link_to "ログイン", "#"
+        %li.newmemmber
+          = link_to "新規会員登録", "#"
 
 .main
   .showmain
@@ -31,17 +53,13 @@
       %h2.item__name
         = @item.name
       .item__image
-        -# imagesモデルの表示はマージ後行う。
-        %ul
+        %ul.photo__innner
           %li
-            = image_tag "itemsimage/appstoer.png", width: '346'
+            = image_tag @item.images.first.src.url, class: "main__image"
             %ul
-              %li
-                = image_tag "itemsimage/pict-reason-01.jpg", size: '140x87'
-              %li
-                = image_tag "itemsimage/pict-reason-02.jpg", size: '140x87'
-              %li
-                = image_tag "itemsimage/pict-reason-03.jpg", size: '140x87'
+              - @item.images.each do |image|
+                %li
+                  = image_tag image.src.url, class: "image__list"
       .item__price
         %span 
           ¥
@@ -53,10 +71,14 @@
             = link_to "この商品情報を編集する", "#", class: "link__btn__sell__edit"
             = link_to item_path(@item.id), method: :delete, class: "link__btn__sell__destory" do
               この商品を削除する
-      -elsif user_signed_in? && current_user.id != @item.seller_id
+      - elsif user_signed_in? && current_user.id != @item.seller_id && @item.buyer_id == nil
         .link__btn
           = link_to "購入画面に進む", "#", class: "link__btn__buy"
-      -else
+      - elsif user_signed_in? && @item.buyer_id != nil
+        .link__btn
+          .link__btn__sold
+            SOLD OUT
+      -else 
         .link__btn
           = link_to "ログインして下さい", "#", class: "link__btn__login"
       .item__explanation
@@ -68,52 +90,95 @@
               %th 出品者
               %td 
                 = link_to "#" do
-                  -# ココリンク
-                  = @item.seller.nickname
+                  = @item.sell_user.nickname
             %tr.item__categories
               %th カテゴリー
               %td
-                = link_to "#" do
-                  -# ココリンク
-                  item.category.parent.name的な
-                %br
-                = link_to "#" do
-                  -# ココリンク
-                  >
-                  item.category.children.name的な
-                %br
-                = link_to "#" do
-                  -# ココリンク
-                  >>
-                  item.category.indirects.name的な
+                //親要素
+                - @parents.each do |parent|
+                  -if @item.category_id == parent.id
+                    = link_to '#' do
+                      = parent.name
+                      %br
+                  //子要素
+                  - parent.children.each do |child|
+                    -if @item.category_id == child.id
+                      = link_to '#' do
+                        = parent.name
+                        %br
+                      = link_to '#' do
+                        >
+                        = child.name
+                        %br
+                    //孫要素
+                    - child.children.each do |grandchild|
+                      -if @item.category_id == grandchild.id
+                        = link_to '#' do
+                          = parent.name
+                        %br
+                        = link_to '#' do
+                          >
+                          = child.name
+                        %br
+                        = link_to '#' do
+                          >>
+                          = grandchild.name
+                        %br
             %tr.item__brand
               %th ブランド
               %td
                 = link_to "#" do
-                  -# ココリンク？必須ではない？
-                  = @item.brand.name
+                  - unless @item.brand == nil
+                    = @item.brand.name
             %tr.item__condition
               %th 商品の状態
               %td 
-                = @item.condition
+                = @item.condition.text
             %tr.item__deliveryfee
               %th 配送料の負担
               %td 
-                = @item.delivery_fee
-            -# %tr.item__methd
-              -# %th 発送の方法
-              -# %td 
-              -#   = @item.method
+                = @item.delivery_fee.text
             %tr.item__prefecture
               %th 発送元の地域
               %td 
-                = @item.prefecture_id
+                = @item.prefecture.name
             %tr.item__date
               %th 発送日の目安
               %td 
-                = @item.duration
+                = @item.duration.text
+      .optionalarea
+        %ul
+          %li#likebtn
+            お気に入り 0
+        %ul.optional
+          %li.optionalbtn
+            = link_to "#" do
+              不適切な商品の通報
+    .showmain__commentbox
+      = form_with model:@comment ,class:"new_comment", local: true do |f|
+        = f.text_area :comment,id: "comment_body",wrap: "soft"
+        = f.hidden_field :item_id, value: @item.id
+      %p.noticeMsg
+        相手のことを考えて丁寧なコメントをこころがけましょう。
+        %br/
+        不快な言葉遣いなどは利用制限や退会処分となることがあります。
+      %br/
+      %button.commentBtn{name: "button", type: "submit"}
+        %i.fa.fa-comment
+        コメントする
+      
+    %ul.showmain__link
+      %li
+        - if @item.previous.present?
+          = link_to item_path(@item.previous) do
+            <
+            = @item.previous.name
+      %li
+        - if @item.next.present?
+          = link_to item_path(@item.next) do
+            = @item.next.name
+            >
 
-  
 .applink
   .applink__inner
     .applink__inner__title
