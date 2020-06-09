@@ -35,6 +35,13 @@
       font-size: 14px;
       margin-top: 8px;
       padding: 0 10px;
+      &--image{
+        display: none;
+        color: #ff0211;
+        font-size: 14px;
+        margin-top: 8px;
+        padding: 0 10px;
+      }
       &--price{
         color: #ff0211;
         font-size: 14px;

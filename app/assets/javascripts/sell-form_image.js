@@ -17,6 +17,9 @@ $(function(){
                   <div class="previews__preview__btn js-remove">削除</div>
                 </div>`
     $('.previews').append(html);
+    // 画像のエラーハンドリング（要リファクタリング）
+    $('.errors--image').css('display','none');
+
   }
 
   // file_fieldのnameに動的なindexをつける為の配列
@@ -79,5 +82,9 @@ $(function(){
     // file_fieldを削除
     $(`.js-file__group[data-index=${targetIndex}]`).remove();
 
+    // 画像のエラーハンドリング（要リファクタリング）
+    if ($('.sell-form__image__input__box__field').length == 1) {
+      $('.errors--image').css('display','block')
+    }
   })
 });
