@@ -20,6 +20,7 @@ class CardsController < ApplicationController
       @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
       if @card.save
         redirect_to user_path(current_user)
+        flash[:notice] = 'クレジットカードを登録しました'
       else
         flash.now[:alert] = @card.errors.full_messages
         render :new
@@ -56,6 +57,7 @@ class CardsController < ApplicationController
       card.delete
       customer.save
       if @card.update(card_id: customer.default_card)
+        flash[:notice] = 'クレジットカードを編集しました'
         redirect_to user_path(current_user)
       else
         flash.now[:alert] = @card.errors.full_messages
@@ -74,6 +76,7 @@ class CardsController < ApplicationController
       customer.delete
       card.delete
     end
+    flash[:notice] = 'クレジットカードを削除しました'
     redirect_to user_path(current_user)
   end
   
@@ -98,7 +101,6 @@ class CardsController < ApplicationController
         redirect_to controller: 'items', action: 'show', id: @item.id
       else
         flash[:alert] = '購入に失敗しました'
-        flash[:alert] = @item.errors.full_messages
         redirect_to controller: 'items', action: 'show', id: @item.id
       end
     end
