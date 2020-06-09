@@ -128,9 +128,7 @@
               %th ブランド
               %td
                 = link_to "#" do
-                  - if @item.brand == nil
-                    -# ブランド名がnilの場合「空白」とする
-                  - else
+                  - unless @item.brand == nil
                     = @item.brand.name
             %tr.item__condition
               %th 商品の状態
