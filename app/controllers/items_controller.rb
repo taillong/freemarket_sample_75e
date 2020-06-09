@@ -41,6 +41,7 @@ class ItemsController < ApplicationController
     @fee = (@item.price * 0.1).round
     @profit = @item.price - @fee
 
+    binding.pry
   end
 
   def update

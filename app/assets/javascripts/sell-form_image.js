@@ -11,9 +11,7 @@ $(function(){
   // プレビューをつける
   function appendPreview(url,index){
     let html = `<div class="previews__preview" data-index="${index}">
-                  <p class="previews__preview__photo">
-                    <img width="100" height="100" src="${url}">
-                  </p>
+                  <img width="100" height="100" src="${url}" ,class="previews__preview__photo">
                   <hr>
                   <div class="previews__preview__btn js-remove">削除</div>
                 </div>`
