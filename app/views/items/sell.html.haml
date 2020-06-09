@@ -27,8 +27,11 @@
         .method
           .method__text
             支払方法
-          .method__register
-            = link_to "登録してください", new_user_card_path(current_user)
+          -if @user.card.present?
+            .method__register
+          -else
+            .method__register
+              = link_to "登録してください", new_user_card_path(current_user)
 
         .delivery
           .delivery__text
@@ -62,7 +65,8 @@
             = @user.address.tell
       
         .submit
-          %input{type: "submit", value: "登録する", placeholder: "次に進む", class: "submit__btn"}
+          = button_to "購入する", buy_user_card_path(current_user, @item.id), method: :post, class: "submit__btn"
+          -# = button_to "削除する", user_card_path(current_user, @user.card.id), method: :delete, class: "submit__erea__btn"
 
         .input__privasy
           = link_to "プライバシーポリシー", "#"

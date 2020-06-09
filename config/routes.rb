@@ -8,9 +8,13 @@ Rails.application.routes.draw do
   end
   root 'items#index'
   resources :users, only: :show do
-    resources :cards
     member do
       get :logout, :card
+    end
+    resources :cards, except: :index do
+      member do
+        post :buy
+      end
     end
   end
   resources :items, except: :index do
