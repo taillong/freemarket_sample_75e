@@ -1,0 +1,30 @@
+.user__show 
+  .header
+    = render "users/header"
+
+  .user__mypage
+    = render "users/user__left"
+
+    .user__right
+      .card__erea
+        .card__erea__text
+          登録クレジットカード情報
+        .card__erea__add
+          .card__erea__add__number
+            %p
+              カード番号:
+            = "**** **** **** " + @default_card_information.last4
+          .card__erea__add__year
+            %p
+              有効期限:
+            - exp_month = @default_card_information.exp_month.to_s
+            - exp_year = @default_card_information.exp_year.to_s.slice(2,3)
+            = exp_month + " / " + exp_year
+        .card__erea__add
+          = button_to "削除する", user_card_path(current_user, @user.card.id), method: :delete, class: "submit__erea__btn"
+                
+  .applink
+    = render "users/applink"
+
+  .top__footer
+    = render "users/footer"

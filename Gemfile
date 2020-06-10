@@ -36,9 +36,11 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'active_hash'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'dotenv-rails'
 gem "font-awesome-sass"
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'payjp'
 gem 'rubocop', require: false
 
 group :development, :test do
@@ -81,10 +83,10 @@ group :production do
   gem 'unicorn'
 end
 
-gem 'devise'
 gem 'active_hash'
-gem 'carrierwave'
-gem 'mini_magick'
-gem 'jquery-rails'
 gem 'ancestry'
+gem 'carrierwave'
+gem 'devise'
 gem 'fog-aws'
+gem 'jquery-rails'
+gem 'mini_magick'

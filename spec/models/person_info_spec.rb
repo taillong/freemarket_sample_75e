@@ -106,7 +106,7 @@ RSpec.describe PersonInfo, type: :model do
     # it "user_idがないと登録できない" do
     #   person_info = build(:person_info, user_id: nil)
     #   person_info.valid?
-    #   expect(person_info.errors[:user_id]).to include("を入力してください")
+    #   expect(person_info.errors[:user]).to include("を入力してください")
     # end
   end
 end

@@ -1,7 +1,7 @@
 .user__left
   %ul.user_boxes
     %li.user_box
-      = link_to  user_path(current_user), class: "user_box__text" do
+      = link_to  user_path, class: "user_box__text" do
         マイページ
         %i{class: "fas fa-chevron-right user_box__icon"} 
     %li.user_box
@@ -53,7 +53,7 @@
         商品送付先住所変更
         %i{class: "fas fa-chevron-right user_box__icon"}
     %li.user_box 
-      = link_to  card_user_path(current_user), class: "user_box__text" do
+      = link_to  card_user_path, class: "user_box__text" do
         支払方法
         %i{class: "fas fa-chevron-right user_box__icon"}
     %li.user_box
@@ -65,6 +65,6 @@
         本人情報
         %i{class: "fas fa-chevron-right user_box__icon"}
     %li.user_box
-      = link_to logout_user_path(current_user), class: "user_box__text" do
+      = link_to logout_user_path, class: "user_box__text" do
         ログアウト
         %i{class: "fas fa-chevron-right user_box__icon"}

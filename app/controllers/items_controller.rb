@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:destroy]
+  before_action :set_item, only: [:destroy, :sell]
 
   def index
     @users = User.new
@@ -39,7 +39,6 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @parents = Category.where(ancestry: nil)
-
   end
 
   def destroy
@@ -50,7 +49,18 @@ class ItemsController < ApplicationController
     end
   end
 
+  def sell
+    @user = current_user
+    card = Card.find_by(user_id: @user)
+    if card.present?
+      Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+      customer = Payjp::Customer.retrieve(card.customer_id)
+      @default_card_information = customer.cards.retrieve(card.card_id)
+    end
+  end
+
   private
+
   def item_params
     tmp1 = params.require(:item).permit(:name, :explanation, :condition_id, :delivery_fee_id, :prefecture_id, :duration_id, :price, images_attributes: [:src]).merge(seller_id: current_user.id)
     tmp2 = params.permit(:category_id).merge(tmp1)
@@ -71,5 +81,4 @@ class ItemsController < ApplicationController
   def product_params
     params.require(:product)
   end
-
 end
