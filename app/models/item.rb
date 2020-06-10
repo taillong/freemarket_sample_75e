@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id' ,optional: true
   
   has_many :images, dependent: :destroy
+
   accepts_nested_attributes_for :images, allow_destroy: true
 
   belongs_to :sell_user, class_name: 'User', foreign_key: 'seller_id'
@@ -31,6 +32,7 @@ class Item < ApplicationRecord
   def previous 
     Item.where("id < ?", self.id).order("id DESC").first 
   end 
+
   def next 
     Item.where("id > ?", self.id).order("id ASC").first 
   end

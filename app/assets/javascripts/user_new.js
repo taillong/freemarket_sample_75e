@@ -1,7 +1,6 @@
 $(function(){
   // エラーメッセージ
   function addHTML(name, place) {
-    console.log(name)
     var html = `<div class="field__error" id="${name}">
                   <p>${name}を入力してください</p>
                 </div>`
@@ -74,7 +73,6 @@ $(function(){
 
   // 電話番号バリデーションチェック
   function tell_error(input, name, place) {
-    console.log(input)
     if (name === "電話番号" && input.match(/^[0-9]+$/)) {
       $(`#${name}`).remove();
     } else if(input == "") {
@@ -104,7 +102,6 @@ $(function(){
    $('.field__input__defalut__none').on('focusout', function() {
     var input = $(this).val()
     var name = $(this).data("name");
-    console.log(input)
     tell_error(input, name, this);
   });
 
@@ -132,7 +129,6 @@ $(function(){
   $('input[type="checkbox"]').on('change', function() {
     var password = $('#field__input__password').val()
     var prop = $('#test1').prop('checked')
-    console.log(prop)
     if (prop) {
       $('.field__checkbox').append(`<div class="checkbox__confirmation">${password}</div>`)
     }else {
@@ -149,8 +145,6 @@ $(function(){
       person($(this).val(), $(this).data("name"), $(this));
     });
     if ($('.field__error').length > 0 ) {
-      ok = $('.field__error').length
-      console.log(ok);
       return false;
     }
   });
@@ -167,8 +161,6 @@ $(function(){
       tell_error($(this).val(), $(this).data("name"), $(this));
     });
     if ($('.field__error').length > 0 ) {
-      ok = $('.field__error').length
-      console.log(ok);
       return false;
     }
   });
@@ -182,8 +174,6 @@ $(function(){
       person($(this).val(), $(this).data("name"), $(this));
     });
     if ($('.field__error').length > 0 ) {
-      ok = $('.field__error').length
-      console.log(ok);
       return false;
     }
   });

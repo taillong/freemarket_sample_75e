@@ -1,14 +1,31 @@
 = render 'layouts/notifications'
 .user__new
   .header
-    = render 'devise/header'
+    = render 'header'
+    .header__list
+      %ol
+        %li.header__list__text.red
+          会員情報
+          .header__list__user__rod.red
+        %li.header__list__text.red
+          個人情報
+          .header__list__user__rod.red
+        %li.header__list__text.red
+          商品送付先住所情報
+          .header__list__user__rod.red
+        %li.header__list__text
+          クレジットカード登録
+          .header__list__user__rod.red
+        %li.header__list__text.text__none
+          完了
+          .header__list__user__rod
   
   .account
     .account__number
-      %h3 クレジットカード登録
+      %h3 クレジットカード登録(任意)
     .account__input
       .account__input__form
-        = form_with url: user_cards_path, method: :post,class:"form__card"  do |f|
+        = form_with url: card_path, method: :post,class:"form__card"  do |f|
           .field
             .field__label
               カード番号
@@ -39,9 +56,12 @@
           .submit
             = f.submit '登録する', class: "submit__btn", id: "submit__btn"
 
-          .input__privasy
-            = link_to "プライバシーポリシー", "#"
-            = link_to "メルカリ利用規約", "#"
-            = link_to "商品取引に関する表記", "#"
+      .account__input__skip
+        =button_to "スキップ", skip_path, method: :post, class: "account__input__skip__btn"
       
+      .account__input__privasy
+        = link_to "プライバシーポリシー", "#"
+        = link_to "メルカリ利用規約", "#"
+        = link_to "商品取引に関する表記", "#"
+
   .footer__user

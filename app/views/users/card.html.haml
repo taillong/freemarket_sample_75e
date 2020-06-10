@@ -9,14 +9,21 @@
       .card__erea
         .card__erea__text
           支払方法
-        .card__erea__add
-          クレジットカード一覧
-          = button_to "クレジットカードを追加する", new_user_card_path(current_user), method: :get, class: "submit__erea__btn"
+        -if @user.card.present? 
+          .card__erea__add 
+            クレジットカード一覧
+            = button_to "クレジットカードを編集する", edit_user_card_path(@user.card.id), method: :get, class: "submit__erea__btn"
+            = button_to "クレジットカードの詳細をみる", user_card_path(@user.card.id), method: :get, class: "submit__erea__btn"
+
+        -else 
+          .card__erea__add
+            クレジットカード一覧
+            = button_to "クレジットカードを登録する", new_user_card_path, method: :get, class: "submit__erea__btn"
         .card__erea__method
           = link_to "支払方法について  >", "#"
         
   .applink
     = render "applink"
 
-  .footer
+  .top__footer
     = render "footer"
