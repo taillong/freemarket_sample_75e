@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Payjp.configure do |config| 
+  #   PAYJP_PRIVATE_KEY = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
+  #   PAYJP_KEY = Rails.application.credentials[:payjp][:PAYJP_KEY]
+  # end
+
   def production?
     Rails.env.production?
   end
