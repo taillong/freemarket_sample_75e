@@ -1,6 +1,6 @@
 .user__show 
   .header
-    = render "users/header"
+    = render "items/header"
 
   .user__mypage
     = render "users/user__left"
@@ -24,7 +24,7 @@
           = button_to "削除する", user_card_path(current_user, @user.card.id), method: :delete, class: "submit__erea__btn"
                 
   .applink
-    = render "users/applink"
+    = render "items/applink"
 
   .top__footer
-    = render "users/footer"
+    = render "items/footer"

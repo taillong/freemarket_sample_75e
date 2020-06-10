@@ -1,0 +1,148 @@
+.sell-form__container
+
+
+  = form_with model:@item, class: "sell-form", local: true do |f|
+    %h2.sell-form__header 商品の情報を入力
+    %hr
+
+    .sell-form__image
+      %label.sell-form__title 出品画像
+      %span.sell-form__require 必須
+      %p.sell-form__image__attention 最大５枚までアップロードできます
+      .sell-form__image__input
+
+        .previews
+          -# 登録済みの画像のプレビュー
+          - if @item.persisted?
+            - @item.images.each_with_index do |image, i|
+              .previews__preview{data:{ index: i}} 
+                = image_tag image.src.url, data: { index: i }, class: 'previews__preview__photo', size: '100x100'
+                %hr
+                .previews__preview__btn.js-remove 削除
+
+        -# 新規登録用のボックス
+        - if @item.images.count >= 5
+          = f.label "images_attributes_#{@item.images.count}_src" ,class: "sell-form__image__input__box" ,style: "display:none;" do
+            = image_tag "material/icon/icon_camera.png",alt: "画像", width: "104", class: "sell-form__image__input__box__icon"
+            = f.fields_for :images do |image|
+              -# 登録済みのfilefield
+              .js-file__group{data: {index: "#{image.index}"}} 
+                = image.file_field :src ,class: "sell-form__image__input__box__field js-file", accept: "image/png,image/jpeg"
+              - if @item.persisted?
+                = image.check_box :_destroy, data: { index: image.index }, class: 'hidden-destroy'
+            -#一つは新規登録用のfilefieldをつけておく  
+            - if @item.persisted?
+              .js-file__group{data: {index: "#{@item.images.count}"}}
+                = f.file_field :src ,class: 'sell-form__image__input__box__field js-file',name: "item[images_attributes][#{@item.images.count}][src]", accept: "image/png,image/jpeg", id: "item_images_attributes_#{@item.images.count}_src"
+
+        - else 
+          = f.label "images_attributes_#{@item.images.count}_src" ,class: "sell-form__image__input__box" do
+            = image_tag "material/icon/icon_camera.png",alt: "画像", width: "104", class: "sell-form__image__input__box__icon"
+            = f.fields_for :images do |image|
+              -# 登録済みのfilefield
+              .js-file__group{data: {index: "#{image.index}"}} 
+                = image.file_field :src ,class: "sell-form__image__input__box__field js-file", accept: "image/png,image/jpeg"
+              - if @item.persisted?
+                = image.check_box :_destroy, data: { index: image.index }, class: 'hidden-destroy'
+            -#一つは新規登録用のfilefieldをつけておく  
+            - if @item.persisted?
+              .js-file__group{data: {index: "#{@item.images.count}"}}
+                = f.file_field :src ,class: 'sell-form__image__input__box__field js-file',name: "item[images_attributes][#{@item.images.count}][src]", accept: "image/png,image/jpeg", id: "item_images_attributes_#{@item.images.count}_src"
+      .errors--image
+        %p 画像がありません
+    %hr
+
+    .sell-form__profile
+      .sell-form__profile__group--name
+        %label.sell-form__title 出品名
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.text_field :name, placeholder: "40文字まで" ,class: "sell-form__input--text_field--name"
+
+      .sell-form__profile__group--explanation
+        %label.sell-form__title 出品の説明
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.text_area :explanation, rows: "7",class:"sell-form__input--text_area", placeholder: "商品の説明（必須1,000文字以内)\n（色、素材、重さ、定価、注意点など）\n\n例） 2010年頃に1万円で購入したジャケットです。ライトグレーで傷ではありません。合わせやすいのでおすすめです。" 
+
+    %hr
+
+    .sell-form__content
+      %h3.sell-form__content__sub-title 商品詳細
+      .sell-form__content__group
+        %label.sell-form__title カテゴリー
+        %span.sell-form__require 必須
+        .sell-form__wrapper
+          .sell-form__input
+            = f.collection_select :category, @category, :id, :name, {prompt: "選択してください", selected: @item.category.root_id}, {class: "sell-form__input--select", id: "parent_category"}
+            = f.collection_select :category, @category_child, :id, :name, {prompt: "選択してください" ,selected: @item.category.parent_id}, {class: "sell-form__input--select", id: "child_category"}
+            = f.collection_select :category_id, @category_grandchild, :id, :name, {prompt: "選択してください" ,selected: @item.category.id}, {class: "sell-form__input--select", id: "grandchild_category"}
+
+      .sell-form__content__group
+        %label.sell-form__title ブランド
+        %span.sell-form__optional 任意
+        .sell-form__input
+          = f.text_field :brand_id, placeholder: "例）シャネル" ,class: "sell-form__input--text_field--brand"
+      
+      .sell-form__content__group
+        %label.sell-form__title 商品の状態
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.collection_select :condition_id, Condition.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select condition"}
+
+    %hr
+    
+    .sell-form__content
+      %h3.sell-form__content__sub-title 発送について
+      .sell-form__content__group
+        %label.sell-form__title 発送料の負担
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.collection_select :delivery_fee_id, DeliveryFee.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select delivery_fee"}
+
+      .sell-form__content__group
+        %label.sell-form__title 発送元の地域
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: '選択してください'}, {class: "sell-form__input--select prefecture"}
+
+      .sell-form__content__group
+        %label.sell-form__title 発送までの日数
+        %span.sell-form__require 必須
+        .sell-form__input
+          = f.collection_select :duration_id, Duration.all, :id, :text, {prompt: "選択してください"}, {class: "sell-form__input--select duraiton"}
+
+    %hr
+    
+    .sell-form__content--price
+      %h3.sell-form__content__sub-title 価格 (¥300~9,999,999)
+      
+      .sell-form__content--price__group__wrapper
+        .sell-form__content--price__group
+          .sell-form__content--price__group--left
+            %label.sell-form__title 販売価格
+            %span.sell-form__require 必須
+          .sell-form__input--price
+            .yen ¥
+            = f.number_field :price, placeholder: 0,min:300 ,max:9999999 ,class: "sell-form__input--price--number_field"
+
+      .sell-form__content--price--fee
+        %label.sell-form__content--price--fee__title 販売手数料（10%）
+        %span.sell-form__content--price--fee__value 
+          ¥
+          = @fee
+      %hr
+      .sell-form__content--price--profit
+        %label.sell-form__content--price--profit__title 販売利益
+        %span.sell-form__content--price--profit__value 
+          ¥
+          = @profit
+
+
+
+    .sell-form__btn
+      = f.submit "変更する", class: "sell-form__btn--submit"
+      = link_to "キャンセル", item_path(@item), class: "sell-form__btn--back"
+
+    .sell-form__notation
+      %p 禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。

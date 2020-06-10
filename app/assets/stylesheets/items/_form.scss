@@ -22,11 +22,26 @@
     margin: 0 auto;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
+    h2 ,&__header{
+      padding: 32px 16px;
+      font-size: 22px;
+      text-align: center;
+      font-weight: bold;
+
+
+    }
     .errors{
       color: #ff0211;
       font-size: 14px;
       margin-top: 8px;
       padding: 0 10px;
+      &--image{
+        display: none;
+        color: #ff0211;
+        font-size: 14px;
+        margin-top: 8px;
+        padding: 0 10px;
+      }
       &--price{
         color: #ff0211;
         font-size: 14px;
