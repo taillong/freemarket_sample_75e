@@ -3,16 +3,14 @@
     .sell-form__image
       %label.sell-form__title 出品画像
       %span.sell-form__require 必須
-      %p.sell-form__image__attention 最大１０枚までアップロードできます
+      %p.sell-form__image__attention 最大５枚までアップロードできます
       .sell-form__image__input
         .previews
 
         = f.label "images_attributes_0_src" ,class: "sell-form__image__input__box" do
           = image_tag "material/icon/icon_camera.png",alt: "画像", width: "104", class: "sell-form__image__input__box__icon"
           %p.sell-form__image__input__box__text 
-            ドラッグアンドドロップ
-            %br
-            またはクリックしてファイルをアップロード
+            クリックしてファイルをアップロード
           = f.fields_for :images do |image|
             .js-file__group{data: {index: "#{image.index}"}} 
               = image.file_field :src ,class: "sell-form__image__input__box__field js-file", accept: "image/png,image/jpeg"
