@@ -50,7 +50,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create_card
     require "payjp"
-    Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+    Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
     @user = User.new(session["devise_regist_data"]["user"])
     @person_info = PersonInfo.new(session["devise_person_info_data"]["person_info"])
     @address = Address.new(session["devise_address_data"]["address"])
