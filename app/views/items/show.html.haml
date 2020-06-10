@@ -19,7 +19,7 @@
           ¥
           = @item.price
         %p (税込)送料込み
-      - if user_signed_in? && current_user.id == @item.seller_id
+      - if user_signed_in? && current_user.id == @item.seller_id && @item.buyer_id == nil
         .link__btn
           .link__btn__sell
             = link_to "この商品情報を編集する", edit_item_path(@item), class: "link__btn__sell__edit"
