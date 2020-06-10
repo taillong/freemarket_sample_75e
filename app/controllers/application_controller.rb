@@ -11,6 +11,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # def payjp
+  #   authenticate_or_request_with_http_basic do |username, password|
+  #     PAYJP_PRIVATE_KEY == Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY] &&
+  #     PAYJP_KEY == Rails.application.credentials[:payjp][:PAYJP_KEY]
+  #   end
+  # end
+
   def production?
     Rails.env.production?
   end
