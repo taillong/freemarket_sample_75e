@@ -1,7 +1,7 @@
 %header.sell-header
   = link_to image_tag("material/logo/logo.png", alt: "FURIMA" ,class: "sell-header__logo"), root_path
 
-= render partial: "sell-form-new", locals: { item: @item }
+= render partial: "sell-form-edit", locals: { item: @item}
 
 %footer.sell-footer
   .sell-footer__rules
