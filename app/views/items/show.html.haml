@@ -69,7 +69,7 @@
       - if user_signed_in? && current_user.id == @item.seller_id
         .link__btn
           .link__btn__sell
-            = link_to "この商品情報を編集する", "#", class: "link__btn__sell__edit"
+            = link_to "この商品情報を編集する", edit_item_path(@item), class: "link__btn__sell__edit"
             = link_to item_path(@item.id), method: :delete, class: "link__btn__sell__destory" do
               この商品を削除する
       - elsif user_signed_in? && current_user.id != @item.seller_id && @item.buyer_id == nil
@@ -91,7 +91,7 @@
               %th 出品者
               %td 
                 = link_to "#" do
-                  = @item.sell_user.nickname
+                  = @item.seller.nickname
             %tr.item__categories
               %th カテゴリー
               %td
