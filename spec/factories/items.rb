@@ -11,7 +11,7 @@ FactoryBot.define do
     brand_id         {"2"}
     category_id      {"1203"}
     seller
-    images
+    images   {File.open("#{Rails.root}/public/images/test_image.jpg")}
 
   end
 
