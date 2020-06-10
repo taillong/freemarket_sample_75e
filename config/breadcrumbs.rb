@@ -4,6 +4,22 @@ end
 
 crumb :user do
   link "マイページ", user_path
+  parent :root
+end
+
+crumb :card do
+  link "支払方法", card_user_path
+  parent :user
+end
+
+crumb :logout do
+  link "ログアウト", logout_user_path
+  parent :user
+end
+
+crumb :card_show do
+  link "クレジットカード詳細", user_card_path(current_user.card)
+  parent :card
 end
 
 # crumb :projects do

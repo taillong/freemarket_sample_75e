@@ -1,6 +1,8 @@
 .user__show 
   .header
     = render "items/header"
+    - breadcrumb :card
+    = breadcrumbs separator: " &rsaquo; "
 
   .user__mypage
     = render "user__left"

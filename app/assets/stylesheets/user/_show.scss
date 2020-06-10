@@ -8,6 +8,20 @@
     max-width: none;
   }
 }
+.breadcrumbs {
+  a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #333333;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  .current {
+    font-weight: 600;
+  }
+}
+
 .user__mypage {
   width: 70%;
   padding: 50px 0px;
