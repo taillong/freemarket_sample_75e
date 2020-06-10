@@ -5,5 +5,8 @@ FactoryBot.define do
     email    {Faker::Internet.free_email}
     password {"123456q"}
     password_confirmation {"123456q"}
+    factory :seller do
+      nickname { "Sellerman"}
+    end
   end
 end

@@ -10,9 +10,13 @@ FactoryBot.define do
     prefecture_id    {"22"}
     brand_id         {"2"}
     category_id      {"1203"}
-    seller
-    images   {File.open("#{Rails.root}/public/images/test_image.jpg")}
-
+    seller          
   end
 
+  factory :item_with_images, class: Item do
+    after(:build) do |item|
+      build :images, item: item 
+    end
+  end
+  
 end

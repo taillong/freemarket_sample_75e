@@ -17,14 +17,14 @@ class Item < ApplicationRecord
   validates_associated :images
   validates :images, presence: true
 
-  def self.brand_id_search(input)
-    brand = Brand.find_by(name: input[:brand])
-    if brand 
-      brand_id = brand.id
-    else 
-      brand_id = nil
-    end
-  end
+  # def self.brand_id_search(input)
+  #   brand = Brand.find_by(name: input[:brand])
+  #   if brand 
+  #     brand_id = brand.id
+  #   else 
+  #     brand_id = nil
+  #   end
+  # end
 
   def previous 
     Item.where("id < ?", self.id).order("id DESC").first 
