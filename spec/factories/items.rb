@@ -16,9 +16,7 @@ FactoryBot.define do
 
 
   trait :with_images do
-    after(:build) { |item| item.images << FactoryBot.build(:image) }
+    after(:build, :attributes_for) { |item| item.images << FactoryBot.build(:image) }
   end
-
-
   
 end

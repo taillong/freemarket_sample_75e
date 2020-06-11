@@ -65,4 +65,19 @@ describe Item do
       end
     end
   end
+
+  describe ItemsController , type: :controller do
+    let(:user) { create(:user) }
+    before do
+      login user
+    end
+
+    describe 'POST #create' do
+      it "データベースにitemを新規登録すること" do
+        images = {images_attributes: {"0":attributes_for(:image)}}
+        
+        expect{post :create, params: {item: attributes_for(:item).merge(images)}}.to change(Item, :count).by(1)
+      end
+    end
+  end
 end
