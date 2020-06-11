@@ -13,10 +13,12 @@ FactoryBot.define do
     seller          
   end
 
-  factory :item_with_images, class: Item do
-    after(:build) do |item|
-      build :images, item: item 
-    end
+
+
+  trait :with_images do
+    after(:build) { |item| item.images << FactoryBot.build(:image) }
   end
+
+
   
 end
