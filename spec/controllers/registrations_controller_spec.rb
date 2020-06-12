@@ -164,19 +164,19 @@ describe Users::RegistrationsController  do
         before do
           customer = allow(Payjp::Customer).to receive(:create).and_return(PayjpMock.prepare_customer_information)
         end
-        subject {
-          card = attributes_for(:card)
-          post :create_card, params: params
-                                session: {
-                                  user: user,
-                                  person_info: person_info,
-                                  address: address
-                                }
-        
-          session["devise_regist_data"] = {user: user}.clear
-          session["devise_person_info_data"] = {person_info: person_info}.clear
-          session["devise_address_data"] = {address: address}.clear
-        }
+          subject {
+            card = attributes_for(:card)
+            post :create_card, params: params,
+                                  session: {
+                                    user: user,
+                                    person_info: person_info,
+                                    address: address
+                                  }
+          
+            session["devise_regist_data"] = {user: user}.clear
+            session["devise_person_info_data"] = {person_info: person_info}.clear
+            session["devise_address_data"] = {address: address}.clear
+          }
     
         it "データの保存をすること" do
           expect {
@@ -202,7 +202,7 @@ describe Users::RegistrationsController  do
     context "有効なデータの場合"  do
       let(:params) { { user: user, person_info: person_info, address: address} }
       subject {
-        post :create_skip, params: params
+        post :create_skip, params: params,
                               session: {
                                 user: user,
                                 person_info: person_info,
