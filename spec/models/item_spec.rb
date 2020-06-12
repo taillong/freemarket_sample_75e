@@ -78,6 +78,11 @@ describe Item do
         
         expect{post :create, params: {item: attributes_for(:item).merge(images)}}.to change(Item, :count).by(1)
       end
+      it "登録したらトップページに戻ること" do
+        images = {images_attributes: {"0":attributes_for(:image)}}
+        post :create, params: {item: attributes_for(:item).merge(images)}
+        expect(response).to redirect_to root_path
+      end
     end
   end
 end
