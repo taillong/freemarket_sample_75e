@@ -22,6 +22,11 @@ crumb :card_show do
   parent :card
 end
 
+crumb :item_show do |item|
+  link item.name, item_path(item.id)
+  parent :root 
+end
+
 # crumb :projects do
 #   link "Projects", projects_path
 # end
