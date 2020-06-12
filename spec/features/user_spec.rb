@@ -5,7 +5,7 @@ require 'rails_helper'
 feature 'user', type: :feature do
 
   scenario 'usee登録' do
-    expect {
+    # expect {
       visit new_user_registration_path
       expect(page).to have_content '会員情報'
       fill_in 'field__input__nickname', with: "yama"
@@ -30,13 +30,22 @@ feature 'user', type: :feature do
       fill_in "address_family_kana", with: "やまだ"
       fill_in "address_first_kana", with: "あや"
       fill_in "address_zipcode", with: "123-4567"
-      select "青森県", from: 'address_prefecture_id'
-      fill_in "address_city", with: "青山1-1"
+      select "青森県", from: "address_prefecture_id"
+      fill_in "address_city", with: "横浜市"
+      fill_in "address_street", with: "青山1-1"
       fill_in "address_apartment", with: "柳ビル103"
       fill_in "address_tell", with: "09012345678"
-      find('input[type="submit"]').click
-      #binding.pry
-      #save_and_open_page
-    }.to change(User, :count).by(1)
+      click_on("次に進む")
+      expect(current_path).to eq addresses_path
+      expect(page).to have_content("クレジットカード登録(任意)")  
+      # find('input[type="submit"]').click
+      click_on("スキップ")
+      # binding.pry
+      # save_and_open_page
+    # }.to change(User, :count).by(1)
+      # fill_in "card_number", with: "4012888888881881"
+      # select "02", from: "exp_month"
+      # select "20", from: "exp_year"
+      # fill_in "cvc", with: "111"
   end 
 end

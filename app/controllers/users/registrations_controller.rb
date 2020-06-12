@@ -21,6 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create_person_info
+    #binding.pry
     @user = User.new(session["devise_regist_data"]["user"])
     @person_info = PersonInfo.new(person_info_params)
     unless @person_info.valid?
@@ -49,48 +50,94 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create_card
-    require "payjp"
-    Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
-    @user = User.new(session["devise_regist_data"]["user"])
-    @person_info = PersonInfo.new(session["devise_person_info_data"]["person_info"])
-    @address = Address.new(session["devise_address_data"]["address"])
-    if params['payjpToken'].blank?
-      render :new_card
-    else 
-      customer = Payjp::Customer.create(
-        description: 'test',
-        card: params['payjpToken'],
-        metadata: {user_id: @user.id}
-      )
-      @card = Card.new(customer_id: customer.id, card_id: customer.default_card)
-      unless @card.valid?
-        flash.now[:alert] = @card.errors.full_messages
-        render :new_card and return
+    if Rails.env.development? || Rails.env.production?
+      require "payjp"
+      Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
+      @user = User.new(session["devise_regist_data"]["user"])
+      @person_info = PersonInfo.new(session["devise_person_info_data"]["person_info"])
+      @address = Address.new(session["devise_address_data"]["address"])
+      if params['payjpToken'].blank?
+        render :new_card
+      else 
+        customer = Payjp::Customer.create(
+          description: 'test',
+          card: params['payjpToken'],
+          metadata: {user_id: @user.id}
+        )
+        binding.pry
+        @card = Card.new(customer_id: customer.id, card_id: customer.default_card)
+        unless @card.valid?
+          flash.now[:alert] = @card.errors.full_messages
+          render :new_card and return
+        end
+        @user.build_person_info(@person_info.attributes)
+        @user.build_address(@address.attributes)
+        @user.build_card(@card.attributes)
+        @user.save
+        session["devise_regist_data"]["user"].clear
+        session["devise_person_info_data"]["person_info"].clear
+        session["devise_address_data"]["address"].clear
+        sign_in @user
+        redirect_to root_path(@user)
       end
+    else Rails.env.test?
+      require "payjp"
+      Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
+      @user = User.new(session["devise_regist_data"][:user])
+      @person_info = PersonInfo.new(session["devise_person_info_data"][:person_info])
+      @address = Address.new(session["devise_address_data"][:address])
+      if params['payjpToken'].blank?
+        render :new_card
+      else 
+        customer = Payjp::Customer.create(
+          description: 'test',
+          card: params['payjpToken'],
+          metadata: {user_id: @user.id}
+        )
+        @card = Card.new(customer_id: customer[:id], card_id: customer[:default_card])
+        unless @card.valid?
+          flash.now[:alert] = @card.errors.full_messages
+          render :new_card and return
+        end
+        @user.build_person_info(@person_info.attributes)
+        @user.build_address(@address.attributes)
+        @user.build_card(@card.attributes)
+        @user.save
+        session["devise_regist_data"][:user].clear
+        session["devise_person_info_data"][:person_info].clear
+        session["devise_address_data"][:address].clear
+        sign_in @user
+        redirect_to root_path(@user)
+      end
+    end
+  end
+
+  def create_skip
+    if Rails.env.development? || Rails.env.production?
+      @user = User.new(session["devise_regist_data"]["user"])
+      @person_info = PersonInfo.new(session["devise_person_info_data"]["person_info"])
+      @address = Address.new(session["devise_address_data"]["address"])
       @user.build_person_info(@person_info.attributes)
       @user.build_address(@address.attributes)
-      @user.build_card(@card.attributes)
       @user.save
       session["devise_regist_data"]["user"].clear
       session["devise_person_info_data"]["person_info"].clear
       session["devise_address_data"]["address"].clear
       sign_in @user
       redirect_to root_path(@user)
+    else Rails.env.test?
+      @user = User.new(session["devise_regist_data"][:user])
+      @person_info = PersonInfo.new(session["devise_person_info_data"][:person_info])
+      @address = Address.new(session["devise_address_data"][:address])
+      @user.build_person_info(@person_info.attributes)
+      @user.build_address(@address.attributes)
+      @user.save
+      session["devise_regist_data"][:user].clear
+      session["devise_person_info_data"][:person_info].clear
+      session["devise_address_data"][:address].clear
+      sign_in @user
+      redirect_to root_path(@user)
     end
-  end
-
-  def create_skip
-    @user = User.new(session["devise_regist_data"]["user"])
-    @person_info = PersonInfo.new(session["devise_person_info_data"]["person_info"])
-    @address = Address.new(session["devise_address_data"]["address"])
-    @user.build_person_info(@person_info.attributes)
-    @user.build_address(@address.attributes)
-    @user.save
-    session["devise_regist_data"]["user"].clear
-    session["devise_person_info_data"]["person_info"].clear
-    session["devise_address_data"]["address"].clear
-    sign_in @user
-    redirect_to root_path(@user)
   end
   
   # GET /resource/edit
