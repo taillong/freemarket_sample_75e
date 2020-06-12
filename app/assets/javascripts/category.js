@@ -17,7 +17,7 @@ $(function(){
   
   // 孫カテゴリーのselectタグを追加
   function appendSelectGrandchild(insertOption){
-    let html = `<select class="sell-form__input--select" id="grandchild_category" name="category_id">
+    let html = `<select class="sell-form__input--select" id="grandchild_category" name="item[category_id]">
                   <option value="">選択してください</option>
                   ${insertOption}
                 </select>`;
