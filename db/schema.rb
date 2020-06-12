@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_031234) do
     t.integer "price", null: false
     t.integer "prefecture_id", null: false
     t.bigint "brand_id"
-    t.bigint "category_id", null: false
+    t.bigint "category_id"
     t.bigint "seller_id", null: false
     t.bigint "buyer_id"
     t.datetime "created_at", null: false
