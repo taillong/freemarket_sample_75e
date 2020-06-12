@@ -104,4 +104,3 @@ freemarket_sample_75e DB設計
 |card_id |integer |null: false |
 ### Association
 - belongs_to :user
-
