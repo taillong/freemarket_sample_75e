@@ -135,5 +135,11 @@ RSpec.describe Address, type: :model do
       expect(address.errors[:tell]).to include("は不正な値です")
     end
 
+    it "user_idがないと登録できない" do
+      address = build(:address, user_id: nil)
+      address.valid?
+      expect(address.errors[:user]).to include("を入力してください")
+    end
+
   end
 end
