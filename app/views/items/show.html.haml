@@ -1,6 +1,8 @@
 = render 'layouts/notifications'
 .header
   = render "header"
+  - breadcrumb :item_show,@item
+  = breadcrumbs separator: " &rsaquo; "
 .main
   .showmain
     .showmain__item

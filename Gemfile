@@ -90,3 +90,4 @@ gem 'devise'
 gem 'fog-aws'
 gem 'jquery-rails'
 gem 'mini_magick'
+gem "gretel"
